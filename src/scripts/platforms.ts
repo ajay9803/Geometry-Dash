@@ -108,59 +108,110 @@ let platform25 = new ThePlatform(9700, aboveGround - 300, 50, 20, "pink");
 let platform26 = new ThePlatform(9750, aboveGround - 300, 50, 20, "pink");
 let platform27 = new ThePlatform(9800, aboveGround - 300, 50, 20, "pink");
 let platform28 = new ThePlatform(9850, aboveGround - 300, 50, 20, "pink");
-let platform29 = new ThePlatform(9900, aboveGround - 300, 50, 20, "pink");
 
-let platform30 = new ThePlatform(10000, aboveGround - 200, 50, 20, "blue");
-let platform31 = new ThePlatform(10050, aboveGround - 200, 50, 20, "blue");
-let platform32 = new ThePlatform(10100, aboveGround - 200, 50, 20, "blue");
-let platform33 = new ThePlatform(10150, aboveGround - 200, 50, 20, "blue");
-let platform34 = new ThePlatform(10200, aboveGround - 200, 50, 20, "blue");
+let platform30 = new ThePlatform(10000 + 50, aboveGround - 200, 50, 20, "blue");
+let platform31 = new ThePlatform(10050 + 50, aboveGround - 200, 50, 20, "blue");
+let platform32 = new ThePlatform(10100 + 50, aboveGround - 200, 50, 20, "blue");
+let platform33 = new ThePlatform(10150 + 50, aboveGround - 200, 50, 20, "blue");
+let platform34 = new ThePlatform(10200 + 50, aboveGround - 200, 50, 20, "blue");
+let platform29 = new ThePlatform(10250 + 50, aboveGround - 200, 50, 20, "pink");
 
-let platform35 = new ThePlatform(10300, aboveGround - 100, 50, 20, "blue");
-let platform36 = new ThePlatform(10350, aboveGround - 100, 50, 20, "blue");
-let platform37 = new ThePlatform(10400, aboveGround - 100, 50, 20, "blue");
-let platform38 = new ThePlatform(10450, aboveGround - 100, 50, 20, "blue");
-let platform39 = new ThePlatform(10500, aboveGround - 100, 50, 20, "blue");
+let platform35 = new ThePlatform(
+  10300 + 200,
+  aboveGround - 100,
+  50,
+  20,
+  "blue"
+);
+let platform36 = new ThePlatform(
+  10350 + 200,
+  aboveGround - 100,
+  50,
+  20,
+  "blue"
+);
+let platform37 = new ThePlatform(
+  10400 + 200,
+  aboveGround - 100,
+  50,
+  20,
+  "blue"
+);
+let platform38 = new ThePlatform(
+  10450 + 200,
+  aboveGround - 100,
+  50,
+  20,
+  "blue"
+);
+// let platform39 = new ThePlatform(10500 + 100, aboveGround - 100, 50, 20, "blue");
 
-let platform40 = new ThePlatform(10740, aboveGround - 100 - 50, 70, 20, "gray");
+let platform40 = new ThePlatform(
+  10740 + 100,
+  aboveGround - 100 - 50,
+  70,
+  20,
+  "gray"
+);
 let platform41 = new ThePlatform(
-  10740 + 240,
+  10740 + 100 + 240,
   aboveGround - 180 - 50,
   70,
   20,
   "gray"
 ); // 5550 + 262
 let platform42 = new ThePlatform(
-  10740 + 240 * 2,
+  10740 + 100 + 240 * 2,
   aboveGround - 240 - 50,
   70,
   20,
   "gray"
 ); // 5812 + 262
 let platform43 = new ThePlatform(
-  10740 + 240 * 3,
+  10740 + 100 + 240 * 3,
   aboveGround - 300 - 50,
   70,
   20,
   "gray"
 ); // 6074 + 262
 let platform44 = new ThePlatform(
-  10740 + 240 * 4,
+  10740 + 100 + 240 * 4,
   aboveGround - 360 - 50,
   70,
   20,
   "gray"
 );
 let platform45 = new ThePlatform(
-  10740 + 240 * 5,
+  10740 + 100 + 240 * 5,
   aboveGround - 420 - 50,
   70,
   20,
   "gray"
 );
 
-let platform46 = new ThePlatform(11800, aboveGround - 300, 200, 50, "gray");
+let platform46 = new ThePlatform(11900, aboveGround - 300, 100, 50, "gray");
 let platform47 = new ThePlatform(12000, aboveGround - 300, 1700, 300, "purple");
+
+let platform48 = new ThePlatform(13700, aboveGround - 100, 8000, 100, "red");
+let platform49 = new ThePlatform(13700, aboveGround - 700, 8000, 100, "red");
+
+let platform50 = new ThePlatform(14700, aboveGround - 150, 50, 50, "blue");
+let platform51 = new ThePlatform(15300, aboveGround - 150, 50, 50, "blue");
+
+let platform52 = new ThePlatform(14700, aboveGround - 600, 50, 50, "pink");
+let platform53 = new ThePlatform(15300, aboveGround - 600, 50, 50, "pink");
+
+let platform54 = new ThePlatform(16000, aboveGround - 250, 50, 150, "pink");
+let platform55 = new ThePlatform(16500, aboveGround - 600, 50, 150, "pink");
+
+let platform56 = new ThePlatform(16700, aboveGround - 150, 50, 50, "black");
+let platform57 = new ThePlatform(17000, aboveGround - 200, 50, 100, "black");
+let platform58 = new ThePlatform(17300, aboveGround - 250, 50, 150, "black");
+
+let platform59 = new ThePlatform(17750, aboveGround - 600, 50, 150, "black");
+
+let platform60 = new ThePlatform(18300, aboveGround - 250, 800, 150, 'red');
+let platform61 = new ThePlatform(18300, aboveGround - 600, 800, 150, "red");
 
 let platforms = [
   platform1,
@@ -201,7 +252,7 @@ let platforms = [
   platform36,
   platform37,
   platform38,
-  platform39,
+  // platform39,
   platform40,
   platform41,
   platform42,
@@ -210,6 +261,20 @@ let platforms = [
   platform45,
   platform46,
   platform47,
+  platform48,
+  platform49,
+  platform50,
+  platform51,
+  platform52,
+  platform53,
+  platform54,
+  platform55,
+  platform56,
+  platform57,
+  platform58,
+  platform59,
+  platform60,
+  platform61,
 ];
 
 export default platforms;

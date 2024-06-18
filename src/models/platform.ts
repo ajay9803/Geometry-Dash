@@ -1,4 +1,5 @@
 // import { ctx } from "../main";
+import { GRAVITYSTATE } from "../enums/gravity_state";
 import { level1Ctx } from "../scripts/level1";
 
 class ThePlatform {
@@ -55,18 +56,22 @@ class ThePlatform {
     const squareRight = theSquare.x + theSquare.w;
     const squareLeft = theSquare.x;
 
-    
     // Check if the square is landing on top of the platform
     if (
       squareBottom < this.y && // Square's bottom is above the platform's top
-      squareBottom + theSquare.dy >= this.y  && // Square is falling onto the platform
+      squareBottom + theSquare.dy >= this.y && // Square is falling onto the platform
       squareRight > this.x && // Square's right side is to the right of the platform's left edge
       squareLeft < this.x + this.w // Square's left side is to the left of the platform's right edge
     ) {
-      // theSquare.y = this.y - theSquare.h; // Position the square on top of the platform
-      theSquare.dy = 0; // Stop downward movement
-      theSquare.shouldJump = true; // Allow jumping again
-      return; // Exit the function to avoid further collision checks
+      // if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
+        // theSquare.y = this.y - theSquare.h; // Position the square on top of the platform
+        theSquare.dy = 0; // Stop downward movement
+        theSquare.shouldJump = true; // Allow jumping again
+        return; // Exit the function to avoid further collision checks
+      // }
+      // if (theSquare.gravityState === GRAVITYSTATE.FREE) {
+      //   theSquare.color = 'gold';
+      // }
     }
 
     // Check collision with the left side of the platform

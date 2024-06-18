@@ -5,6 +5,8 @@ import Background from "../models/background";
 import Square from "../models/player";
 import spikes from "./spikes";
 import platforms from "./platforms";
+import { portals } from "./portals";
+import { GRAVITYSTATE } from "../enums/gravity_state";
 
 export let canvasCor = {
   x: 0,
@@ -130,6 +132,11 @@ const animate = () => {
     platform.draw();
   });
 
+  portals.forEach((portal) => {
+    portal.draw();
+    portal.checkCollisionWithSquare(theSquare);
+  });
+
   // Update square's position
   theSquare.update();
 };
@@ -140,10 +147,19 @@ animate();
 addEventListener("keydown", ({ code }) => {
   // Jump
   if (code === "Space" || code === "ArrowUp") {
-    if (theSquare.shouldJump) {
-      theSquare.dy -= 15;
-      theSquare.gravity = 1;
-      theSquare.shouldJump = false; // Disable jump while in the air
+    if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
+      if (theSquare.shouldJump) {
+        theSquare.dy -= 15;
+        theSquare.gravity = 1;
+        theSquare.shouldJump = false; // Disable jump while in the air
+      }
+    }
+
+    if (theSquare.gravityState === GRAVITYSTATE.FREE) {
+      console.log("keep jumping");
+      theSquare.shouldJump = true;
+      theSquare.dy -= 1.6;
+      theSquare.gravity = 0.08;
     }
   }
 

@@ -1,6 +1,12 @@
 // import { canvas, ctx } from "../main";
 
-import { canvasCor, level1Canvas, level1Ctx } from "../scripts/level1";
+import { GRAVITYSTATE } from "../enums/gravity_state";
+import {
+  canvasCor,
+  level1Canvas,
+  level1Ctx,
+  movingSpeed,
+} from "../scripts/level1";
 
 class Square {
   x: number;
@@ -11,11 +17,11 @@ class Square {
   dy: number;
   color: string;
   shouldJump: boolean;
-  // tails: PlayerTail[];
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   gravity: number;
   offsetY: number;
+  gravityState: GRAVITYSTATE;
 
   constructor(
     x: number,
@@ -28,7 +34,8 @@ class Square {
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
     gravity: number,
-    offsetY: number = 0
+    offsetY: number = 0,
+    gravityState: GRAVITYSTATE = GRAVITYSTATE.NORMAL
   ) {
     this.x = x;
     this.y = y;
@@ -42,6 +49,7 @@ class Square {
     this.ctx = ctx;
     this.gravity = gravity;
     this.offsetY = offsetY;
+    this.gravityState = gravityState;
   }
 
   // Draw the square and its tails
@@ -69,24 +77,31 @@ class Square {
 
     // Update square's position
     this.y += this.dy;
-    this.x += 9;
+    this.x += movingSpeed;
 
-    let translateX = -9;
+    let translateX = -movingSpeed;
     let translateY = 0;
 
-    canvasCor.x += 9;
+    canvasCor.x += movingSpeed;
 
-    if (this.y < level1Canvas.height / 4 + this.offsetY) {
-      console.log("Go up");
-      translateY = 2.5;
-      canvasCor.y -= 2.5;
-      this.offsetY -= 2.5;
-    } else if (this.y > level1Canvas.height * 0.7 + this.offsetY) {
-      console.log("Go up");
-      translateY = -5.5;
-      canvasCor.y += 5.5;
-      this.offsetY += 5.5;
+    if (this.gravityState === GRAVITYSTATE.NORMAL) {
+      if (this.y < level1Canvas.height / 4 + this.offsetY) {
+        console.log("Go up");
+        translateY = 2.5;
+        canvasCor.y -= 2.5;
+        this.offsetY -= 2.5;
+      } else if (this.y > level1Canvas.height * 0.7 + this.offsetY) {
+        console.log("Go up");
+        translateY = -5.5;
+        canvasCor.y += 5.5;
+        this.offsetY += 5.5;
+      }
     }
+
+    if (this.gravityState === GRAVITYSTATE.FREE) {
+    
+    }
+
     level1Ctx.translate(translateX, translateY);
 
     // Check if the square hits the bottom of the canvas

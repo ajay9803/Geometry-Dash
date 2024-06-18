@@ -1,4 +1,6 @@
-import { canvas, ctx } from "../main";
+// import { canvas, ctx } from "../main";
+
+import { canvasCor, level1Canvas, level1Ctx } from "../scripts/level1";
 
 class Square {
   x: number;
@@ -9,7 +11,11 @@ class Square {
   dy: number;
   color: string;
   shouldJump: boolean;
-  tails: PlayerTail[];
+  // tails: PlayerTail[];
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  gravity: number;
+  offsetY: number;
 
   constructor(
     x: number,
@@ -18,7 +24,11 @@ class Square {
     h: number,
     dx: number,
     dy: number,
-    color: string
+    color: string,
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    gravity: number,
+    offsetY: number = 0
   ) {
     this.x = x;
     this.y = y;
@@ -28,33 +38,26 @@ class Square {
     this.dy = dy;
     this.color = color;
     this.shouldJump = false;
-
-    // Initialize tails relative to the square's position
-    this.tails = [
-      new PlayerTail(this.x - 15, this.y + 5, 10),
-      new PlayerTail(this.x - 15, this.y + 20, 10),
-      new PlayerTail(this.x - 15, this.y + 35, 10),
-    ];
+    this.canvas = canvas;
+    this.ctx = ctx;
+    this.gravity = gravity;
+    this.offsetY = offsetY;
   }
 
   // Draw the square and its tails
   draw = (): void => {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.w, this.h);
-
-    this.tails.forEach((tail) => {
-      tail.draw();
-    });
+    this.ctx.fillStyle = this.color;
+    this.ctx.fillRect(this.x, this.y, this.w, this.h);
   };
 
   // Keep check of the square's mid position
-  trackMidPosition: () => void = () => {
-    if (this.x < 200) {
-      this.dx = 3;
-    } else {
-      this.dx = 0;
-    }
-  };
+  // trackMidPosition: () => void = () => {
+  //   if (this.x < 200) {
+  //     this.dx = 3;
+  //   } else {
+  //     this.dx = 0;
+  //   }
+  // };
 
   // Update square's position and its tails' positions
   update = (): void => {
@@ -62,18 +65,36 @@ class Square {
       this.shouldJump = false;
     }
 
-    this.trackMidPosition();
+    // this.trackMidPosition();
 
     // Update square's position
     this.y += this.dy;
-    this.x += this.dx;
+    this.x += 9;
+
+    let translateX = -9;
+    let translateY = 0;
+
+    canvasCor.x += 9;
+
+    if (this.y < level1Canvas.height / 4 + this.offsetY) {
+      console.log("Go up");
+      translateY = 2.5;
+      canvasCor.y -= 2.5;
+      this.offsetY -= 2.5;
+    } else if (this.y > level1Canvas.height * 0.7 + this.offsetY) {
+      console.log("Go up");
+      translateY = -5.5;
+      canvasCor.y += 5.5;
+      this.offsetY += 5.5;
+    }
+    level1Ctx.translate(translateX, translateY);
 
     // Check if the square hits the bottom of the canvas
-    if (this.y + this.h + this.dy > canvas.height) {
+    if (this.y + this.h + this.dy > this.canvas.height) {
       this.dy = 0;
       this.shouldJump = true;
     } else {
-      this.dy += 1; // Simulate gravity
+      this.dy += this.gravity; // Simulate gravity
     }
 
     // Draw the square and its tails
@@ -82,21 +103,3 @@ class Square {
 }
 
 export default Square;
-
-export class PlayerTail {
-  x: number;
-  y: number;
-  size: number;
-
-  constructor(x: number, y: number, size: number) {
-    this.x = x;
-    this.y = y;
-    this.size = size;
-  }
-
-  // Draw the tail
-  draw: () => void = () => {
-    ctx.fillStyle = "black";
-    ctx.fillRect(this.x, this.y, this.size, this.size);
-  };
-}

@@ -1,0 +1,62 @@
+.main {
+  width: 99.85vw;
+  height: 96vh;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-canvas {
+  height: 100%;
+  width: 100%;
+  border: 1px solid red;
+}
+
+.level-one-canvas {
+  height: 100%;
+  width: 100%;
+  border: 1px solid blue;
+}
+
+.play-button {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: calc(50% - 75px);
+  left: calc(50% - 75px);
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
+.play-button:hover {
+  transform: scale(90%);
+}
+
+.customize-button {
+  height: 159px;
+  width: 150px;
+  position: absolute;
+  top: calc(50% - 75px);
+  left: 25%;
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
+.customize-button:hover {
+  transform: scale(90%);
+}
+
+.more-button {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: calc(50% - 75px);
+  right: 25%;
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
+.more-button:hover {
+  transform: scale(90%);
+}

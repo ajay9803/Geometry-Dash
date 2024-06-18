@@ -1,18 +1,19 @@
-// import { SPEED } from "./constants/speed_constants";
-import Square, { PlayerTail } from "./models/player";
+import Square from "./models/player";
 import platforms from "./scripts/platforms";
 import spikes from "./scripts/spikes";
 
 let pause: boolean = false;
 let movingSpeed = 8;
 
-export const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-canvas.height = innerHeight - 6;
-canvas.width = innerWidth - 6;
+export const canvas = document.getElementById(
+  "level-one-canvas"
+) as HTMLCanvasElement;
+// canvas.height = innerHeight - 6;
+// canvas.width = innerWidth - 6;
 
 export const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-let theSquare = new Square(0, 500, 50, 50, 0, 0, "blue");
+let theSquare = new Square(0, 500, 50, 50, 0, 0, "blue", canvas, ctx);
 
 // animate the square
 
@@ -20,25 +21,25 @@ const animate = () => {
   ctx.clearRect(0, 0, innerWidth, innerHeight);
   requestAnimationFrame(animate);
 
-  spikes.forEach((spike) => {
-    const isColliding = spike.checkCollisionWithSquare(
-      theSquare.x,
-      theSquare.y,
-      50
-    );
-    if (isColliding) {
-      console.log("Collision detected with spike!");
-      theSquare.color = "orange";
-    }
-  });
+  // spikes.forEach((spike) => {
+  //   const isColliding = spike.checkCollisionWithSquare(
+  //     theSquare.x,
+  //     theSquare.y,
+  //     50
+  //   );
+  //   if (isColliding) {
+  //     console.log("Collision detected with spike!");
+  //     theSquare.color = "orange";
+  //   }
+  // });
 
-  spikes.forEach((spike) => {
-    if (theSquare.y < canvas.height / 2) {
-      spike.y += 2.5;
-    }
-    spike.draw();
-    spike.x -= movingSpeed;
-  });
+  // spikes.forEach((spike) => {
+  //   if (theSquare.y < canvas.height / 2) {
+  //     spike.y += 2.5;
+  //   }
+  //   spike.draw();
+  //   spike.x -= movingSpeed;
+  // });
 
   platforms.forEach((platform) => {
     if (theSquare.y < canvas.height / 2) {
@@ -82,7 +83,3 @@ addEventListener("keydown", ({ code }) => {
     }
   }
 });
-
-const restartLevel = () => {
-  
-}

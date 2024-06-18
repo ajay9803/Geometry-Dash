@@ -1,4 +1,6 @@
-import { ctx } from "../../main";
+// import { leve1Ctx } from "../../main";
+
+import { level1Ctx } from "../../scripts/level1";
 
 class Spike {
   x: number;
@@ -10,30 +12,34 @@ class Spike {
     this.x = x;
     this.y = y;
     this.currentColor = "black"; // Initial color
-
-    // Start the interval to toggle the color
-    this.intervalId = setInterval(() => {
-      this.currentColor = this.currentColor === "black" ? "red" : "black";
-    }, 500);
   }
 
   draw: () => void = () => {
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x + 25, this.y - 50);
-    ctx.lineTo(this.x + 50, this.y);
-    ctx.closePath();
-    ctx.strokeStyle = "purple";
-    ctx.stroke();
+    // Begin the path
+    level1Ctx.beginPath();
+    level1Ctx.moveTo(this.x, this.y);
+    level1Ctx.lineTo(this.x + 25, this.y - 50);
+    level1Ctx.lineTo(this.x + 50, this.y);
+    level1Ctx.closePath();
 
-    // Use the current color
-    ctx.fillStyle = this.currentColor;
-    ctx.fill();
-  };
+    // Set line properties
+    level1Ctx.lineWidth = 3;
+    level1Ctx.strokeStyle = "white";
+    level1Ctx.stroke();
 
-  // Add a method to clear the interval when the spike is no longer needed
-  clearInterval: () => void = () => {
-    clearInterval(this.intervalId);
+    // Create a linear gradient from top to bottom
+    let gradient = level1Ctx.createLinearGradient(
+      this.x,
+      this.y - 50,
+      this.x,
+      this.y
+    );
+    gradient.addColorStop(0, "black"); // Start color (top)
+    gradient.addColorStop(1, "purple"); // End color (bottom)
+
+    // Use the gradient for filling the shape
+    level1Ctx.fillStyle = gradient;
+    level1Ctx.fill();
   };
 
   // Method to check collision with a square

@@ -22,10 +22,7 @@ html {
 
 body {
   margin: 0;
-}
-
-* {
-  border: 1px solid red;
+  padding: 0;
 }
 
 /**

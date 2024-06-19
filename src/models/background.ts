@@ -23,7 +23,7 @@ class Background {
 
   update: () => void = () => {
     this.draw();
-    this.x -= BACKGROUND_SPEED;
+    // this.x -= BACKGROUND_SPEED;
   };
 
   draw: () => void = () => {

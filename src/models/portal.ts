@@ -7,24 +7,30 @@ let portalImage = new Image();
 portalImage.src = thePortal;
 
 class Portal {
+  // image: HTMLImageElement;
   x: number;
   y: number;
   w: number;
   h: number;
   toGravityState: GRAVITYSTATE;
+  isStartPortal: boolean;
 
   constructor(
+    // image: HTMLImageElement,
     x: number,
     y: number,
     w: number,
     h: number,
-    toGravityState: GRAVITYSTATE
+    toGravityState: GRAVITYSTATE,
+    isStartPortal: boolean = true
   ) {
+    // this.image = image;
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.toGravityState = toGravityState;
+    this.isStartPortal = isStartPortal;
   }
 
   draw = (): void => {
@@ -40,9 +46,16 @@ class Portal {
       this.y < square.y + square.h && // Check if the portal's top edge is above the square's bottom edge
       this.y + this.h > square.y; // Check if the portal's bottom edge is below the square's top edge
     if (hasCollided) {
-      square.color = "purple";
-      square.gravityState = this.toGravityState;
-      square.gravity = 0.1;
+      if (this.isStartPortal) {
+        square.color = "purple";
+        square.gravityState = this.toGravityState;
+        square.dy = 1;
+        square.gravity = 0.5;
+      } else {
+        square.color = "blue";
+        square.gravityState = this.toGravityState;
+        square.gravity = 1;
+      }
     }
   };
 }

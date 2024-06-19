@@ -100,7 +100,7 @@ class Spike {
       spikeBottom < squareTop ||
       spikeTop > squareBottom
     );
-
+    // console.log('colliding with spike');
     return isColliding;
   }
 }

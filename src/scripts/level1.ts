@@ -7,6 +7,8 @@ import spikes from "./spikes";
 import platforms from "./platforms";
 import { portals } from "./portals";
 import { GRAVITYSTATE } from "../enums/gravity_state";
+import Particle from "../models/particle";
+import explodePlayer from "../utilities/collisions";
 
 export let canvasCor = {
   x: 0,
@@ -15,7 +17,8 @@ export let canvasCor = {
 
 // Variables to pause and resume the game
 let pause: boolean = false;
-export let movingSpeed = 9;
+export let movingSpeed = 50;
+// export let movingSpeed = 9;
 
 // The canvas element
 export const level1Canvas = document.getElementById(
@@ -32,7 +35,7 @@ export let level1Ctx = level1Canvas.getContext(
 ) as CanvasRenderingContext2D;
 
 // The player
-let theSquare = new Square(
+export let theSquare = new Square(
   400,
   level1Canvas.height - MENU_GROUND_HEIGHT - 100,
   50,
@@ -60,8 +63,10 @@ for (let i = 0; i < 2 * 20; i++) {
 
 let grounds: Ground[] = [];
 
+export let particles: Particle[] = [];
+
 // Create grounds dynamically up to ground 8
-for (let i = 0; i <= 8 * 20; i++) {
+for (let i = 0; i <= 8 * 30; i++) {
   let ground = new Ground(
     i * GROUND_SPACING, // x position
     level1Canvas.height - MENU_GROUND_HEIGHT, // y position
@@ -102,13 +107,16 @@ const animate = () => {
   });
 
   // Draw semi-transparent background
-  level1Ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+  level1Ctx.save();
+  level1Ctx.fillStyle = "rgba(0, 0, 255)";
+  level1Ctx.globalAlpha = 0.5;
   level1Ctx.fillRect(
     canvasCor.x,
     canvasCor.y,
     level1Canvas.width,
     level1Canvas.height
   );
+  level1Ctx.restore();
 
   // Update spikes
   spikes.forEach((spike) => {
@@ -119,6 +127,7 @@ const animate = () => {
     );
     if (isColliding) {
       theSquare.color = "orange";
+      explodePlayer();
     }
     spike.draw();
   });
@@ -139,6 +148,14 @@ const animate = () => {
 
   // Update square's position
   theSquare.update();
+
+  particles.forEach((particle, index) => {
+    if (particle.radius <= 0) {
+      particles.splice(index, 1);
+    } else {
+      particle.updatePosition();
+    }
+  });
 };
 
 animate();
@@ -158,8 +175,7 @@ addEventListener("keydown", ({ code }) => {
     if (theSquare.gravityState === GRAVITYSTATE.FREE) {
       console.log("keep jumping");
       theSquare.shouldJump = true;
-      theSquare.dy -= 1.6;
-      theSquare.gravity = 0.08;
+      theSquare.dy -= 6;
     }
   }
 
@@ -171,5 +187,10 @@ addEventListener("keydown", ({ code }) => {
     } else {
       movingSpeed = 9; // Resume movement
     }
+  }
+
+  if (code === "ArrowLeft") {
+    theSquare.color = "blue";
+    movingSpeed = -10;
   }
 });

@@ -1,6 +1,7 @@
 // import { ctx } from "../main";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import { level1Ctx } from "../scripts/level1";
+import explodePlayer from "../utilities/collisions";
 
 class ThePlatform {
   x: number;
@@ -64,10 +65,10 @@ class ThePlatform {
       squareLeft < this.x + this.w // Square's left side is to the left of the platform's right edge
     ) {
       // if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
-        // theSquare.y = this.y - theSquare.h; // Position the square on top of the platform
-        theSquare.dy = 0; // Stop downward movement
-        theSquare.shouldJump = true; // Allow jumping again
-        return; // Exit the function to avoid further collision checks
+      // theSquare.y = this.y - theSquare.h; // Position the square on top of the platform
+      theSquare.dy = 0; // Stop downward movement
+      theSquare.shouldJump = true; // Allow jumping again
+      return; // Exit the function to avoid further collision checks
       // }
       // if (theSquare.gravityState === GRAVITYSTATE.FREE) {
       //   theSquare.color = 'gold';
@@ -83,6 +84,7 @@ class ThePlatform {
     ) {
       theSquare.color = "orange"; // Change color to indicate collision
       // No position adjustment to allow continuous movement
+      explodePlayer();
       return; // Exit the function
     }
 
@@ -95,6 +97,7 @@ class ThePlatform {
     ) {
       theSquare.color = "orange"; // Change color to indicate collision
       // No position adjustment to allow continuous movement
+      explodePlayer();
       return; // Exit the function
     }
 
@@ -107,6 +110,7 @@ class ThePlatform {
     ) {
       theSquare.color = "orange"; // Change color to indicate collision
       // No position adjustment to allow continuous movement
+      explodePlayer();
       return; // Exit the function
     }
   };

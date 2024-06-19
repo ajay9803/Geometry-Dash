@@ -192,8 +192,8 @@ let platform45 = new ThePlatform(
 let platform46 = new ThePlatform(11900, aboveGround - 300, 100, 50, "gray");
 let platform47 = new ThePlatform(12000, aboveGround - 300, 1700, 300, "purple");
 
-let platform48 = new ThePlatform(13700, aboveGround - 100, 8000, 100, "red");
-let platform49 = new ThePlatform(13700, aboveGround - 700, 8000, 100, "red");
+let platform48 = new ThePlatform(13700, aboveGround - 100, 5470, 100, "red");
+let platform49 = new ThePlatform(13700, aboveGround - 700, 5470, 100, "red");
 
 let platform50 = new ThePlatform(14700, aboveGround - 150, 50, 50, "blue");
 let platform51 = new ThePlatform(15300, aboveGround - 150, 50, 50, "blue");
@@ -210,8 +210,219 @@ let platform58 = new ThePlatform(17300, aboveGround - 250, 50, 150, "black");
 
 let platform59 = new ThePlatform(17750, aboveGround - 600, 50, 150, "black");
 
-let platform60 = new ThePlatform(18300, aboveGround - 250, 800, 150, 'red');
-let platform61 = new ThePlatform(18300, aboveGround - 600, 800, 150, "red");
+let platform60 = new ThePlatform(18300, aboveGround - 250, 870, 150, "blue");
+let platform61 = new ThePlatform(18300, aboveGround - 600, 870, 150, "blue");
+
+let platform62 = new ThePlatform(19170, aboveGround - 150, 600, 150, "blue");
+let platform63 = new ThePlatform(19770, aboveGround - 50, 400, 50, "blue");
+let platform64 = new ThePlatform(20370, aboveGround - 100, 50, 100, "yellow");
+let platform65 = new ThePlatform(
+  20370 + 240,
+  aboveGround - 150,
+  50,
+  150,
+  "yellow"
+);
+let platform66 = new ThePlatform(
+  20370 + 220 * 2,
+  aboveGround - 50,
+  50,
+  50,
+  "yellow"
+);
+
+let platform67 = new ThePlatform(
+  20370 + 220 * 2,
+  aboveGround - 300,
+  50,
+  100,
+  "yellow"
+);
+
+let platform68 = new ThePlatform(
+  20370 + 220 * 3,
+  aboveGround - 100,
+  300,
+  100,
+  "yellow"
+);
+
+let platform69 = new ThePlatform(
+  20370 + 220 * 3,
+  aboveGround - 350,
+  50,
+  100,
+  "yellow"
+);
+
+let platform70 = new ThePlatform(21570, aboveGround - 150, 50, 150, "blue");
+let platform71 = new ThePlatform(
+  21570 + 240,
+  aboveGround - 200,
+  50,
+  200,
+  "blue"
+);
+
+let platform72 = new ThePlatform(
+  21570 + 240 * 2,
+  aboveGround - 250,
+  50,
+  250,
+  "blue"
+);
+
+let platform73 = new ThePlatform(
+  21570 + 240 * 3,
+  aboveGround - 300,
+  50,
+  300,
+  "blue"
+);
+
+let platform74 = new ThePlatform(
+  21570 + 240 * 4,
+  aboveGround - 350,
+  50,
+  350,
+  "blue"
+);
+
+let platform75 = new ThePlatform(
+  21570 + 240 * 5,
+  aboveGround - 400,
+  50,
+  400,
+  "blue"
+);
+
+let platform76 = new ThePlatform(
+  21570 + 240 * 6,
+  aboveGround - 450,
+  50,
+  450,
+  "blue"
+);
+
+let platform78 = new ThePlatform(23060, aboveGround - 450, 50, 20, "red");
+
+let platform79 = new ThePlatform(23060 + 150, aboveGround - 400, 50, 20, "red");
+let platform80 = new ThePlatform(
+  23060 + 150 + 50,
+  aboveGround - 400,
+  50,
+  20,
+  "red"
+);
+
+let platform81 = new ThePlatform(
+  23060 + 150 + 50 + 150,
+  aboveGround - 300,
+  50,
+  20,
+  "red"
+);
+
+let platform82 = new ThePlatform(
+  23060 + 150 + 50 + 150 + 50,
+  aboveGround - 300,
+  50,
+  20,
+  "red"
+);
+
+let platform83 = new ThePlatform(
+  23060 + 150 + 50 + 400,
+  aboveGround - 200,
+  50,
+  20,
+  "red"
+);
+
+let platform84 = new ThePlatform(
+  23060 + 150 + 50 + 400 + 50,
+  aboveGround - 200,
+  50,
+  20,
+  "red"
+);
+
+let platform85 = new ThePlatform(
+  23710 - 50,
+  aboveGround - 180,
+  100,
+  180,
+  "yellow"
+);
+
+let platform86 = new ThePlatform(
+  23710 - 50 + 200,
+  aboveGround - 100,
+  50,
+  20,
+  "blue"
+);
+
+let platform87 = new ThePlatform(25000, aboveGround - 50, 50, 50, "purple");
+
+let platform87d = new ThePlatform(25050, aboveGround - 50, 50, 50, "purple");
+
+// let platform88 = new ThePlatform(
+//   25200 + 50,
+//   aboveGround - 100 - 50,
+//   50,
+//   20,
+//   "purple"
+// );
+
+// let platform89 = new ThePlatform(
+//   25250 + 50,
+//   aboveGround - 100 - 50,
+//   50,
+//   20,
+//   "purple"
+// );
+
+let platform90 = new ThePlatform(
+  25400 + 100,
+  aboveGround - 50,
+  50,
+  50,
+  "purple"
+);
+let platform91 = new ThePlatform(
+  25450 + 100,
+  aboveGround - 50,
+  50,
+  50,
+  "purple"
+);
+
+let platform94 = new ThePlatform(
+  25750 + 220,
+  aboveGround - 200,
+  50,
+  20,
+  "purple"
+);
+
+let platform95 = new ThePlatform(
+  25800 + 220,
+  aboveGround - 200,
+  50,
+  20,
+  "purple"
+);
+
+let platform92 = new ThePlatform(25750, aboveGround - 100, 50, 20, "purple");
+
+let platform93 = new ThePlatform(25800, aboveGround - 100, 50, 20, "purple");
+
+let platform96 = new ThePlatform(26200, aboveGround - 50, 50, 50, "brown");
+
+let platform97 = new ThePlatform(26250, aboveGround - 50, 50, 50, "brown");
+
+let platform98 = new ThePlatform(26300, aboveGround - 50, 50, 50, "brown");
 
 let platforms = [
   platform1,
@@ -275,6 +486,59 @@ let platforms = [
   platform59,
   platform60,
   platform61,
+  platform62,
+  platform63,
+  platform64,
+  platform65,
+  platform66,
+  platform67,
+  platform68,
+  platform69,
+  platform70,
+  platform71,
+  platform72,
+  platform73,
+  platform74,
+  platform75,
+  platform76,
+  platform78,
+  platform79,
+  platform80,
+  platform81,
+  platform82,
+  platform83,
+  platform84,
+  platform85,
+  platform86,
+  platform87,
+  platform87d,
+  // platform88,
+  // platform89,
+  platform90,
+  platform91,
+  platform92,
+  platform93,
+  platform94,
+  platform95,
+  platform96,
+  platform97,
+  platform98,
+  // platform99,
+  // platform100,
+  // platform101,
+  // platform102,
+  // platform103,
+  // platform104,
+  // platform105,
+  // platform106,
+  // platform107,
+  // platform108,
+  // platform109,
+  // platform110,
+  // platform111,
+  // platform112,
+  // platform113,
+  // platform114,
 ];
 
 export default platforms;

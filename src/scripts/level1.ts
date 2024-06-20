@@ -9,6 +9,13 @@ import { portals } from "./portals";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
 import explodePlayer from "../utilities/collisions";
+import { showPauseMenu } from "./pause";
+
+let themeValue = 255;
+let themeColor = `rgba(0, 0, ${themeValue})`;
+let opacityValue = 0.5;
+
+export let gameProgress = 0;
 
 export let canvasCor = {
   x: 0,
@@ -108,8 +115,8 @@ const animate = () => {
 
   // Draw semi-transparent background
   level1Ctx.save();
-  level1Ctx.fillStyle = "rgba(0, 0, 255)";
-  level1Ctx.globalAlpha = 0.5;
+  level1Ctx.fillStyle = themeColor;
+  level1Ctx.globalAlpha = opacityValue;
   level1Ctx.fillRect(
     canvasCor.x,
     canvasCor.y,
@@ -146,6 +153,19 @@ const animate = () => {
     portal.checkCollisionWithSquare(theSquare);
   });
 
+  // Separator between ground and the game-env
+  level1Ctx.save();
+  level1Ctx.strokeStyle = "white";
+  level1Ctx.lineWidth = 2;
+  level1Ctx.beginPath();
+  level1Ctx.moveTo(canvasCor.x, level1Canvas.height - MENU_GROUND_HEIGHT); // Adjust the x position based on canvasCor.x
+  level1Ctx.lineTo(
+    canvasCor.x + level1Canvas.width,
+    level1Canvas.height - MENU_GROUND_HEIGHT
+  ); // Adjust the x position based on canvasCor.x and add canvas width
+  level1Ctx.stroke();
+  level1Ctx.restore();
+
   // Update square's position
   theSquare.update();
 
@@ -156,6 +176,10 @@ const animate = () => {
       particle.updatePosition();
     }
   });
+
+  if (pause) {
+    showPauseMenu();
+  }
 };
 
 animate();
@@ -173,7 +197,6 @@ addEventListener("keydown", ({ code }) => {
     }
 
     if (theSquare.gravityState === GRAVITYSTATE.FREE) {
-      console.log("keep jumping");
       theSquare.shouldJump = true;
       theSquare.dy -= 6;
     }
@@ -183,14 +206,83 @@ addEventListener("keydown", ({ code }) => {
   if (code === "Enter") {
     pause = !pause;
     if (pause) {
+      clearInterval(gameProgressInterval);
+      console.log(gameProgress);
       movingSpeed = 0; // Stop movement
     } else {
       movingSpeed = 9; // Resume movement
+      gameProgressInterval = setInterval(() => {
+        gameProgress += 1;
+      }, 1000);
     }
   }
 
   if (code === "ArrowLeft") {
     theSquare.color = "blue";
     movingSpeed = -10;
+  }
+});
+
+let gameProgressInterval = setInterval(() => {
+  gameProgress += 1;
+}, 1000);
+
+// The Resume Button
+// Variables for resume button's dimensions and position
+const buttonWidth = 145;
+const buttonHeight = 145;
+let buttonX = canvasCor.x + level1Canvas.width / 2 - buttonWidth / 2;
+let buttonY = canvasCor.y + 300;
+
+// Track mouse position and hover state
+let mouseX = 0;
+let mouseY = 0;
+let isHovering = false;
+
+// Add event listener to track mouse movements
+level1Canvas.addEventListener("mousemove", (e) => {
+  const rect = level1Canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+
+  // Check if mouse is over the resume button
+  isHovering =
+    mouseX >= buttonX &&
+    mouseX <= buttonX + buttonWidth &&
+    mouseY >= buttonY &&
+    mouseY <= buttonY + buttonHeight;
+});
+
+// Add event listener for mouse clicks
+level1Canvas.addEventListener("click", () => {
+  if (isHovering && pause) {
+    // Resume the game if the resume button is clicked
+    pause = false;
+    movingSpeed = 9; // Resume movement
+    gameProgressInterval = setInterval(() => {
+      gameProgress += 1;
+    }, 1000);
+  }
+});
+
+level1Canvas.addEventListener("click", function (event) {
+  // Get mouse coordinates relative to canvas
+  const rect = level1Canvas.getBoundingClientRect();
+  const mouseX = event.clientX - rect.left;
+  const mouseY = event.clientY - rect.top;
+
+  // Define the coordinates and dimensions of the rectangle
+  const rectX = canvasCor.x + level1Canvas.width * 0.2 + 100;
+  const rectY = canvasCor.y + level1Canvas.height + 372.5 - 25 - 5;
+  const rectWidth = 50;
+  const rectHeight = 50;
+
+  // Check if the click is inside the rectangle
+  if (mouseX >= rectX) {
+    console.log(mouseX, mouseY);
+    // Perform actions when rectangle is clicked
+    console.log("Rectangle clicked!");
+
+    // Add your logic here for what should happen when the rectangle is clicked
   }
 });

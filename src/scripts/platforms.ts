@@ -4,7 +4,7 @@ export let aboveGround = window.innerHeight - 6 - 150;
 
 // The platforms
 
-// let platform0 = new ThePlatform(400, aboveGround - 50, 500, 50, 'black');
+// let platform0 = new ThePlatform(500, aboveGround - 50, 500, 50, "black");
 
 let platform1 = new ThePlatform(
   2050,
@@ -367,22 +367,6 @@ let platform87 = new ThePlatform(25000, aboveGround - 50, 50, 50, "purple");
 
 let platform87d = new ThePlatform(25050, aboveGround - 50, 50, 50, "purple");
 
-// let platform88 = new ThePlatform(
-//   25200 + 50,
-//   aboveGround - 100 - 50,
-//   50,
-//   20,
-//   "purple"
-// );
-
-// let platform89 = new ThePlatform(
-//   25250 + 50,
-//   aboveGround - 100 - 50,
-//   50,
-//   20,
-//   "purple"
-// );
-
 let platform90 = new ThePlatform(
   25400 + 100,
   aboveGround - 50,
@@ -463,7 +447,6 @@ let platforms = [
   platform36,
   platform37,
   platform38,
-  // platform39,
   platform40,
   platform41,
   platform42,
@@ -512,8 +495,6 @@ let platforms = [
   platform86,
   platform87,
   platform87d,
-  // platform88,
-  // platform89,
   platform90,
   platform91,
   platform92,
@@ -523,22 +504,12 @@ let platforms = [
   platform96,
   platform97,
   platform98,
-  // platform99,
-  // platform100,
-  // platform101,
-  // platform102,
-  // platform103,
-  // platform104,
-  // platform105,
-  // platform106,
-  // platform107,
-  // platform108,
-  // platform109,
-  // platform110,
-  // platform111,
-  // platform112,
-  // platform113,
-  // platform114,
 ];
+
+platforms.forEach((platform) => {
+  if (platform.h === 20) {
+    platform.isSlab = true;
+  }
+});
 
 export default platforms;

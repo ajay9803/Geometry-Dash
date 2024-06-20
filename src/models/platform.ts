@@ -1,7 +1,9 @@
-// import { ctx } from "../main";
-import { GRAVITYSTATE } from "../enums/gravity_state";
 import { level1Ctx } from "../scripts/level1";
+import theImage from "../assets/sprites/grounds/the-test (1).png";
 import explodePlayer from "../utilities/collisions";
+
+let image = new Image();
+image.src = theImage;
 
 class ThePlatform {
   x: number;
@@ -10,6 +12,7 @@ class ThePlatform {
   h: number;
   color: string;
   moveDown: boolean;
+  isSlab: boolean;
 
   constructor(
     x: number,
@@ -17,7 +20,8 @@ class ThePlatform {
     w: number,
     h: number,
     color: string,
-    moveDown: boolean = false
+    moveDown: boolean = false,
+    isSlab: boolean = false
   ) {
     this.x = x;
     this.y = y;
@@ -25,33 +29,61 @@ class ThePlatform {
     this.h = h;
     this.color = color;
     this.moveDown = moveDown;
+    this.isSlab = isSlab;
   }
 
   // Draw the platform
   draw = (): void => {
-    // Create a linear gradient from top to bottom of the platform
-    let gradient = level1Ctx.createLinearGradient(
-      this.x,
-      this.y,
-      this.x,
-      this.y + this.h
-    );
-    gradient.addColorStop(0, this.color);
-    gradient.addColorStop(1, "purple"); // Gradient to a lighter color at the bottom
+    level1Ctx.save();
 
-    // Fill the platform with the gradient
-    level1Ctx.fillStyle = gradient;
-    level1Ctx.fillRect(this.x, this.y, this.w, this.h);
+    // if (this.isSlab) {
+      // Draw as a slab with a gradient fill
+      // Create a gradient from the top to the bottom of the platform
+      let gradient = level1Ctx.createLinearGradient(
+        this.x,
+        this.y,
+        this.x,
+        this.y + this.h
+      );
+      gradient.addColorStop(0, 'black');
+      gradient.addColorStop(1, "purple"); // Gradient to a different color at the bottom
 
-    // Add a white stroke with width 3
-    level1Ctx.lineWidth = 3;
-    level1Ctx.strokeStyle = "white";
-    level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
+      // Fill the platform with the gradient
+      level1Ctx.fillStyle = gradient;
+      level1Ctx.fillRect(this.x, this.y, this.w, this.h);
+
+      // Add a white stroke with width 3
+      level1Ctx.lineWidth = 3;
+      level1Ctx.strokeStyle = "white";
+      level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
+    // } else {
+    //   // Draw with the image pattern
+    //   // Create a pattern from the image
+    //   let pattern = level1Ctx.createPattern(image, "repeat");
+    //   if (pattern) {
+    //     level1Ctx.fillStyle = pattern;
+    //     level1Ctx.fillRect(this.x, this.y, this.w, this.h);
+    //   }
+
+    //   // Add a white stroke with width 3
+    //   level1Ctx.lineWidth = 3;
+    //   level1Ctx.strokeStyle = "white";
+    //   level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
+
+    //   // Apply a semi-transparent blue overlay
+    //   level1Ctx.globalAlpha = 0.5; // Set transparency to 50%
+    //   level1Ctx.fillStyle = "rgba(0, 0, 255, 1)"; // Blue color with full opacity in the rgba format
+    //   level1Ctx.fillRect(this.x, this.y, this.w, this.h); // Apply the overlay
+
+    //   // Reset the global alpha to default (opaque)
+    //   level1Ctx.globalAlpha = 1.0;
+    // }
+
+    level1Ctx.restore();
   };
 
   // Check collision with a square and update the square's state
   checkCollisionWithSquare = (theSquare: any): void => {
-    // Calculate the square's boundaries
     const squareBottom = theSquare.y + theSquare.h;
     const squareTop = theSquare.y;
     const squareRight = theSquare.x + theSquare.w;
@@ -59,59 +91,50 @@ class ThePlatform {
 
     // Check if the square is landing on top of the platform
     if (
-      squareBottom < this.y && // Square's bottom is above the platform's top
-      squareBottom + theSquare.dy >= this.y && // Square is falling onto the platform
-      squareRight > this.x && // Square's right side is to the right of the platform's left edge
-      squareLeft < this.x + this.w // Square's left side is to the left of the platform's right edge
+      squareBottom < this.y &&
+      squareBottom + theSquare.dy >= this.y &&
+      squareRight > this.x &&
+      squareLeft < this.x + this.w
     ) {
-      // if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
-      // theSquare.y = this.y - theSquare.h; // Position the square on top of the platform
-      theSquare.dy = 0; // Stop downward movement
-      theSquare.shouldJump = true; // Allow jumping again
-      return; // Exit the function to avoid further collision checks
-      // }
-      // if (theSquare.gravityState === GRAVITYSTATE.FREE) {
-      //   theSquare.color = 'gold';
-      // }
+      theSquare.dy = 0;
+      theSquare.shouldJump = true;
+      return;
     }
 
     // Check collision with the left side of the platform
     if (
-      squareRight > this.x && // Square's right side is to the right of the platform's left edge
-      squareLeft < this.x && // Square's left side is to the left of the platform's left edge
-      squareBottom > this.y && // Square's bottom is below the platform's top edge
-      squareTop < this.y + this.h // Square's top is above the platform's bottom edge
+      squareRight > this.x &&
+      squareLeft < this.x &&
+      squareBottom > this.y &&
+      squareTop < this.y + this.h
     ) {
-      theSquare.color = "orange"; // Change color to indicate collision
-      // No position adjustment to allow continuous movement
+      theSquare.color = "orange";
       explodePlayer();
-      return; // Exit the function
+      return;
     }
 
     // Check collision with the right side of the platform
     if (
-      squareLeft < this.x + this.w && // Square's left side is to the left of the platform's right edge
-      squareRight > this.x + this.w && // Square's right side is to the right of the platform's right edge
-      squareBottom > this.y && // Square's bottom is below the platform's top edge
-      squareTop < this.y + this.h // Square's top is above the platform's bottom edge
+      squareLeft < this.x + this.w &&
+      squareRight > this.x + this.w &&
+      squareBottom > this.y &&
+      squareTop < this.y + this.h
     ) {
-      theSquare.color = "orange"; // Change color to indicate collision
-      // No position adjustment to allow continuous movement
+      theSquare.color = "orange";
       explodePlayer();
-      return; // Exit the function
+      return;
     }
 
     // Check collision with the bottom of the platform
     if (
-      squareTop < this.y + this.h && // Square's top is above the platform's bottom edge
-      squareBottom > this.y + this.h && // Square's bottom is below the platform's bottom edge
-      squareRight > this.x && // Square's right side is to the right of the platform's left edge
-      squareLeft < this.x + this.w // Square's left side is to the left of the platform's right edge
+      squareTop < this.y + this.h &&
+      squareBottom > this.y + this.h &&
+      squareRight > this.x &&
+      squareLeft < this.x + this.w
     ) {
-      theSquare.color = "orange"; // Change color to indicate collision
-      // No position adjustment to allow continuous movement
+      theSquare.color = "orange";
       explodePlayer();
-      return; // Exit the function
+      return;
     }
   };
 }

@@ -41,11 +41,14 @@ export default class Particle implements IParticle {
     level1Ctx.fillRect(this.xpose, this.ypose, this.radius, this.radius);
     level1Ctx.restore();
   }
-  updatePosition(): void {
+  updatePosition(
+    opacityChangeRate: number = 0.01,
+    sizeChangeRate: number = 0.05
+  ): void {
     this.ypose += this.dy;
     this.xpose += this.dx;
-    this.opacity -= 0.01;
-    this.radius -= 0.05;
+    this.opacity -= opacityChangeRate;
+    this.radius -= sizeChangeRate;
     this.draw();
   }
 }

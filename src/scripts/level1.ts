@@ -17,8 +17,8 @@ export let canvasCor = {
 
 // Variables to pause and resume the game
 let pause: boolean = false;
-export let movingSpeed = 50;
-// export let movingSpeed = 9;
+// export let movingSpeed = 50;
+export let movingSpeed = 9;
 
 // The canvas element
 export const level1Canvas = document.getElementById(

@@ -1,22 +1,20 @@
-import { level1Ctx, movingSpeed } from "../scripts/level1";
-import thePortal from "../assets/sprites/portals/portal-1.png";
+import { level1Ctx } from "../scripts/level1";
 import Square from "../models/player"; // Import Square class
 import { GRAVITYSTATE } from "../enums/gravity_state";
-
-let portalImage = new Image();
-portalImage.src = thePortal;
+import Particle from "./particle";
 
 class Portal {
-  // image: HTMLImageElement;
+  image: HTMLImageElement;
   x: number;
   y: number;
   w: number;
   h: number;
   toGravityState: GRAVITYSTATE;
   isStartPortal: boolean;
+  particles: Particle[];
 
   constructor(
-    // image: HTMLImageElement,
+    image: HTMLImageElement,
     x: number,
     y: number,
     w: number,
@@ -24,17 +22,48 @@ class Portal {
     toGravityState: GRAVITYSTATE,
     isStartPortal: boolean = true
   ) {
-    // this.image = image;
+    this.image = image;
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.toGravityState = toGravityState;
     this.isStartPortal = isStartPortal;
+    this.particles = [];
   }
 
   draw = (): void => {
-    level1Ctx.drawImage(portalImage, this.x, this.y, this.w, this.h);
+    level1Ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
+
+    for (let k = 0; k < 1; k++) {
+      const vx = (Math.random() - 0.5) * 2;
+      const vy = (Math.random() - 0.5) * 2;
+      const r = Math.random() * 10;
+      if (this.isStartPortal) {
+        this.particles.push(
+          new Particle(this.x, this.y + this.h / 2, vx, vy, r, "#CC0118")
+        );
+      } else {
+        this.particles.push(
+          new Particle(
+            this.x + this.w,
+            this.y + this.h / 2,
+            vx,
+            vy,
+            r,
+            "#CC0118"
+          )
+        );
+      }
+    }
+
+    this.particles.forEach((particle, index) => {
+      if (particle.opacity <= 0) {
+        this.particles.splice(index, 1);
+      } else {
+        particle.updatePosition(0.02);
+      }
+    });
   };
 
   // Collision detection method

@@ -1,10 +1,17 @@
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Portal from "../models/portal";
 import { aboveGround } from "./platforms";
+import startPortal from "../assets/sprites/portals/portal-2.png";
+import endPortal from "../assets/sprites/portals/portal-1.png";
 
+let endPortalImage = new Image();
+endPortalImage.src = endPortal;
 
+let startPortalImage = new Image();
+startPortalImage.src = startPortal;
 
 let portal1 = new Portal(
+  startPortalImage,
   13550,
   aboveGround - 500,
   336 / 2,
@@ -13,6 +20,7 @@ let portal1 = new Portal(
 );
 
 let portal2 = new Portal(
+  endPortalImage,
   18900,
   aboveGround - 445,
   336 / 2,
@@ -20,5 +28,6 @@ let portal2 = new Portal(
   GRAVITYSTATE.NORMAL,
   false
 );
+
 
 export const portals: Portal[] = [portal1, portal2];

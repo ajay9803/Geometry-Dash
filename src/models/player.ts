@@ -8,6 +8,7 @@ import {
 import TailParticle from "./player_tail";
 
 class Square {
+  isDead: boolean;
   x: number;
   y: number;
   w: number;
@@ -27,6 +28,7 @@ class Square {
   particleTimer: number; // Timer to control particle creation
 
   constructor(
+    isDead: boolean,
     x: number,
     y: number,
     w: number,
@@ -40,6 +42,7 @@ class Square {
     offsetY: number = 0,
     gravityState: GRAVITYSTATE = GRAVITYSTATE.NORMAL
   ) {
+    this.isDead = isDead;
     this.x = x;
     this.y = y;
     this.w = w;

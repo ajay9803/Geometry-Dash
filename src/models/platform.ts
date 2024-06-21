@@ -1,4 +1,4 @@
-import { level1Ctx } from "../scripts/level1";
+import { level1Ctx, resetGame } from "../scripts/level1";
 import theImage from "../assets/sprites/grounds/the-test (1).png";
 import explodePlayer from "../utilities/collisions";
 
@@ -161,8 +161,9 @@ class ThePlatform {
       squareBottom > this.y &&
       squareTop < this.y + this.h
     ) {
-      theSquare.color = "orange";
+      theSquare.isDead = true;
       explodePlayer();
+      resetGame();
       return;
     }
 
@@ -172,8 +173,9 @@ class ThePlatform {
       squareBottom > this.y &&
       squareTop < this.y + this.h
     ) {
-      theSquare.color = "orange";
+      theSquare.isDead = true;
       explodePlayer();
+      resetGame();
       return;
     }
 
@@ -183,8 +185,9 @@ class ThePlatform {
       squareRight > this.x &&
       squareLeft < this.x + this.w
     ) {
-      theSquare.color = "orange";
+      theSquare.isDead = true;
       explodePlayer();
+      resetGame();
       return;
     }
   };

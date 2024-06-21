@@ -120,7 +120,5 @@ export const showPauseMenu = () => {
     );
   }
 
-  
-
   level1Ctx.restore();
 };

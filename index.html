@@ -1,6 +1,6 @@
 <!-- Menu Screen  -->
 
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,29 +9,34 @@
   <title>Document</title>
   <link rel="stylesheet" href="./src/css/index.css">
   <link rel="stylesheet" href="./src/css/styles.css">
-  <style>
-  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 </head>
 
 <body class="main">
 
-  The play buttons 
-  <a href="http://localhost:5173/src/pages/level1.html">
-    <img class="play-button" src="./src/assets/sprites/buttons/play-button.png">
-  </a>
-  <img class="customize-button" src="./src/assets/sprites/buttons/customize-button.png">
+  <!-- The play buttons -->
+  <div id="menu-buttons">
+    <div id="play-button">
+      <img class="play-button-img" src="./src/assets/sprites/buttons/play-button.png">
+    </div>
+    <img class="customize-button" src="./src/assets/sprites/buttons/customize-button.png">
 
-  <img class="more-button" src="./src/assets/sprites/buttons/more-button.png">
+    <img class="more-button" src="./src/assets/sprites/buttons/more-button.png">
+  </div>
 
-  Menu Canvas 
+  <!-- Menu Canvas -->
   <canvas id="menu-canvas" class="menu-canvas"></canvas>
+  <canvas id="level-one-canvas" class="level-one-canvas"></canvas>
   <script type="module" src="./src/scripts/menu.ts"></script>
+  <script type="module" src="./src/scripts/level1.ts"></script>
 </body>
 
-</html> -->
+</html>
 
-
-
+<!-- 
 <!doctype html>
 <html lang="en">
 
@@ -41,14 +46,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Geometry Dash</title>
 
-  <!-- Base CSS -->
-  <link rel="stylesheet" href="./src/css/index.css">
+Base CSS 
+<link rel="stylesheet" href="./src/css/index.css">
 
-  <link rel="stylesheet" href="./src/css/styles.css">
+<link rel="stylesheet" href="./src/css/styles.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 </head>
 
 <body class="main">
@@ -56,4 +61,4 @@
   <script type="module" src="./src/scripts/level1.ts"></script>
 </body>
 
-</html>
+</html> -->

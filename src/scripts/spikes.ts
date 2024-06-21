@@ -4,7 +4,7 @@ import MidSpike from "../models/spikes/mid_spike";
 import Spike from "../models/spikes/spike";
 import { aboveGround } from "./platforms";
 
-let spike0 = new Spike(900, window.innerHeight - 6 - 150);
+let spike0 = new Spike(800, window.innerHeight - 6 - 150);
 
 let spike1 = new MidSpike(1200, window.innerHeight - 6 - 150);
 let spike2 = new Spike(1250, window.innerHeight - 6 - 150);

@@ -5,21 +5,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .menu-canvas {
   height: 100%;
   width: 100%;
   border: 1px solid red;
+  
 }
 
 .level-one-canvas {
   height: 100%;
   width: 100%;
   border: 1px solid blue;
+  display: none;
 }
 
-.play-button {
+.play-button-img {
   height: 150px;
   width: 150px;
   position: absolute;

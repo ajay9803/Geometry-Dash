@@ -10,11 +10,9 @@ import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
 import explodePlayer from "../utilities/collisions";
 import { showPauseMenu } from "./pause";
-import backgroundMusic from "../assets/audios/zilly.mp3";
+import { backgroundAudio } from "./menu";
 
-// Background Music 
-let backgroundAudio = new Audio(backgroundMusic);
-backgroundAudio.loop = true;
+let resetGameInterval = null;
 
 let themeValue = 255;
 let themeColor = `rgba(0, 0, ${themeValue})`;
@@ -30,7 +28,11 @@ export let canvasCor = {
 // Variables to pause and resume the game
 let pause: boolean = false;
 // export let movingSpeed = 50;
-export let movingSpeed = 9;
+export let movingSpeed = 0;
+
+export const startSpeed = () => {
+  movingSpeed = 9;
+};
 
 // The canvas element
 export const level1Canvas = document.getElementById(
@@ -48,6 +50,7 @@ export let level1Ctx = level1Canvas.getContext(
 
 // The player
 export let theSquare = new Square(
+  false,
   400,
   level1Canvas.height - MENU_GROUND_HEIGHT - 100,
   50,
@@ -87,10 +90,6 @@ for (let i = 0; i <= 8 * 30; i++) {
   );
   grounds.push(ground);
 }
-
-// backgroundAudio
-//   .play()
-//   .catch((e) => console.log("Error playing background music:", e));
 
 const animate = () => {
   level1Ctx.clearRect(
@@ -142,8 +141,12 @@ const animate = () => {
       50
     );
     if (isColliding) {
-      theSquare.color = "orange";
+      console.log("The collision has been made");
+      theSquare.isDead = true;
       explodePlayer();
+      resetGame();
+
+      // here, i want the player to start from start,
     }
     spike.draw();
   });
@@ -176,13 +179,17 @@ const animate = () => {
   level1Ctx.restore();
 
   // Update square's position
-  theSquare.update();
+  if (!theSquare.isDead) {
+    theSquare.update();
+  }
 
   particles.forEach((particle, index) => {
     if (particle.radius <= 0) {
       particles.splice(index, 1);
     } else {
-      particle.updatePosition();
+      if (particles.length <= 250) {
+        particle.updatePosition();
+      }
     }
   });
 
@@ -213,6 +220,7 @@ addEventListener("keydown", ({ code }) => {
 
   // Pause the game
   if (code === "Enter") {
+    console.log("pause");
     pause = !pause;
     if (pause) {
       clearInterval(gameProgressInterval);
@@ -280,7 +288,7 @@ const checkboxX = canvasCor.x + level1Canvas.width * 0.2 + 100;
 const checkboxY = canvasCor.y + 372.5 - 25 - 5;
 
 // Track the state of the checkbox (checked or unchecked)
-export let isCheckboxChecked = false;
+export let isCheckboxChecked = true;
 
 // Track mouse position and hover state for the checkbox
 let isHoveringOverCheckbox = false;
@@ -310,8 +318,52 @@ level1Canvas.addEventListener("click", () => {
     } else {
       backgroundAudio.pause();
     }
-    
+
     // (Optional) Perform additional actions when checkbox state changes
-    console.log(`Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`);
+    console.log(
+      `Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`
+    );
   }
 });
+
+// Reset Game
+export const resetGame = () => {
+  if (resetGameInterval !== null) {
+    clearInterval(resetGameInterval);
+  } else {
+    setTimeout(() => {
+      // Reset the canvas translation
+      canvasCor.x = 0;
+      canvasCor.y = 0;
+      level1Ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any transformations
+
+      theSquare.isDead = false;
+      theSquare.x = 400;
+      theSquare.y = level1Canvas.height - MENU_GROUND_HEIGHT - 50;
+      theSquare.dx = 0;
+      theSquare.dy = 0;
+      theSquare.color = "blue";
+      theSquare.offsetY = 0;
+      theSquare.gravityState = GRAVITYSTATE.NORMAL;
+
+      // Clear particles
+      particles.length = 0;
+
+      // Reset game progress
+      gameProgress = 0;
+      clearInterval(gameProgressInterval);
+      gameProgressInterval = setInterval(() => {
+        gameProgress += 1;
+      }, 1000);
+
+      // Restart the background audio if necessary
+      backgroundAudio.currentTime = 0;
+      backgroundAudio.play();
+
+      console.log("Game has been reset.");
+
+      movingSpeed = 9;
+    }, 500);
+  }
+  // Reset player position and state
+};

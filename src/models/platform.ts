@@ -11,8 +11,16 @@ class ThePlatform {
   w: number;
   h: number;
   color: string;
-  moveDown: boolean;
+  showSlabLight: boolean;
   isSlab: boolean;
+  showLight: boolean;
+
+  // Properties for the pulsating circle
+  circleRadius: number;
+  circleGrowing: boolean;
+  maxRadius: number;
+  minRadius: number;
+  circleGrowthRate: number;
 
   constructor(
     x: number,
@@ -20,64 +28,111 @@ class ThePlatform {
     w: number,
     h: number,
     color: string,
-    moveDown: boolean = false,
-    isSlab: boolean = false
+    showSlabLight: boolean = true,
+    isSlab: boolean = false,
+    showLight: boolean = false
   ) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.color = color;
-    this.moveDown = moveDown;
+    this.showSlabLight = showSlabLight;
     this.isSlab = isSlab;
+    this.showLight = showLight;
+
+    // Initialize circle properties
+    this.circleRadius = 5;
+    this.circleGrowing = true;
+    this.maxRadius = 15;
+    this.minRadius = 5;
+    this.circleGrowthRate = 0.5;
   }
 
-  // Draw the platform
+  // Update the circle's radius
+  updateCircle = (): void => {
+    if (this.circleGrowing) {
+      this.circleRadius += this.circleGrowthRate;
+      if (this.circleRadius >= this.maxRadius) {
+        this.circleGrowing = false;
+      }
+    } else {
+      this.circleRadius -= this.circleGrowthRate;
+      if (this.circleRadius <= this.minRadius) {
+        this.circleGrowing = true;
+      }
+    }
+  };
+
+  // Draw the platform and optionally the pulsating circle
   draw = (): void => {
     level1Ctx.save();
 
     // if (this.isSlab) {
-      // Draw as a slab with a gradient fill
-      // Create a gradient from the top to the bottom of the platform
-      let gradient = level1Ctx.createLinearGradient(
-        this.x,
-        this.y,
-        this.x,
-        this.y + this.h
-      );
-      gradient.addColorStop(0, 'black');
-      gradient.addColorStop(1, "purple"); // Gradient to a different color at the bottom
+    // Draw slab platform with gradient fill
+    let gradient = level1Ctx.createLinearGradient(
+      this.x,
+      this.y,
+      this.x,
+      this.y + this.h
+    );
+    gradient.addColorStop(0, "black");
+    gradient.addColorStop(1, "purple");
 
-      // Fill the platform with the gradient
-      level1Ctx.fillStyle = gradient;
-      level1Ctx.fillRect(this.x, this.y, this.w, this.h);
-
-      // Add a white stroke with width 3
-      level1Ctx.lineWidth = 3;
-      level1Ctx.strokeStyle = "white";
-      level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
+    level1Ctx.fillStyle = gradient;
+    level1Ctx.fillRect(this.x, this.y, this.w, this.h);
+    level1Ctx.strokeStyle = "white";
+    level1Ctx.lineWidth = 3;
+    level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
     // } else {
-    //   // Draw with the image pattern
-    //   // Create a pattern from the image
+    //   // Draw non-slab platform with image pattern fill
     //   let pattern = level1Ctx.createPattern(image, "repeat");
     //   if (pattern) {
     //     level1Ctx.fillStyle = pattern;
     //     level1Ctx.fillRect(this.x, this.y, this.w, this.h);
     //   }
 
-    //   // Add a white stroke with width 3
-    //   level1Ctx.lineWidth = 3;
     //   level1Ctx.strokeStyle = "white";
+    //   level1Ctx.lineWidth = 3;
     //   level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
 
-    //   // Apply a semi-transparent blue overlay
-    //   level1Ctx.globalAlpha = 0.5; // Set transparency to 50%
-    //   level1Ctx.fillStyle = "rgba(0, 0, 255, 1)"; // Blue color with full opacity in the rgba format
-    //   level1Ctx.fillRect(this.x, this.y, this.w, this.h); // Apply the overlay
-
-    //   // Reset the global alpha to default (opaque)
+    //   level1Ctx.globalAlpha = 0.5;
+    //   level1Ctx.fillStyle = "rgba(0, 0, 255, 1)";
+    //   level1Ctx.fillRect(this.x, this.y, this.w, this.h);
     //   level1Ctx.globalAlpha = 1.0;
     // }
+
+    if (this.showLight && this.showSlabLight) {
+      const lineStartX = this.x + this.w / 2;
+      const lineStartY = this.isSlab ? this.y + this.h + 3 : this.y - 3;
+      const circleCenterY = this.isSlab ? lineStartY + 30 : lineStartY - 30;
+
+      // Draw the white vertical line
+      level1Ctx.beginPath();
+      level1Ctx.moveTo(lineStartX, lineStartY);
+      if (this.isSlab) {
+        level1Ctx.lineTo(lineStartX, lineStartY + 20);
+      } else {
+        level1Ctx.lineTo(lineStartX, lineStartY - 20);
+      }
+      level1Ctx.strokeStyle = "white";
+      level1Ctx.lineWidth = 5;
+      level1Ctx.stroke();
+
+      // Update and draw the pulsating circle
+      this.updateCircle();
+      level1Ctx.beginPath();
+      level1Ctx.arc(
+        lineStartX,
+        circleCenterY,
+        this.circleRadius,
+        0,
+        2 * Math.PI
+      );
+      level1Ctx.strokeStyle = "white";
+      level1Ctx.fillStyle = "transparent";
+      level1Ctx.stroke();
+    }
 
     level1Ctx.restore();
   };
@@ -89,7 +144,6 @@ class ThePlatform {
     const squareRight = theSquare.x + theSquare.w;
     const squareLeft = theSquare.x;
 
-    // Check if the square is landing on top of the platform
     if (
       squareBottom < this.y &&
       squareBottom + theSquare.dy >= this.y &&
@@ -101,7 +155,6 @@ class ThePlatform {
       return;
     }
 
-    // Check collision with the left side of the platform
     if (
       squareRight > this.x &&
       squareLeft < this.x &&
@@ -113,7 +166,6 @@ class ThePlatform {
       return;
     }
 
-    // Check collision with the right side of the platform
     if (
       squareLeft < this.x + this.w &&
       squareRight > this.x + this.w &&
@@ -125,7 +177,6 @@ class ThePlatform {
       return;
     }
 
-    // Check collision with the bottom of the platform
     if (
       squareTop < this.y + this.h &&
       squareBottom > this.y + this.h &&

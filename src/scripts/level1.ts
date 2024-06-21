@@ -10,6 +10,11 @@ import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
 import explodePlayer from "../utilities/collisions";
 import { showPauseMenu } from "./pause";
+import backgroundMusic from "../assets/audios/zilly.mp3";
+
+// Background Music 
+let backgroundAudio = new Audio(backgroundMusic);
+backgroundAudio.loop = true;
 
 let themeValue = 255;
 let themeColor = `rgba(0, 0, ${themeValue})`;
@@ -82,6 +87,10 @@ for (let i = 0; i <= 8 * 30; i++) {
   );
   grounds.push(ground);
 }
+
+// backgroundAudio
+//   .play()
+//   .catch((e) => console.log("Error playing background music:", e));
 
 const animate = () => {
   level1Ctx.clearRect(
@@ -237,7 +246,7 @@ let buttonY = canvasCor.y + 300;
 // Track mouse position and hover state
 let mouseX = 0;
 let mouseY = 0;
-let isHovering = false;
+let isHoveringOverResume = false;
 
 // Add event listener to track mouse movements
 level1Canvas.addEventListener("mousemove", (e) => {
@@ -246,7 +255,7 @@ level1Canvas.addEventListener("mousemove", (e) => {
   mouseY = e.clientY - rect.top;
 
   // Check if mouse is over the resume button
-  isHovering =
+  isHoveringOverResume =
     mouseX >= buttonX &&
     mouseX <= buttonX + buttonWidth &&
     mouseY >= buttonY &&
@@ -255,7 +264,7 @@ level1Canvas.addEventListener("mousemove", (e) => {
 
 // Add event listener for mouse clicks
 level1Canvas.addEventListener("click", () => {
-  if (isHovering && pause) {
+  if (isHoveringOverResume && pause) {
     // Resume the game if the resume button is clicked
     pause = false;
     movingSpeed = 9; // Resume movement
@@ -265,24 +274,44 @@ level1Canvas.addEventListener("click", () => {
   }
 });
 
-level1Canvas.addEventListener("click", function (event) {
-  // Get mouse coordinates relative to canvas
+// Define the dimensions and position for the checkbox
+const checkboxSize = 50;
+const checkboxX = canvasCor.x + level1Canvas.width * 0.2 + 100;
+const checkboxY = canvasCor.y + 372.5 - 25 - 5;
+
+// Track the state of the checkbox (checked or unchecked)
+export let isCheckboxChecked = false;
+
+// Track mouse position and hover state for the checkbox
+let isHoveringOverCheckbox = false;
+
+// Update mouse tracking for checkbox hover
+level1Canvas.addEventListener("mousemove", (e) => {
   const rect = level1Canvas.getBoundingClientRect();
-  const mouseX = event.clientX - rect.left;
-  const mouseY = event.clientY - rect.top;
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
 
-  // Define the coordinates and dimensions of the rectangle
-  const rectX = canvasCor.x + level1Canvas.width * 0.2 + 100;
-  const rectY = canvasCor.y + level1Canvas.height + 372.5 - 25 - 5;
-  const rectWidth = 50;
-  const rectHeight = 50;
+  // Check if mouse is over the checkbox
+  isHoveringOverCheckbox =
+    mouseX >= checkboxX &&
+    mouseX <= checkboxX + checkboxSize &&
+    mouseY >= checkboxY &&
+    mouseY <= checkboxY + checkboxSize;
+});
 
-  // Check if the click is inside the rectangle
-  if (mouseX >= rectX) {
-    console.log(mouseX, mouseY);
-    // Perform actions when rectangle is clicked
-    console.log("Rectangle clicked!");
+// Add event listener for mouse clicks on the checkbox
+level1Canvas.addEventListener("click", () => {
+  if (isHoveringOverCheckbox && pause) {
+    // Toggle the checkbox state
+    isCheckboxChecked = !isCheckboxChecked;
 
-    // Add your logic here for what should happen when the rectangle is clicked
+    if (isCheckboxChecked) {
+      backgroundAudio.play();
+    } else {
+      backgroundAudio.pause();
+    }
+    
+    // (Optional) Perform additional actions when checkbox state changes
+    console.log(`Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`);
   }
 });

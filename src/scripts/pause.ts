@@ -1,4 +1,10 @@
-import { canvasCor, gameProgress, level1Canvas, level1Ctx } from "./level1";
+import {
+  canvasCor,
+  gameProgress,
+  isCheckboxChecked,
+  level1Canvas,
+  level1Ctx,
+} from "./level1";
 
 import resumeButtonImage from "../assets/sprites/buttons/resume-button.png";
 import starIconImage from "../assets/sprites/icons/the-star.png";
@@ -94,6 +100,7 @@ export const showPauseMenu = () => {
     50
   );
 
+  // Music Checkbox
   level1Ctx.strokeStyle = "black"; // Set border color
   level1Ctx.lineWidth = 2; // Set border width
   level1Ctx.strokeRect(
@@ -103,13 +110,17 @@ export const showPauseMenu = () => {
     50
   );
 
-  level1Ctx.drawImage(
-    starIcon,
-    canvasCor.x + level1Canvas.width * 0.2 + 100 + 5,
-    canvasCor.y + 372.5 - 25,
-    40,
-    40
-  );
+  if (isCheckboxChecked) {
+    level1Ctx.drawImage(
+      starIcon,
+      canvasCor.x + level1Canvas.width * 0.2 + 100 + 5,
+      canvasCor.y + 372.5 - 25,
+      40,
+      40
+    );
+  }
+
+  
 
   level1Ctx.restore();
 };

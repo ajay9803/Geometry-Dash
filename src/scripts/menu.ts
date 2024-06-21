@@ -16,7 +16,9 @@ backgroundAudio.loop = true;
 let playButton = new Image();
 playButton.src = playButtonImage;
 
-export const menuCanvas = document.getElementById("menu-canvas") as HTMLCanvasElement;
+export const menuCanvas = document.getElementById(
+  "menu-canvas"
+) as HTMLCanvasElement;
 
 // Set the dimension for the canvas
 menuCanvas.width = window.innerWidth - 5;
@@ -87,20 +89,83 @@ animate();
 
 // Wait for the DOM to fully load
 document.addEventListener("DOMContentLoaded", () => {
+  // Main body
+  const mainBody = document.getElementById("main") as HTMLDivElement;
+
   // Select the button using its ID
   const playButton = document.getElementById("play-button") as HTMLDivElement;
+  const customizeButton = document.getElementById(
+    "customize-button"
+  ) as HTMLDivElement;
+  const randomButton = document.getElementById(
+    "random-button"
+  ) as HTMLDivElement;
 
-  const menuCanvas = document.getElementById("menu-canvas") as HTMLCanvasElement;
-  const levelOneCanvas = document.getElementById("level-one-canvas") as HTMLCanvasElement;
-  const menuButtons = document.getElementById('menu-buttons') as HTMLDivElement;
+  const menuCanvas = document.getElementById(
+    "menu-canvas"
+  ) as HTMLCanvasElement;
+  const levelOneCanvas = document.getElementById(
+    "level-one-canvas"
+  ) as HTMLCanvasElement;
+  const menuButtons = document.getElementById("menu-buttons") as HTMLDivElement;
 
   // Add a click event listener to the button
   playButton.addEventListener("click", () => {
-    console.log('this running again');
+    console.log("this running again");
     backgroundAudio.play();
-    menuCanvas.style.display = 'none';
-    levelOneCanvas.style.display = 'block';
-    menuButtons.style.display = 'none';
+    menuCanvas.style.display = "none";
+    levelOneCanvas.style.display = "block";
+    menuButtons.style.display = "none";
     setMovingSpeed();
+  });
+
+  customizeButton.addEventListener("click", () => {
+    playButton.style.display = "none";
+    customizeButton.style.display = "none";
+    randomButton.style.display = "none";
+    menuCanvas.style.display = "none";
+    mainBody.style.justifyContent = "start";
+    mainBody.style.alignItems = "start";
+    mainBody.style.background =
+      "linear-gradient(to right, transparent, #787878)";
+
+    const customizeWrapper = document.createElement("div");
+    customizeWrapper.classList.add("customize-wrapper");
+
+    mainBody.appendChild(customizeWrapper);
+
+    const img = document.createElement("img");
+    img.src = "assets/sprites/icons/cross-icon.png"; // Replace with the path to your image
+    img.alt = "Description of the image"; // Replace with a description for accessibility
+    img.classList.add("cross-image");
+
+    customizeWrapper.appendChild(img);
+
+    const selectedPlayerImage = document.createElement('img');
+    selectedPlayerImage.src = 'assets/sprites/cubes/cube-1.png'
+    selectedPlayerImage.classList.add('selected-player-image');
+
+    customizeWrapper.appendChild(selectedPlayerImage);
+
+    const line = document.createElement("div");
+    line.classList.add("separator-line");
+
+    customizeWrapper.appendChild(line);
+
+    // Create a flexbox container for the images
+    const flexContainer = document.createElement("div");
+    flexContainer.classList.add("flex-container");
+
+    // Create and append 8 player images to the flexbox container
+    for (let i = 0; i < 8; i++) {
+      const playerImg = document.createElement("img");
+      playerImg.src = `assets/sprites/cubes/cube-${i + 1}.png`; // Use modulo to loop through available images
+      playerImg.alt = `Player ${i + 1}`;
+      playerImg.classList.add("player-image");
+      flexContainer.appendChild(playerImg);
+    }
+
+    // Append the flexbox container to the main body
+    customizeWrapper.appendChild(flexContainer);
   });
 });

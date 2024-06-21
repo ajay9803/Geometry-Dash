@@ -11,14 +11,18 @@ import Particle from "../models/particle";
 import explodePlayer from "../utilities/collisions";
 import { showPauseMenu } from "./pause";
 import { backgroundAudio } from "./menu";
-
-let resetGameInterval = null;
+import { attemptCount, getAttempts, saveAttempts } from "../utilities/attempts";
+import { resetGame } from "./reset";
 
 let themeValue = 255;
 let themeColor = `rgba(0, 0, ${themeValue})`;
 let opacityValue = 0.5;
 
 export let gameProgress = 0;
+
+export const setGameProgress = (progress: number) => {
+  gameProgress = progress;
+};
 
 export let canvasCor = {
   x: 0,
@@ -30,7 +34,7 @@ let pause: boolean = false;
 // export let movingSpeed = 50;
 export let movingSpeed = 0;
 
-export const startSpeed = () => {
+export const setMovingSpeed = () => {
   movingSpeed = 9;
 };
 
@@ -143,9 +147,10 @@ const animate = () => {
     if (isColliding) {
       console.log("The collision has been made");
       theSquare.isDead = true;
-      explodePlayer();
-      resetGame();
-
+      if (theSquare.isDead) {
+        explodePlayer();
+        resetGame();
+      }
       // here, i want the player to start from start,
     }
     spike.draw();
@@ -192,6 +197,10 @@ const animate = () => {
       }
     }
   });
+
+  level1Ctx.fillStyle = "white";
+  level1Ctx.font = "bold 50px Lacquer";
+  level1Ctx.fillText(`Attempt ${attemptCount}`, 200, canvasCor.y + 100);
 
   if (pause) {
     showPauseMenu();
@@ -240,9 +249,15 @@ addEventListener("keydown", ({ code }) => {
   }
 });
 
-let gameProgressInterval = setInterval(() => {
+export let gameProgressInterval = setInterval(() => {
   gameProgress += 1;
 }, 1000);
+
+export const setGameProgressInterval = () => {
+  gameProgressInterval = setInterval(() => {
+    setGameProgress(gameProgress + 1);
+  }, 1000);
+};
 
 // The Resume Button
 // Variables for resume button's dimensions and position
@@ -327,43 +342,3 @@ level1Canvas.addEventListener("click", () => {
 });
 
 // Reset Game
-export const resetGame = () => {
-  if (resetGameInterval !== null) {
-    clearInterval(resetGameInterval);
-  } else {
-    setTimeout(() => {
-      // Reset the canvas translation
-      canvasCor.x = 0;
-      canvasCor.y = 0;
-      level1Ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset any transformations
-
-      theSquare.isDead = false;
-      theSquare.x = 400;
-      theSquare.y = level1Canvas.height - MENU_GROUND_HEIGHT - 50;
-      theSquare.dx = 0;
-      theSquare.dy = 0;
-      theSquare.color = "blue";
-      theSquare.offsetY = 0;
-      theSquare.gravityState = GRAVITYSTATE.NORMAL;
-
-      // Clear particles
-      particles.length = 0;
-
-      // Reset game progress
-      gameProgress = 0;
-      clearInterval(gameProgressInterval);
-      gameProgressInterval = setInterval(() => {
-        gameProgress += 1;
-      }, 1000);
-
-      // Restart the background audio if necessary
-      backgroundAudio.currentTime = 0;
-      backgroundAudio.play();
-
-      console.log("Game has been reset.");
-
-      movingSpeed = 9;
-    }, 500);
-  }
-  // Reset player position and state
-};

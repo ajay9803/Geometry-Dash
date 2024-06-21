@@ -65,22 +65,8 @@ let platform11 = new ThePlatform(
   "gray"
 ); // 6336 + 262
 
-let platform12 = new ThePlatform(
-  6750,
-  aboveGround - 400,
-  150,
-  100,
-  "red",
-  false
-);
-let platform13 = new ThePlatform(
-  6900,
-  aboveGround - 400,
-  1200,
-  400,
-  "orange",
-  false
-);
+let platform12 = new ThePlatform(6750, aboveGround - 400, 150, 100, "red", false);
+let platform13 = new ThePlatform(6900, aboveGround - 400, 1200, 400, "orange", false);
 
 let platform14 = new ThePlatform(7130, aboveGround - 480, 50, 20, "red", false);
 let platform15 = new ThePlatform(7215, aboveGround - 480, 50, 20, "red", false);
@@ -88,22 +74,8 @@ let platform15 = new ThePlatform(7215, aboveGround - 480, 50, 20, "red", false);
 let platform16 = new ThePlatform(7730, aboveGround - 480, 50, 20, "red", false);
 let platform17 = new ThePlatform(7815, aboveGround - 480, 50, 20, "red", false);
 
-let platform18 = new ThePlatform(
-  8100,
-  aboveGround - 350,
-  600,
-  350,
-  "blue",
-  false
-);
-let platform19 = new ThePlatform(
-  8700,
-  aboveGround - 400,
-  450,
-  400,
-  "yellow",
-  false
-);
+let platform18 = new ThePlatform(8100, aboveGround - 350, 600, 350, "blue", false);
+let platform19 = new ThePlatform(8700, aboveGround - 400, 450, 400, "yellow", false);
 
 let platform20 = new ThePlatform(8290, aboveGround - 450, 50, 20, "orange");
 let platform21 = new ThePlatform(

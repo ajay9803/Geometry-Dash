@@ -7,7 +7,7 @@ import MenuGround from "../models/menu/ground";
 import MenuBackground from "../models/menu/background";
 
 import backgroundMusic from "../assets/audios/zilly.mp3";
-import { startSpeed } from "./level1";
+import { setMovingSpeed } from "./level1";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);
@@ -101,6 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     menuCanvas.style.display = 'none';
     levelOneCanvas.style.display = 'block';
     menuButtons.style.display = 'none';
-    startSpeed();
+    setMovingSpeed();
   });
 });

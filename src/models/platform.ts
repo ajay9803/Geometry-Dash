@@ -1,6 +1,7 @@
-import { level1Ctx, resetGame } from "../scripts/level1";
+import { level1Ctx } from "../scripts/level1";
 import theImage from "../assets/sprites/grounds/the-test (1).png";
 import explodePlayer from "../utilities/collisions";
+import { resetGame } from "../scripts/reset";
 
 let image = new Image();
 image.src = theImage;

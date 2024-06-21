@@ -78,7 +78,7 @@ class Portal {
       if (this.isStartPortal) {
         square.color = "purple";
         square.gravityState = this.toGravityState;
-        square.dy = 1;
+        // square.dy = 1;
         square.gravity = 0.5;
       } else {
         square.color = "blue";

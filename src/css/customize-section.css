@@ -7,6 +7,7 @@
   height: 51px;
   width: 51px;
   text-align: start;
+  cursor: pointer;
 }
 
 .customize-wrapper {
@@ -30,11 +31,11 @@
 
 .separator-line {
   height: 10px;
-  width: 400px;
+  width: 500px;
   background: linear-gradient(
     to right,
     white,
-    blue,
+    black,
     white
   ); /* Linear gradient */
   align-self: center; /* Center the separator line */

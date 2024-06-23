@@ -4,13 +4,11 @@ import { saveAttempts } from "../utilities/attempts";
 import {
   canvasCor,
   gameProgress,
-  gameProgressInterval,
   isCheckboxChecked,
   level1Canvas,
   level1Ctx,
   particles,
   setGameProgress,
-  setGameProgressInterval,
   setMovingSpeed,
   theSquare,
 } from "./level1";
@@ -18,7 +16,7 @@ import { backgroundAudio } from "./menu";
 
 let resetGameInterval = null;
 
-export const resetGame = () => {
+export const resetGame = (milliseconds: number) => {
   if (resetGameInterval !== null) {
     clearInterval(resetGameInterval);
   } else {
@@ -36,7 +34,6 @@ export const resetGame = () => {
       theSquare.y = level1Canvas.height - MENU_GROUND_HEIGHT - 50;
       theSquare.dx = 0;
       theSquare.dy = 0;
-      theSquare.color = "blue";
       theSquare.offsetY = 0;
       theSquare.gravityState = GRAVITYSTATE.NORMAL;
 
@@ -45,8 +42,6 @@ export const resetGame = () => {
 
       // Reset game progress
       setGameProgress(0);
-      clearInterval(gameProgressInterval);
-      setGameProgressInterval();
 
       // Restart the background audio if necessary
       if (isCheckboxChecked) {
@@ -57,6 +52,6 @@ export const resetGame = () => {
       console.log("Game has been reset.");
 
       setMovingSpeed();
-    }, 500);
+    }, milliseconds);
   }
 };

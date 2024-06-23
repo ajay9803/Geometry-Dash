@@ -9,10 +9,15 @@ import { portals } from "./portals";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
 import explodePlayer from "../utilities/collisions";
-import { showPauseMenu } from "./pause";
+import { openMenu, showPauseMenu } from "./pause";
 import { backgroundAudio } from "./menu";
 import { attemptCount, getAttempts, saveAttempts } from "../utilities/attempts";
 import { resetGame } from "./reset";
+
+import player from "/assets/sprites/cubes/cube-5.png";
+
+let playerImage = new Image();
+playerImage.src = player;
 
 let themeValue = 255;
 let themeColor = `rgba(0, 0, ${themeValue})`;
@@ -54,6 +59,7 @@ export let level1Ctx = level1Canvas.getContext(
 
 // The player
 export let theSquare = new Square(
+  player,
   false,
   400,
   level1Canvas.height - MENU_GROUND_HEIGHT - 100,
@@ -66,6 +72,10 @@ export let theSquare = new Square(
   level1Ctx,
   1
 );
+
+export const setPlayer = (player: Square) => {
+  theSquare = player;
+};
 
 let backgrounds: Background[] = [];
 
@@ -149,7 +159,7 @@ const animate = () => {
       theSquare.isDead = true;
       if (theSquare.isDead) {
         explodePlayer();
-        resetGame();
+        resetGame(500);
       }
       // here, i want the player to start from start,
     }
@@ -232,32 +242,17 @@ addEventListener("keydown", ({ code }) => {
     console.log("pause");
     pause = !pause;
     if (pause) {
-      clearInterval(gameProgressInterval);
       console.log(gameProgress);
       movingSpeed = 0; // Stop movement
     } else {
       movingSpeed = 9; // Resume movement
-      gameProgressInterval = setInterval(() => {
-        gameProgress += 1;
-      }, 1000);
     }
   }
 
   if (code === "ArrowLeft") {
-    theSquare.color = "blue";
-    movingSpeed = -10;
+    movingSpeed = -9;
   }
 });
-
-export let gameProgressInterval = setInterval(() => {
-  gameProgress += 1;
-}, 1000);
-
-export const setGameProgressInterval = () => {
-  gameProgressInterval = setInterval(() => {
-    setGameProgress(gameProgress + 1);
-  }, 1000);
-};
 
 // The Resume Button
 // Variables for resume button's dimensions and position
@@ -283,6 +278,8 @@ level1Canvas.addEventListener("mousemove", (e) => {
     mouseX <= buttonX + buttonWidth &&
     mouseY >= buttonY &&
     mouseY <= buttonY + buttonHeight;
+
+  level1Canvas.style.cursor = isHoveringOverResume ? "pointer" : "default";
 });
 
 // Add event listener for mouse clicks
@@ -291,9 +288,6 @@ level1Canvas.addEventListener("click", () => {
     // Resume the game if the resume button is clicked
     pause = false;
     movingSpeed = 9; // Resume movement
-    gameProgressInterval = setInterval(() => {
-      gameProgress += 1;
-    }, 1000);
   }
 });
 
@@ -320,6 +314,8 @@ level1Canvas.addEventListener("mousemove", (e) => {
     mouseX <= checkboxX + checkboxSize &&
     mouseY >= checkboxY &&
     mouseY <= checkboxY + checkboxSize;
+
+  level1Canvas.style.cursor = isHoveringOverCheckbox ? "pointer" : "default";
 });
 
 // Add event listener for mouse clicks on the checkbox
@@ -341,4 +337,42 @@ level1Canvas.addEventListener("click", () => {
   }
 });
 
-// Reset Game
+// The menu button
+// Coordinates and dimensions for the menu icon
+const menuIconWidth = 90;
+const menuIconHeight = 90;
+const menuIconX = canvasCor.x + level1Canvas.width * 0.6 + 100;
+const menuIconY = canvasCor.y + 372.5 - 25 - 20;
+
+let isHoveringOverMenuIcon = false;
+
+// Add event listener to track mouse movements
+level1Canvas.addEventListener("mousemove", (e) => {
+  const rect = level1Canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+
+  // Check if mouse is over the menu icon
+  isHoveringOverMenuIcon =
+    mouseX >= menuIconX &&
+    mouseX <= menuIconX + menuIconWidth &&
+    mouseY >= menuIconY &&
+    mouseY <= menuIconY + menuIconHeight;
+
+  // Optionally, you can provide visual feedback for hovering (like changing cursor)
+  level1Canvas.style.cursor = isHoveringOverMenuIcon ? "pointer" : "default";
+});
+
+// Add event listener for mouse clicks
+level1Canvas.addEventListener("click", () => {
+  if (isHoveringOverMenuIcon) {
+    // Action to be taken when the menu icon is clicked
+    // For example, open the game menu or pause the game
+    console.log("Menu icon clicked");
+    // Implement the desired functionality here
+    resetGame(1);
+    openMenu();
+    theSquare.isDead = true;
+    pause = false;
+  }
+});

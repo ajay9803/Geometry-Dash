@@ -164,7 +164,7 @@ class ThePlatform {
     ) {
       theSquare.isDead = true;
       explodePlayer();
-      resetGame();
+      resetGame(500);
       return;
     }
 
@@ -176,7 +176,7 @@ class ThePlatform {
     ) {
       theSquare.isDead = true;
       explodePlayer();
-      resetGame();
+      resetGame(500);
       return;
     }
 
@@ -188,7 +188,7 @@ class ThePlatform {
     ) {
       theSquare.isDead = true;
       explodePlayer();
-      resetGame();
+      resetGame(500);
       return;
     }
   };

@@ -7,7 +7,25 @@ import {
 } from "../scripts/level1";
 import TailParticle from "./player_tail";
 
+// Utility function to retrieve customization
+export const getCustomization = () => {
+  const playerImageId = localStorage.getItem("selectedPlayerImage") || "cube-1"; // Default to cube-1 if none selected
+  const playerImageSrc = `assets/sprites/cubes/${playerImageId}.png`;
+
+  const playerBackgroundColor =
+    localStorage.getItem("selectedPlayerColor") || "red"; // Default color
+
+  return { playerImageSrc, playerBackgroundColor };
+};
+
+// Retrieve the selected player image and background color
+const { playerImageSrc, playerBackgroundColor } = getCustomization();
+
+export let playerImage = new Image();
+playerImage.src = playerImageSrc;
+
 class Square {
+  imgSrc: string;
   isDead: boolean;
   x: number;
   y: number;
@@ -28,6 +46,7 @@ class Square {
   particleTimer: number; // Timer to control particle creation
 
   constructor(
+    imgSrc: string,
     isDead: boolean,
     x: number,
     y: number,
@@ -42,6 +61,7 @@ class Square {
     offsetY: number = 0,
     gravityState: GRAVITYSTATE = GRAVITYSTATE.NORMAL
   ) {
+    this.imgSrc = imgSrc;
     this.isDead = isDead;
     this.x = x;
     this.y = y;
@@ -49,7 +69,7 @@ class Square {
     this.h = h;
     this.dx = dx;
     this.dy = dy;
-    this.color = color;
+    this.color = color; // Use the stored background color
     this.shouldJump = false;
     this.canvas = canvas;
     this.ctx = ctx;
@@ -60,12 +80,34 @@ class Square {
     this.tailParticles2 = []; // Initialize the second tail particles array
     this.tailParticles3 = []; // Initialize the third tail particles array
     this.particleTimer = 0; // Initialize the timer for particle creation
+
+    // Set the initial image
+    this.updateImage(imgSrc);
+    this.updateColor(color);
+  }
+
+  updateImage(newImageSrc: string) {
+    this.imgSrc = newImageSrc;
+    playerImage.src = newImageSrc;
+    playerImage.onload = () => {
+      this.draw();
+    };
+  }
+
+  updateColor(newColor: string) {
+    this.color = newColor;
   }
 
   draw(): void {
-    // Draw the square
+    // Clear the previous drawing to avoid overpainting
+    this.ctx.clearRect(this.x, this.y, this.w, this.h);
+
+    // Draw the square with a background color
     this.ctx.fillStyle = this.color;
-    this.ctx.fillRect(this.x, this.y, this.w, this.h);
+    this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
+
+    // Draw the player image on top
+    this.ctx.drawImage(playerImage, this.x, this.y, this.w, this.h);
 
     // Draw tail particles
     this.tailParticles1.forEach((particle) => particle.draw());
@@ -100,7 +142,7 @@ class Square {
     }
 
     if (this.gravityState === GRAVITYSTATE.FREE) {
-      // Behavior for free gravity state 
+      // Behavior for free gravity state
     }
 
     level1Ctx.translate(translateX, translateY);

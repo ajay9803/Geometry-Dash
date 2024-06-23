@@ -8,12 +8,16 @@ import {
 
 import resumeButtonImage from "../assets/sprites/buttons/resume-button.png";
 import starIconImage from "../assets/sprites/icons/the-star.png";
+import menuIconImage from "../assets/sprites/icons/menu-icon.png";
 
 let resumeButton = new Image();
 resumeButton.src = resumeButtonImage;
 
 let starIcon = new Image();
 starIcon.src = starIconImage;
+
+let menuIcon = new Image();
+menuIcon.src = menuIconImage;
 
 export const showPauseMenu = () => {
   level1Ctx.save();
@@ -120,5 +124,29 @@ export const showPauseMenu = () => {
     );
   }
 
+  level1Ctx.drawImage(
+    menuIcon,
+    canvasCor.x + level1Canvas.width * 0.6 + 100,
+    canvasCor.y + 372.5 -25 - 20,
+    90,
+    90
+  );
+
   level1Ctx.restore();
 };
+
+// Function to open the menu
+export function openMenu() {
+  const menuCanvas = document.getElementById("menu-canvas") as HTMLCanvasElement;
+  const levelOneCanvas = document.getElementById("level-one-canvas") as HTMLCanvasElement;
+  const menuButtons = document.getElementById("menu-buttons") as HTMLDivElement;
+  const mainBody = document.getElementById("main") as HTMLDivElement;
+
+  // Display the menu canvas and hide other elements
+  menuCanvas.style.display = "block";
+  levelOneCanvas.style.display = "none";
+  menuButtons.style.display = "block";
+  mainBody.style.justifyContent = "center";
+  mainBody.style.alignItems = "center";
+  mainBody.style.background = "linear-gradient(to right, transparent, #787878)";
+}

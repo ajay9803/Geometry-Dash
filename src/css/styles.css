@@ -22,6 +22,15 @@
   display: none;
 }
 
+.title-img {
+  width: 400px;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 200px);
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
 .play-button-img {
   height: 150px;
   width: 150px;
@@ -32,7 +41,7 @@
   transition: transform 0.5s ease-in;
 }
 
-.play-button:hover {
+.play-button-img:hover {
   transform: scale(90%);
 }
 

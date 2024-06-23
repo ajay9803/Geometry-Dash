@@ -127,7 +127,7 @@ export const showPauseMenu = () => {
   level1Ctx.drawImage(
     menuIcon,
     canvasCor.x + level1Canvas.width * 0.6 + 100,
-    canvasCor.y + 372.5 -25 - 20,
+    canvasCor.y + 372.5 - 25 - 20,
     90,
     90
   );
@@ -137,8 +137,12 @@ export const showPauseMenu = () => {
 
 // Function to open the menu
 export function openMenu() {
-  const menuCanvas = document.getElementById("menu-canvas") as HTMLCanvasElement;
-  const levelOneCanvas = document.getElementById("level-one-canvas") as HTMLCanvasElement;
+  const menuCanvas = document.getElementById(
+    "menu-canvas"
+  ) as HTMLCanvasElement;
+  const levelOneCanvas = document.getElementById(
+    "level-one-canvas"
+  ) as HTMLCanvasElement;
   const menuButtons = document.getElementById("menu-buttons") as HTMLDivElement;
   const mainBody = document.getElementById("main") as HTMLDivElement;
 

@@ -21,6 +21,7 @@
   height: 100%;
   padding: 30px;
   row-gap: 10px;
+  border: none;
 }
 
 .selected-player-image {

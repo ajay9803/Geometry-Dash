@@ -77,7 +77,7 @@ class ThePlatform {
       this.x,
       this.y + this.h
     );
-    gradient.addColorStop(0, "black");
+    gradient.addColorStop(0, this.color);
     gradient.addColorStop(1, "purple");
 
     level1Ctx.fillStyle = gradient;
@@ -162,9 +162,7 @@ class ThePlatform {
       squareBottom > this.y &&
       squareTop < this.y + this.h
     ) {
-      theSquare.isDead = true;
-      explodePlayer();
-      resetGame(500);
+      theSquare.removePlayer();
       return;
     }
 
@@ -174,9 +172,7 @@ class ThePlatform {
       squareBottom > this.y &&
       squareTop < this.y + this.h
     ) {
-      theSquare.isDead = true;
-      explodePlayer();
-      resetGame(500);
+      theSquare.removePlayer();
       return;
     }
 
@@ -186,9 +182,7 @@ class ThePlatform {
       squareRight > this.x &&
       squareLeft < this.x + this.w
     ) {
-      theSquare.isDead = true;
-      explodePlayer();
-      resetGame(500);
+      theSquare.removePlayer();
       return;
     }
   };

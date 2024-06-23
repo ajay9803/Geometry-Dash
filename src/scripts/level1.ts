@@ -4,7 +4,7 @@ import { GROUND_SPACING } from "../constants/height_constants";
 import Background from "../models/background";
 import Square from "../models/player";
 import spikes from "./spikes";
-import platforms from "./platforms";
+import platforms, { aboveGround } from "./platforms";
 import { portals } from "./portals";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
@@ -15,6 +15,8 @@ import { attemptCount, getAttempts, saveAttempts } from "../utilities/attempts";
 import { resetGame } from "./reset";
 
 import player from "/assets/sprites/cubes/cube-5.png";
+import { SPEED } from "../constants/speed_constants";
+import Propeller from "../models/propeller";
 
 let playerImage = new Image();
 playerImage.src = player;
@@ -40,7 +42,7 @@ let pause: boolean = false;
 export let movingSpeed = 0;
 
 export const setMovingSpeed = () => {
-  movingSpeed = 9;
+  movingSpeed = SPEED;
 };
 
 // The canvas element
@@ -95,7 +97,7 @@ let grounds: Ground[] = [];
 export let particles: Particle[] = [];
 
 // Create grounds dynamically up to ground 8
-for (let i = 0; i <= 8 * 30; i++) {
+for (let i = 0; i <= 8 * 40; i++) {
   let ground = new Ground(
     i * GROUND_SPACING, // x position
     level1Canvas.height - MENU_GROUND_HEIGHT, // y position
@@ -156,15 +158,15 @@ const animate = () => {
     );
     if (isColliding) {
       console.log("The collision has been made");
-      theSquare.isDead = true;
-      if (theSquare.isDead) {
-        explodePlayer();
-        resetGame(500);
-      }
-      // here, i want the player to start from start,
+      // theSquare.isDead = true;
+      // if (theSquare.isDead) {
+        theSquare.removePlayer();
+      // }
     }
     spike.draw();
   });
+
+  
 
   // Update platforms
   platforms.forEach((platform) => {
@@ -215,6 +217,11 @@ const animate = () => {
   if (pause) {
     showPauseMenu();
   }
+
+  // Example usage:
+  const propeller = new Propeller(600, aboveGround, "gold");
+  propeller.draw();
+  propeller.checkCollision();
 };
 
 animate();
@@ -245,28 +252,29 @@ addEventListener("keydown", ({ code }) => {
       console.log(gameProgress);
       movingSpeed = 0; // Stop movement
     } else {
-      movingSpeed = 9; // Resume movement
+      movingSpeed = SPEED; // Resume movement
     }
   }
 
   if (code === "ArrowLeft") {
-    movingSpeed = -9;
+    movingSpeed = -SPEED;
   }
 });
 
-// The Resume Button
+// Track mouse position and hover state
+let mouseX = 0;
+let mouseY = 0;
+
 // Variables for resume button's dimensions and position
 const buttonWidth = 145;
 const buttonHeight = 145;
 let buttonX = canvasCor.x + level1Canvas.width / 2 - buttonWidth / 2;
 let buttonY = canvasCor.y + 300;
 
-// Track mouse position and hover state
-let mouseX = 0;
-let mouseY = 0;
+// Track mouse position and hover state for the resume button
 let isHoveringOverResume = false;
 
-// Add event listener to track mouse movements
+// Update mouse tracking for resume button hover
 level1Canvas.addEventListener("mousemove", (e) => {
   const rect = level1Canvas.getBoundingClientRect();
   mouseX = e.clientX - rect.left;
@@ -279,15 +287,17 @@ level1Canvas.addEventListener("mousemove", (e) => {
     mouseY >= buttonY &&
     mouseY <= buttonY + buttonHeight;
 
+  // Optionally, change cursor style when hovering over the button
   level1Canvas.style.cursor = isHoveringOverResume ? "pointer" : "default";
 });
 
-// Add event listener for mouse clicks
+// Add event listener for mouse clicks on the resume button
 level1Canvas.addEventListener("click", () => {
   if (isHoveringOverResume && pause) {
     // Resume the game if the resume button is clicked
     pause = false;
-    movingSpeed = 9; // Resume movement
+    movingSpeed = SPEED; // Replace SPEED with your actual speed value
+    console.log("Game resumed");
   }
 });
 
@@ -359,6 +369,10 @@ level1Canvas.addEventListener("mousemove", (e) => {
     mouseY >= menuIconY &&
     mouseY <= menuIconY + menuIconHeight;
 
+  if (isHoveringOverMenuIcon) {
+    console.log("yes");
+  }
+
   // Optionally, you can provide visual feedback for hovering (like changing cursor)
   level1Canvas.style.cursor = isHoveringOverMenuIcon ? "pointer" : "default";
 });
@@ -370,9 +384,9 @@ level1Canvas.addEventListener("click", () => {
     // For example, open the game menu or pause the game
     console.log("Menu icon clicked");
     // Implement the desired functionality here
+    theSquare.isDead = true;
     resetGame(1);
     openMenu();
-    theSquare.isDead = true;
     pause = false;
   }
 });

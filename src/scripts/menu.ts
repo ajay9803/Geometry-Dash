@@ -99,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Main body
   const mainBody = document.getElementById("main") as HTMLDivElement;
 
+  const title = document.getElementById("title-img") as HTMLImageElement;
+
   // Select the button using its ID
   const playButton = document.getElementById("play-button") as HTMLDivElement;
   const customizeButton = document.getElementById(
@@ -142,12 +144,14 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("this running again");
     backgroundAudio.play();
     menuCanvas.style.display = "none";
+    title.style.display = 'none';
     levelOneCanvas.style.display = "block";
     menuButtons.style.display = "none";
     setMovingSpeed();
   });
 
   customizeButton.addEventListener("click", () => {
+    title.style.display = "none";
     playButton.style.display = "none";
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
@@ -201,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
     flexContainer.classList.add("flex-container");
 
     // Create and append 8 player images to the flexbox container
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       const playerImg = document.createElement("img");
       playerImg.id = `cube-${i + 1}`;
       playerImg.src = `assets/sprites/cubes/cube-${i + 1}.png`; // Use modulo to loop through available images
@@ -264,7 +268,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeButton.onclick = () => {
       mainBody.removeChild(customizeWrapper);
+
       menuCanvas.style.display = "block";
+      title.style.display = "block";
       playButton.style.display = "block";
       customizeButton.style.display = "block";
       randomButton.style.display = "block";

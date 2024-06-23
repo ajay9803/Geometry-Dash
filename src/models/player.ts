@@ -5,7 +5,11 @@ import {
   level1Ctx,
   movingSpeed,
 } from "../scripts/level1";
+import { resetGame } from "../scripts/reset";
+import explodePlayer from "../utilities/collisions";
 import TailParticle from "./player_tail";
+
+import planeImage from "../assets/sprites/cubes/plane-img.png";
 
 // Utility function to retrieve customization
 export const getCustomization = () => {
@@ -23,6 +27,9 @@ const { playerImageSrc, playerBackgroundColor } = getCustomization();
 
 export let playerImage = new Image();
 playerImage.src = playerImageSrc;
+
+let playerPlaneImage = new Image();
+playerPlaneImage.src = planeImage;
 
 class Square {
   imgSrc: string;
@@ -86,6 +93,12 @@ class Square {
     this.updateColor(color);
   }
 
+  removePlayer: () => void = () => {
+    this.isDead = true;
+    explodePlayer();
+    resetGame(500);
+  };
+
   updateImage(newImageSrc: string) {
     this.imgSrc = newImageSrc;
     playerImage.src = newImageSrc;
@@ -102,17 +115,26 @@ class Square {
     // Clear the previous drawing to avoid overpainting
     this.ctx.clearRect(this.x, this.y, this.w, this.h);
 
-    // Draw the square with a background color
-    this.ctx.fillStyle = this.color;
-    this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
-
-    // Draw the player image on top
-    this.ctx.drawImage(playerImage, this.x, this.y, this.w, this.h);
-
-    // Draw tail particles
+    // Draw tail particles first (above the player image)
     this.tailParticles1.forEach((particle) => particle.draw());
     this.tailParticles2.forEach((particle) => particle.draw());
     this.tailParticles3.forEach((particle) => particle.draw());
+
+    // Draw the player image on top
+
+    if (this.gravityState === GRAVITYSTATE.FREE) {
+      this.ctx.save();
+      // Draw the square with a background color
+      // this.ctx.fillStyle = 'transparent';
+      // this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
+      this.ctx.drawImage(playerPlaneImage, this.x, this.y, this.w + this.w, this.h);
+      this.ctx.restore();
+    } else {
+      // Draw the square with a background color
+      this.ctx.fillStyle = this.color;
+      this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
+      this.ctx.drawImage(playerImage, this.x, this.y, this.w, this.h);
+    }
   }
 
   update(): void {

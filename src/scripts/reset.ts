@@ -4,7 +4,6 @@ import { GRAVITYSTATE } from "../enums/gravity_state";
 import { saveAttempts } from "../utilities/attempts";
 import {
   canvasCor,
-  isCheckboxChecked,
   level1Canvas,
   level1Ctx,
   particles,
@@ -12,6 +11,7 @@ import {
   theSquare,
 } from "./level1";
 import { backgroundAudio } from "./menu";
+import { isCheckboxChecked } from "./gameplay_events";
 
 let resetGameInterval: any = null;
 

@@ -1,10 +1,10 @@
 import coin from "../assets/sprites/coins/coin.png";
+import { coins, setCollectedCoinsCount } from "../scripts/coins";
 import { level1Ctx } from "../scripts/level1";
+import Square from "./player";
 
 let coinImage = new Image();
 coinImage.src = coin;
-
-let frame = 1;
 
 class Coin {
   x: number;
@@ -26,12 +26,9 @@ class Coin {
   draw: () => void = () => {
     this.frame++;
     let imgWidth = 82;
-    if (this.frame % 6 == 0) {
-      console.log(this.frame);
-
+    if (this.frame % 5 == 0) {
       this.srcX = (this.srcX + 1) % 6;
     }
-    console.log(this.srcX);
     level1Ctx.drawImage(
       coinImage,
       91 + this.srcX * imgWidth,
@@ -43,6 +40,18 @@ class Coin {
       this.w,
       this.h
     );
+  };
+
+  collidesWith: (theSquare: Square) => void = (theSquare: Square) => {
+    let collided =
+      this.x < theSquare.x + theSquare.w &&
+      this.x + this.w > theSquare.x &&
+      this.y < theSquare.y + theSquare.h &&
+      this.y + this.h > theSquare.y;
+    if (collided) {
+      coins.shift();
+      setCollectedCoinsCount(1);
+    }
   };
 }
 

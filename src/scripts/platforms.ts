@@ -252,9 +252,9 @@ let platform65 = new ThePlatform(
   "yellow"
 );
 let platform66 = new ThePlatform(
-  20370 + 220 * 2,
+  20370 + 220 * 2 - 50,
   aboveGround - 50,
-  50,
+  150,
   50,
   "yellow"
 );
@@ -264,7 +264,7 @@ let platform67 = new ThePlatform(
   aboveGround - 300,
   50,
   100,
-  "yellow"
+  "pink"
 );
 
 let platform68 = new ThePlatform(
@@ -272,7 +272,7 @@ let platform68 = new ThePlatform(
   aboveGround - 100,
   300,
   100,
-  "yellow"
+  "blue"
 );
 
 let platform69 = new ThePlatform(

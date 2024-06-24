@@ -145,6 +145,16 @@ class ThePlatform {
     const squareRight = theSquare.x + theSquare.w;
     const squareLeft = theSquare.x;
 
+    // if (
+    //   squareBottom < this.y && // Square is above the platform
+    //   squareBottom + theSquare.dy >= this.y - 100 && // Within 5 pixels of the platform
+    //   squareRight > this.x && // Square is horizontally over the platform
+    //   squareLeft < this.x + this.w
+    // ) {
+    //   theSquare.shouldJump = true; // Allow the square to jump
+    //   // return;
+    // }
+
     if (
       squareBottom < this.y &&
       squareBottom + theSquare.dy >= this.y &&

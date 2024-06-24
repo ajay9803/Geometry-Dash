@@ -17,6 +17,7 @@ import {
 import Square, { getCustomization } from "../models/player";
 import { getTodayProgress, getTopThreeProgresses } from "./reset";
 import { SPEED } from "../constants/speed_constants";
+import { collectedCoinsCount } from "./coins";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);
@@ -126,6 +127,12 @@ document.addEventListener("DOMContentLoaded", () => {
     leaderboardTitle.classList.add("leaderboard-title");
 
     leaderboard.appendChild(leaderboardTitle);
+    
+    let coinsCollectedText = document.createElement("h1") as HTMLHeadingElement;
+    coinsCollectedText.innerHTML = `Coins Collected: ${collectedCoinsCount}`;
+    coinsCollectedText.classList.add("leaderboard-title");
+
+    leaderboard.appendChild(coinsCollectedText);
 
     const closeButton = document.createElement("img");
     closeButton.src = "assets/sprites/icons/cross-icon.png"; // Replace with the path to your image
@@ -337,6 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
       playButton.style.display = "block";
       customizeButton.style.display = "block";
       randomButton.style.display = "block";
+      leaderboardButton.style.display = 'block';
     };
   });
 

@@ -15,6 +15,8 @@ import {
   theSquare,
 } from "./level1";
 import Square, { getCustomization } from "../models/player";
+import { getTodayProgress, getTopThreeProgresses } from "./reset";
+import { SPEED } from "../constants/speed_constants";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);
@@ -110,13 +112,71 @@ document.addEventListener("DOMContentLoaded", () => {
     "random-button"
   ) as HTMLDivElement;
 
+  const leaderboardButton = document.getElementById(
+    "leaderboard-button"
+  ) as HTMLDivElement;
+
+  leaderboardButton.addEventListener("click", () => {
+    let leaderboard = document.createElement("div");
+    leaderboard.classList.add("leaderboard");
+    mainBody.appendChild(leaderboard);
+
+    let leaderboardTitle = document.createElement("h1") as HTMLHeadingElement;
+    leaderboardTitle.innerHTML = "Today's Leaderboard";
+    leaderboardTitle.classList.add("leaderboard-title");
+
+    leaderboard.appendChild(leaderboardTitle);
+
+    const closeButton = document.createElement("img");
+    closeButton.src = "assets/sprites/icons/cross-icon.png"; // Replace with the path to your image
+    closeButton.alt = "Close"; // Replace with a description for accessibility
+    closeButton.classList.add("leaderboard-cross-image");
+
+    closeButton.addEventListener("click", () => {
+      leaderboard.style.display = "none";
+    });
+
+    leaderboard.appendChild(closeButton);
+
+    let mainWrapper = document.createElement("div");
+    mainWrapper.classList.add("main-wrapper");
+    leaderboard.appendChild(mainWrapper);
+
+    let progressBarsWrapper = document.createElement("div");
+    progressBarsWrapper.classList.add("progress-bars-wrapper");
+    mainWrapper.appendChild(progressBarsWrapper);
+
+    let progresses = getTodayProgress();
+    let topProgresses = getTopThreeProgresses(progresses);
+
+    topProgresses.forEach((progress) => {
+      let progressbar = document.createElement("div");
+      progressbar.classList.add('progressbar');
+      progressbar.style.width = "10%";
+      progressbar.style.height = `${(progress["progress"] / 100) * 200}px`;
+      progressbar.style.backgroundColor = "purple";
+      progressBarsWrapper.appendChild(progressbar);
+    });
+
+    let progressValues = document.createElement('div');
+    progressValues.style.display = 'flex';
+    progressValues.style.justifyContent = 'space-between';
+    progressValues.classList.add('progress-values');
+
+    topProgresses.forEach((progress) => {
+      let text = document.createElement('h1');
+      text.innerHTML = Math.floor(progress["progress"]).toString() + '%';
+      progressValues.appendChild(text);
+    });
+    mainWrapper.appendChild(progressValues);
+  });
+
   const menuCanvas = document.getElementById(
     "menu-canvas"
   ) as HTMLCanvasElement;
   const levelOneCanvas = document.getElementById(
     "level-one-canvas"
   ) as HTMLCanvasElement;
-  const menuButtons = document.getElementById("menu-buttons") as HTMLDivElement;
 
   // Add a click event listener to the button
   playButton.addEventListener("click", () => {
@@ -141,13 +201,15 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     setPlayer(player);
 
-    console.log("this running again");
     backgroundAudio.play();
     menuCanvas.style.display = "none";
-    title.style.display = 'none';
+    title.style.display = "none";
     levelOneCanvas.style.display = "block";
-    menuButtons.style.display = "none";
-    setMovingSpeed();
+    playButton.style.display = "none";
+    customizeButton.style.display = "none";
+    randomButton.style.display = "none";
+    leaderboardButton.style.display = 'none';
+    setMovingSpeed(SPEED);
   });
 
   customizeButton.addEventListener("click", () => {
@@ -155,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     playButton.style.display = "none";
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
+    leaderboardButton.style.display = 'none';
     menuCanvas.style.display = "none";
     mainBody.style.justifyContent = "start";
     mainBody.style.alignItems = "start";

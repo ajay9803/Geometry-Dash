@@ -10,6 +10,7 @@ import explodePlayer from "../utilities/collisions";
 import TailParticle from "./player_tail";
 
 import planeImage from "../assets/sprites/cubes/plane-img.png";
+import { SPEED } from "../constants/speed_constants";
 
 // Utility function to retrieve customization
 export const getCustomization = () => {
@@ -34,6 +35,7 @@ playerPlaneImage.src = planeImage;
 class Square {
   imgSrc: string;
   isDead: boolean;
+  jumpCount: number;
   x: number;
   y: number;
   w: number;
@@ -70,6 +72,9 @@ class Square {
   ) {
     this.imgSrc = imgSrc;
     this.isDead = isDead;
+
+    this.jumpCount =
+      localStorage.getItem("selectedPlayerImage") === "cube-4" ? 1 : 1;
     this.x = x;
     this.y = y;
     this.w = w;
@@ -96,7 +101,7 @@ class Square {
   removePlayer: () => void = () => {
     this.isDead = true;
     explodePlayer();
-    resetGame(500);
+    resetGame(500, SPEED);
   };
 
   updateImage(newImageSrc: string) {
@@ -112,10 +117,6 @@ class Square {
   }
 
   draw(): void {
-    // Clear the previous drawing to avoid overpainting
-    this.ctx.clearRect(this.x, this.y, this.w, this.h);
-
-    // Draw tail particles first (above the player image)
     this.tailParticles1.forEach((particle) => particle.draw());
     this.tailParticles2.forEach((particle) => particle.draw());
     this.tailParticles3.forEach((particle) => particle.draw());
@@ -125,15 +126,26 @@ class Square {
     if (this.gravityState === GRAVITYSTATE.FREE) {
       this.ctx.save();
       // Draw the square with a background color
-      // this.ctx.fillStyle = 'transparent';
-      // this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
-      this.ctx.drawImage(playerPlaneImage, this.x, this.y, this.w + this.w, this.h);
+      this.ctx.fillStyle = "transparent";
+      this.ctx.fillRect(this.x, this.y, this.w, this.h);
+
+      this.ctx.drawImage(
+        playerPlaneImage,
+        this.x,
+        this.y,
+        this.w + this.w,
+        this.h + 10
+      );
+
       this.ctx.restore();
     } else {
+      this.ctx.save();
+
       // Draw the square with a background color
       this.ctx.fillStyle = this.color;
       this.ctx.fillRect(this.x, this.y, this.w, this.h); // Fill with background color
       this.ctx.drawImage(playerImage, this.x, this.y, this.w, this.h);
+      this.ctx.restore();
     }
   }
 
@@ -213,8 +225,11 @@ class Square {
       );
 
       // Add particles to their respective tail arrays
-      this.tailParticles1.push(tailParticle1);
-      this.tailParticles2.push(tailParticle2);
+      if (this.gravityState === GRAVITYSTATE.NORMAL) {
+        this.tailParticles1.push(tailParticle1);
+        this.tailParticles2.push(tailParticle2);
+      }
+
       this.tailParticles3.push(tailParticle3);
 
       // Limit the number of particles to control the tail length

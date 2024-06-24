@@ -6,10 +6,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Geometry Dash</title>
   <link rel="stylesheet" href="./src/css/index.css">
   <link rel="stylesheet" href="./src/css/styles.css">
   <link rel="stylesheet" href="./src/css/customize-section.css">
+  <link rel="stylesheet" href="./src/css/leaderboard-section.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,21 +20,13 @@
 <body id="main" class="main">
 
   <img id="title-img" class="title-img" src="./src/assets/sprites/texts/title.png">
-  <!-- The play buttons -->
-  <div id="menu-buttons">
-    <div id="play-button">
-      <img class="play-button-img" src="./src/assets/sprites/buttons/play-button.png">
-    </div>
-    <div id="customize-button">
-      <img class="customize-button" src="./src/assets/sprites/buttons/customize-button.png">
-    </div>
+  <!-- The menu buttons -->
+  <img id="play-button" class="play-button-img" src="./src/assets/sprites/buttons/play-button.png">
+  <img id="customize-button" class="customize-button" src="./src/assets/sprites/buttons/customize-button.png">
 
 
-    <!-- <a> -->
-    <img id="random-button" class="more-button" src="./src/assets/sprites/buttons/more-button.png">
-    <!-- </a> -->
-
-  </div>
+  <img id="random-button" class="more-button" src="./src/assets/sprites/buttons/more-button.png">
+  <img id="leaderboard-button" class="leaderboard-button" src="./src/assets/sprites/icons/leaderboard-icon.png">
 
   <!-- Menu Canvas -->
   <canvas id="menu-canvas" class="menu-canvas"></canvas>

@@ -20,6 +20,7 @@
   width: 100%;
   border: 1px solid blue;
   display: none;
+  background-color: transparent;
 }
 
 .title-img {
@@ -71,4 +72,18 @@
 
 .more-button:hover {
   transform: scale(90%);
+}
+
+.leaderboard-button {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  bottom: 10%;
+  right: calc(50% - 40px);
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
+.leaderboard-button:hover {
+  transform: scale(110%);
 }

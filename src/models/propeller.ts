@@ -68,7 +68,6 @@ class Propeller {
 
     // Check if the distance is less than the sum of their radii for collision
     if (distance < theSquare.w + Math.max(theSquare.w, theSquare.h) / 2) {
-      console.log("propeller hit");
       theSquare.dy -= 25;
     }
   }

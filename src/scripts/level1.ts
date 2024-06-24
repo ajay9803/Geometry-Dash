@@ -17,6 +17,7 @@ import { resetGame } from "./reset";
 import player from "/assets/sprites/cubes/cube-5.png";
 import { SPEED } from "../constants/speed_constants";
 import Propeller from "../models/propeller";
+import Coin from "../models/coin";
 
 let playerImage = new Image();
 playerImage.src = player;
@@ -25,12 +26,6 @@ let themeValue = 255;
 let themeColor = `rgba(0, 0, ${themeValue})`;
 let opacityValue = 0.5;
 
-export let gameProgress = 0;
-
-export const setGameProgress = (progress: number) => {
-  gameProgress = progress;
-};
-
 export let canvasCor = {
   x: 0,
   y: 0,
@@ -38,11 +33,15 @@ export let canvasCor = {
 
 // Variables to pause and resume the game
 let pause: boolean = false;
+
+export let setPause = (value: boolean) => {
+  pause = value;
+};
 // export let movingSpeed = 50;
 export let movingSpeed = 0;
 
-export const setMovingSpeed = () => {
-  movingSpeed = SPEED;
+export const setMovingSpeed = (speed: number) => {
+  movingSpeed = speed;
 };
 
 // The canvas element
@@ -74,6 +73,8 @@ export let theSquare = new Square(
   level1Ctx,
   1
 );
+
+let coin = new Coin(500, aboveGround - 150, 82, 82);
 
 export const setPlayer = (player: Square) => {
   theSquare = player;
@@ -157,16 +158,13 @@ const animate = () => {
       50
     );
     if (isColliding) {
-      console.log("The collision has been made");
       // theSquare.isDead = true;
       // if (theSquare.isDead) {
-        theSquare.removePlayer();
+      theSquare.removePlayer();
       // }
     }
     spike.draw();
   });
-
-  
 
   // Update platforms
   platforms.forEach((platform) => {
@@ -210,9 +208,11 @@ const animate = () => {
     }
   });
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "bold 50px Lacquer";
   level1Ctx.fillText(`Attempt ${attemptCount}`, 200, canvasCor.y + 100);
+  level1Ctx.restore();
 
   if (pause) {
     showPauseMenu();
@@ -222,6 +222,8 @@ const animate = () => {
   const propeller = new Propeller(600, aboveGround, "gold");
   propeller.draw();
   propeller.checkCollision();
+
+  coin.draw();
 };
 
 animate();
@@ -234,8 +236,17 @@ addEventListener("keydown", ({ code }) => {
       if (theSquare.shouldJump) {
         theSquare.dy -= 15;
         theSquare.gravity = 1;
-        theSquare.shouldJump = false; // Disable jump while in the air
+        theSquare.jumpCount--;
+        if (theSquare.jumpCount === 0) {
+          theSquare.shouldJump = false; // Disable jump while in the air
+          theSquare.jumpCount =
+            localStorage.getItem("selectedPlayerImage") === "cube-4" ? 2 : 1;
+        }
       }
+
+      // if (theSquare.jumpCount === 0) {
+
+      // }
     }
 
     if (theSquare.gravityState === GRAVITYSTATE.FREE) {
@@ -246,13 +257,11 @@ addEventListener("keydown", ({ code }) => {
 
   // Pause the game
   if (code === "Enter") {
-    console.log("pause");
     pause = !pause;
     if (pause) {
-      console.log(gameProgress);
       movingSpeed = 0; // Stop movement
     } else {
-      movingSpeed = SPEED; // Resume movement
+      movingSpeed = 9; // Resume movement
     }
   }
 
@@ -297,7 +306,6 @@ level1Canvas.addEventListener("click", () => {
     // Resume the game if the resume button is clicked
     pause = false;
     movingSpeed = SPEED; // Replace SPEED with your actual speed value
-    console.log("Game resumed");
   }
 });
 
@@ -341,9 +349,9 @@ level1Canvas.addEventListener("click", () => {
     }
 
     // (Optional) Perform additional actions when checkbox state changes
-    console.log(
-      `Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`
-    );
+    // console.log(
+    //   `Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`
+    // );
   }
 });
 
@@ -370,7 +378,6 @@ level1Canvas.addEventListener("mousemove", (e) => {
     mouseY <= menuIconY + menuIconHeight;
 
   if (isHoveringOverMenuIcon) {
-    console.log("yes");
   }
 
   // Optionally, you can provide visual feedback for hovering (like changing cursor)
@@ -385,8 +392,9 @@ level1Canvas.addEventListener("click", () => {
     console.log("Menu icon clicked");
     // Implement the desired functionality here
     theSquare.isDead = true;
-    resetGame(1);
+    resetGame(1, 0);
     openMenu();
+    setMovingSpeed(0);
     pause = false;
   }
 });

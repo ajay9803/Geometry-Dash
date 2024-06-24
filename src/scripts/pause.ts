@@ -1,6 +1,5 @@
 import {
   canvasCor,
-  gameProgress,
   isCheckboxChecked,
   level1Canvas,
   level1Ctx,
@@ -31,6 +30,7 @@ export const showPauseMenu = () => {
   );
   level1Ctx.restore();
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "bold 30px Lacquer";
   level1Ctx.fillText(
@@ -38,7 +38,9 @@ export const showPauseMenu = () => {
     canvasCor.x + level1Canvas.width / 2 - 116,
     canvasCor.y + 100
   );
+  level1Ctx.restore();
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "25px Lacquer";
   level1Ctx.fillText(
@@ -46,7 +48,9 @@ export const showPauseMenu = () => {
     canvasCor.x + level1Canvas.width / 2 - 85,
     canvasCor.y + 150
   );
+  level1Ctx.restore();
 
+  level1Ctx.save();
   level1Ctx.strokeStyle = "white";
   level1Ctx.lineWidth = 4;
   level1Ctx.fillStyle = "black";
@@ -58,9 +62,14 @@ export const showPauseMenu = () => {
   );
 
   level1Ctx.stroke();
+  level1Ctx.restore();
 
-  let gameProgressPercentage = (gameProgress / 120) * 100;
+  let gameProgressPercentage =
+    (canvasCor.x / 37000) * 100 >= 100 ? 100 : (canvasCor.x / 37000) * 100;
 
+  if ((gameProgressPercentage / 100) * 450 > 450) {
+  }
+  level1Ctx.save();
   level1Ctx.fillStyle = "green";
   level1Ctx.fillRect(
     canvasCor.x + level1Canvas.width / 2 - 225,
@@ -70,7 +79,9 @@ export const showPauseMenu = () => {
     // 25
   );
   level1Ctx.fill();
+  level1Ctx.restore();
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "bold 30px Lacquer";
   level1Ctx.fillText(
@@ -78,6 +89,7 @@ export const showPauseMenu = () => {
     canvasCor.x + level1Canvas.width / 2 - 20,
     canvasCor.y + 232
   );
+  level1Ctx.restore();
 
   // Resume Button
   level1Ctx.drawImage(
@@ -88,6 +100,7 @@ export const showPauseMenu = () => {
     145
   );
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "bold 30px Lacquer";
   level1Ctx.fillText(
@@ -95,7 +108,9 @@ export const showPauseMenu = () => {
     canvasCor.x + level1Canvas.width * 0.2,
     canvasCor.y + 372.5
   );
+  level1Ctx.restore();
 
+  level1Ctx.save();
   level1Ctx.fillStyle = "gray";
   level1Ctx.fillRect(
     canvasCor.x + level1Canvas.width * 0.2 + 100,
@@ -103,6 +118,7 @@ export const showPauseMenu = () => {
     50,
     50
   );
+  level1Ctx.restore();
 
   // Music Checkbox
   level1Ctx.strokeStyle = "black"; // Set border color
@@ -143,13 +159,26 @@ export function openMenu() {
   const levelOneCanvas = document.getElementById(
     "level-one-canvas"
   ) as HTMLCanvasElement;
-  const menuButtons = document.getElementById("menu-buttons") as HTMLDivElement;
+  const titleImg = document.getElementById("title-img") as HTMLDivElement;
+  const playButton = document.getElementById("play-button") as HTMLDivElement;
+  const customizeButton = document.getElementById(
+    "customize-button"
+  ) as HTMLDivElement;
+  const randomButton = document.getElementById(
+    "random-button"
+  ) as HTMLDivElement;
+  const leaderboardButton = document.getElementById('leaderboard-button') as HTMLDivElement;
   const mainBody = document.getElementById("main") as HTMLDivElement;
 
   // Display the menu canvas and hide other elements
   menuCanvas.style.display = "block";
   levelOneCanvas.style.display = "none";
-  menuButtons.style.display = "block";
+  titleImg.style.display = "block";
+  playButton.style.display = "block";
+  customizeButton.style.display = "block";
+  randomButton.style.display = "block";
+  leaderboardButton.style.display = 'block';
+
   mainBody.style.justifyContent = "center";
   mainBody.style.alignItems = "center";
   mainBody.style.background = "linear-gradient(to right, transparent, #787878)";

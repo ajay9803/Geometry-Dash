@@ -38,6 +38,7 @@ export const setEventListeners = () => {
       }
 
       if (theSquare.gravityState === GRAVITYSTATE.FREE) {
+        
         theSquare.shouldJump = true;
         theSquare.dy -= 6;
       }
@@ -54,7 +55,8 @@ export const setEventListeners = () => {
     }
 
     if (code === "ArrowLeft") {
-      setMovingSpeed(-SPEED);
+      theSquare.color = "blue";
+      setMovingSpeed(-9);
     }
   });
 

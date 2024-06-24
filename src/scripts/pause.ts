@@ -65,7 +65,7 @@ export const showPauseMenu = () => {
   level1Ctx.restore();
 
   let gameProgressPercentage =
-    (canvasCor.x / 37000) * 100 >= 100 ? 100 : (canvasCor.x / 37000) * 100;
+    (canvasCor.x / 37000) * 100 >= 100 ? 100 : (canvasCor.x / 42000) * 100;
 
   if ((gameProgressPercentage / 100) * 450 > 450) {
   }

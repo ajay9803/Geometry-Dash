@@ -264,7 +264,7 @@ let platform67 = new ThePlatform(
   aboveGround - 300,
   50,
   100,
-  "pink"
+  "yellow"
 );
 
 let platform68 = new ThePlatform(
@@ -272,7 +272,7 @@ let platform68 = new ThePlatform(
   aboveGround - 100,
   300,
   100,
-  "blue"
+  "yellow"
 );
 
 let platform69 = new ThePlatform(
@@ -487,18 +487,71 @@ let platform106 = new ThePlatform(
   aboveGround - 50,
   50,
   20,
-  "pink"
+  "pink",
+  false
 );
 
-let platform107 = new ThePlatform(29400, aboveGround - 150, 50, 50, "pink");
-let platform108 = new ThePlatform(29450, aboveGround - 150, 50, 50, "pink");
-let platform109 = new ThePlatform(29500, aboveGround - 150, 50, 50, "pink");
-let platform110 = new ThePlatform(29550, aboveGround - 150, 50, 50, "pink");
-let platform111 = new ThePlatform(29850, aboveGround - 50, 50, 50, "pink");
-let platform112 = new ThePlatform(30100, aboveGround - 50, 50, 20, "pink");
-let platform113 = new ThePlatform(30150, aboveGround - 50, 50, 20, "pink");
-let platform114 = new ThePlatform(30200, aboveGround - 50, 50, 20, "pink");
-let platform115 = new ThePlatform(30250, aboveGround - 50, 50, 20, "pink");
+let platform107 = new ThePlatform(
+  29400,
+  aboveGround - 150 - 20,
+  50,
+  50,
+  "pink"
+);
+let platform108 = new ThePlatform(
+  29450,
+  aboveGround - 150 - 20,
+  50,
+  50,
+  "pink"
+);
+let platform109 = new ThePlatform(
+  29500,
+  aboveGround - 150 - 20,
+  50,
+  50,
+  "pink"
+);
+let platform110 = new ThePlatform(
+  29550,
+  aboveGround - 150 - 20,
+  50,
+  50,
+  "pink"
+);
+let platform111 = new ThePlatform(29850, aboveGround - 50, 50, 50, "blue");
+let platform112 = new ThePlatform(
+  30100,
+  aboveGround - 70,
+  50,
+  20,
+  "pink",
+  false
+);
+let platform113 = new ThePlatform(
+  30150,
+  aboveGround - 70,
+  50,
+  20,
+  "pink",
+  false
+);
+let platform114 = new ThePlatform(
+  30200,
+  aboveGround - 70,
+  50,
+  20,
+  "pink",
+  false
+);
+let platform115 = new ThePlatform(
+  30250,
+  aboveGround - 70,
+  50,
+  20,
+  "pink",
+  false
+);
 let platform116 = new ThePlatform(
   30250 + 240,
   aboveGround - 100,
@@ -542,14 +595,33 @@ let platform121 = new ThePlatform(
   "pink"
 );
 
-let platform122 = new ThePlatform(31400, aboveGround - 350, 50, 50, "pink");
+let platform122 = new ThePlatform(
+  31400 + 50,
+  aboveGround - 350,
+  50,
+  50,
+  "pink"
+);
 let platform123 = new ThePlatform(31400, aboveGround - 200, 50, 50, "pink");
-let platform124 = new ThePlatform(31500, aboveGround - 300, 50, 50, "pink");
+let platform124 = new ThePlatform(
+  31500 + 50,
+  aboveGround - 300,
+  50,
+  50,
+  "pink"
+);
+
 let platform125 = new ThePlatform(31500, aboveGround - 150, 50, 50, "pink");
-let platform126 = new ThePlatform(31600, aboveGround - 250, 50, 50, "pink");
+let platform126 = new ThePlatform(
+  31600 + 50,
+  aboveGround - 250,
+  50,
+  50,
+  "pink"
+);
 let platform127 = new ThePlatform(31600, aboveGround - 100, 50, 50, "pink");
 let platform128 = new ThePlatform(
-  31700,
+  31700 + 50,
   aboveGround - 200,
   50,
   50,
@@ -557,190 +629,145 @@ let platform128 = new ThePlatform(
   false
 );
 let platform129 = new ThePlatform(31700, aboveGround - 50, 50, 50, "pink");
-let platform130 = new ThePlatform(32460, aboveGround - 100, 50, 20, "pink");
-let platform131 = new ThePlatform(32600, aboveGround - 100, 50, 20, "pink");
-let platform132 = new ThePlatform(32740, aboveGround - 100, 50, 20, "pink");
-let platform133 = new ThePlatform(32980, aboveGround - 150, 50, 20, "pink");
-let platform134 = new ThePlatform(33130, aboveGround - 150, 50, 20, "pink");
-let platform135 = new ThePlatform(33180, aboveGround - 150, 50, 20, "pink");
-let platform136 = new ThePlatform(33230, aboveGround - 150, 50, 20, "pink");
-let platform137 = new ThePlatform(33330, aboveGround - 100, 50, 20, "pink");
-let platform138 = new ThePlatform(
-  33430,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform139 = new ThePlatform(
-  33480,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform140 = new ThePlatform(
-  33530,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform141 = new ThePlatform(33850, aboveGround - 250, 50, 50, "pink");
-let platform142 = new ThePlatform(33900, aboveGround - 250, 50, 50, "pink");
-let platform143 = new ThePlatform(34150, aboveGround - 50, 50, 50, "pink");
-let platform144 = new ThePlatform(
-  34200,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform145 = new ThePlatform(
-  34250,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform146 = new ThePlatform(
-  34490,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform147 = new ThePlatform(
-  34490 + 240,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform148 = new ThePlatform(
-  34780,
-  aboveGround - 50,
-  50,
-  20,
-  "pink",
-  false
-);
-
-let platform149 = new ThePlatform(
-  34830,
-  aboveGround - 50,
-  50,
-  50,
-  "pink",
-  false
-);
-let platform150 = new ThePlatform(34880, aboveGround - 50, 50, 50, "pink");
-let platform151 = new ThePlatform(34880, aboveGround - 100, 50, 50, "pink");
-let platform152 = new ThePlatform(34930, aboveGround - 100, 50, 20, "pink");
-let platform153 = new ThePlatform(34980, aboveGround - 100, 50, 20, "pink");
-let platform154 = new ThePlatform(
-  34980 + 150,
+// let platform130 = new ThePlatform(32100, aboveGround - 100, 50, 20, "pink");
+let platform131 = new ThePlatform(
+  32150 + 150,
   aboveGround - 150,
   50,
   20,
   "pink"
+);
+let platform132 = new ThePlatform(
+  32200 + 150,
+  aboveGround - 150,
+  50,
+  20,
+  "pink"
+);
+let platform133 = new ThePlatform(
+  32250 + 150,
+  aboveGround - 150,
+  50,
+  20,
+  "pink"
+);
+
+let platform134 = new ThePlatform(
+  32300 + 240,
+  aboveGround - 100,
+  50,
+  20,
+  "pink"
+);
+let platform135 = new ThePlatform(
+  32350 + 240,
+  aboveGround - 100,
+  50,
+  20,
+  "pink"
+);
+let platform136 = new ThePlatform(
+  32400 + 240,
+  aboveGround - 100,
+  50,
+  20,
+  "pink"
+);
+let platform137 = new ThePlatform(32750, aboveGround - 50, 50, 50, "red");
+let platform138 = new ThePlatform(32750, aboveGround - 100, 50, 50, "red");
+let platform139 = new ThePlatform(
+  32750,
+  aboveGround - 150,
+  50,
+  50,
+  "red",
+  false
+);
+
+let platform140 = new ThePlatform(32750, aboveGround - 450, 50, 50, "red");
+let platform141 = new ThePlatform(32750, aboveGround - 500, 50, 50, "red");
+let platform142 = new ThePlatform(32750, aboveGround - 550, 50, 50, "red");
+
+//portal starts
+let platform143 = new ThePlatform(34000, aboveGround - 50, 50, 50, "red");
+let platform144 = new ThePlatform(34050, aboveGround - 50, 400, 50, "blue");
+let platform145 = new ThePlatform(34450, aboveGround - 50, 50, 50, "red");
+let platform146 = new ThePlatform(34050, aboveGround - 100, 50, 50, "red");
+let platform147 = new ThePlatform(34100, aboveGround - 100, 300, 50, "blue");
+let platform148 = new ThePlatform(34400, aboveGround - 100, 50, 50, "red");
+let platform149 = new ThePlatform(34100, aboveGround - 150, 300, 50, "red");
+let platform150 = new ThePlatform(34000, aboveGround - 550, 50, 50, "red");
+let platform151 = new ThePlatform(34050, aboveGround - 550, 400, 50, "blue");
+let platform152 = new ThePlatform(34450, aboveGround - 550, 50, 50, "red");
+let platform153 = new ThePlatform(
+  34050,
+  aboveGround - 500,
+  50,
+  50,
+  "red",
+  false
+);
+let platform154 = new ThePlatform(
+  34100,
+  aboveGround - 500,
+  300,
+  50,
+  "blue",
+  false
 );
 let platform155 = new ThePlatform(
-  35080 + 150,
-  aboveGround - 100,
+  34400,
+  aboveGround - 500,
   50,
-  20,
-  "pink"
-);
-let platform156 = new ThePlatform(
-  35180 + 150,
-  aboveGround - 50,
   50,
-  20,
-  "pink",
+  "red",
   false
 );
-let platform157 = new ThePlatform(
-  35230 + 150,
-  aboveGround - 50,
+let platform156 = new ThePlatform(34100, aboveGround - 450, 300, 50, "red");
+let platform157 = new ThePlatform(35500, aboveGround - 50, 50, 50, "red");
+let platform158 = new ThePlatform(35550, aboveGround - 50, 400, 50, "blue");
+let platform159 = new ThePlatform(35950, aboveGround - 50, 50, 50, "red");
+let platform160 = new ThePlatform(35550, aboveGround - 100, 50, 50, "red");
+let platform161 = new ThePlatform(35600, aboveGround - 100, 300, 50, "blue");
+let platform162 = new ThePlatform(35900, aboveGround - 100, 50, 50, "red");
+let platform163 = new ThePlatform(35600, aboveGround - 150, 300, 50, "red");
+let platform164 = new ThePlatform(35600, aboveGround - 450, 300, 50, "red");
+let platform165 = new ThePlatform(
+  35900,
+  aboveGround - 500,
   50,
-  20,
-  "pink",
+  50,
+  "red",
   false
 );
-let platform158 = new ThePlatform(
-  35280 + 150,
-  aboveGround - 50,
+let platform166 = new ThePlatform(
+  35550,
+  aboveGround - 500,
   50,
-  20,
-  "pink",
+  50,
+  "red",
   false
 );
-let platform159 = new ThePlatform(
-  35430 + 240,
-  aboveGround - 100,
-  50,
-  20,
-  "pink",
-  false
-);
-let platform160 = new ThePlatform(35770, aboveGround - 100, 50, 20, "pink");
-let platform161 = new ThePlatform(35870, aboveGround - 100, 50, 20, "pink");
-let platform162 = new ThePlatform(35920, aboveGround - 100, 50, 20, "pink");
-let platform163 = new ThePlatform(35970, aboveGround - 100, 50, 20, "pink");
-let platform164 = new ThePlatform(36020, aboveGround - 100, 50, 20, "pink");
-let platform165 = new ThePlatform(36140, aboveGround - 100, 50, 20, "pink");
-let platform166 = new ThePlatform(36260, aboveGround - 100, 50, 20, "pink");
-let platform167 = new ThePlatform(
-  36310 + 150,
-  aboveGround - 150,
-  50,
-  20,
-  "pink"
-);
-let platform168 = new ThePlatform(
-  36360 + 150,
-  aboveGround - 150,
-  50,
-  20,
-  "pink"
-);
-let platform169 = new ThePlatform(
-  36410 + 150,
-  aboveGround - 150,
-  50,
-  20,
-  "pink"
-);
-
-let platform170 = new ThePlatform(
-  36460 + 240,
-  aboveGround - 100,
-  50,
-  20,
-  "pink"
-);
+// let platform167 = new ThePlatform(35950, aboveGround - 550, 50, 50, "red");
+// let platform167 = new ThePlatform(36500, aboveGround - 100, 50, 20, "red");
+// let platform168 = new ThePlatform(36550, aboveGround - 100, 50, 20, "red");
+// let platform169 = new ThePlatform(36600, aboveGround - 100, 50, 20, "red");
+let platform167 = new ThePlatform(36740, aboveGround - 200, 5000, 200, "red");
+let platform168 = new ThePlatform(36740, aboveGround - 550, 5000, 150, "red");
+let platform169 = new ThePlatform(37200, aboveGround - 400, 100, 50, "red");
+let platform170 = new ThePlatform(38800, aboveGround - 250, 50, 50, "red");
 let platform171 = new ThePlatform(
-  36510 + 240,
-  aboveGround - 100,
+  39000,
+  aboveGround - 400,
   50,
-  20,
-  "pink"
-);
-let platform172 = new ThePlatform(
-  36560 + 240,
-  aboveGround - 100,
   50,
-  20,
-  "pink"
+  "red",
+  false
 );
+let platform172 = new ThePlatform(39350, aboveGround - 250, 1050, 50, "red");
+let platform173 = new ThePlatform(39800, aboveGround - 300, 600, 50, "red");
+let platform174 = new ThePlatform(40650, aboveGround - 400, 100, 100, "red");
+let platform175 = new ThePlatform(41000, aboveGround - 300, 100, 100, "red");
 // let platform153 = new ThePlatform(34980, aboveGround - 100, 50, 20, "pink");
 
 let platforms = [
@@ -870,7 +897,7 @@ let platforms = [
   platform127,
   platform128,
   platform129,
-  platform130,
+  // platform130,
   platform131,
   platform132,
   platform133,
@@ -913,6 +940,9 @@ let platforms = [
   platform170,
   platform171,
   platform172,
+  platform173,
+  platform174,
+  platform175,
 ];
 
 platforms.forEach((platform) => {

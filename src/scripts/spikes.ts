@@ -123,7 +123,7 @@ let spike82 = new Spike(18150, aboveGround - 600, true);
 let spike83 = new Spike(24900, aboveGround);
 let spike84 = new Spike(24950, aboveGround);
 
-let spike85 = new Spike(26350, aboveGround);
+// let spike85 = new Spike(26350, aboveGround);
 
 let spike86 = new Spike(26750, aboveGround);
 let spike87 = new Spike(26800, aboveGround);
@@ -134,22 +134,52 @@ let spike89 = new Spike(27350, aboveGround);
 
 let spike90 = new Spike(28900, aboveGround);
 let spike91 = new Spike(28950, aboveGround);
-let spike92 = new Spike(29400, aboveGround - 100, true);
-let spike93 = new Spike(29450, aboveGround - 100, true);
-let spike94 = new Spike(29500, aboveGround - 100, true);
-let spike95 = new Spike(29550, aboveGround - 100, true);
+let spike92 = new Spike(29400, aboveGround - 100 - 20, true);
+let spike93 = new Spike(29450, aboveGround - 100 - 20, true);
+let spike94 = new Spike(29500, aboveGround - 100 - 20, true);
+let spike95 = new Spike(29550, aboveGround - 100 - 20, true);
 let spike96 = new Spike(29800, aboveGround);
-let spike97 = new MidSpike(31700, aboveGround - 200);
-let spike98 = new Spike(32600, aboveGround - 100);
-let spike99 = new Spike(33580, aboveGround);
-let spike100 = new Spike(33630, aboveGround);
-let spike101 = new Spike(33850, aboveGround);
-let spike102 = new Spike(33900, aboveGround);
-let spike103 = new Spike(33850, aboveGround - 200, true);
-let spike104 = new Spike(33900, aboveGround - 200, true);
-let spike105 = new Spike(35770, aboveGround - 100);
-let spike106 = new Spike(36140, aboveGround - 100);
-let spike107 = new Spike(36410 + 150, aboveGround - 150);
+// let spike97 = new MidSpike(31700, aboveGround - 200);
+// let spike98 = new Spike(32250 + 150, aboveGround - 150);
+let spike99 = new Spike(36950, aboveGround - 200);
+let spike100 = new Spike(37000, aboveGround - 200);
+let spike101 = new Spike(37300, aboveGround - 400, true);
+let spike102 = new Spike(37350, aboveGround - 400, true);
+let spike103 = new Spike(37650, aboveGround - 200);
+let spike104 = new MidSpike(37700, aboveGround - 200);
+let spike105 = new Spike(37750, aboveGround - 200);
+let spike106 = new MidSpike(37800, aboveGround - 200);
+let spike107 = new Spike(37850, aboveGround - 200);
+let spike108 = new Spike(38100, aboveGround - 400, true);
+let spike109 = new Spike(38150, aboveGround - 400, true);
+let spike110 = new Spike(38200, aboveGround - 400, true);
+let spike111 = new Spike(38500, aboveGround - 200);
+let spike112 = new Spike(38550, aboveGround - 200);
+let spike113 = new Spike(38600, aboveGround - 200);
+let spike114 = new Spike(38650, aboveGround - 200);
+let spike115 = new Spike(38700, aboveGround - 200);
+let spike116 = new Spike(38750, aboveGround - 200);
+let spike117 = new Spike(38850, aboveGround - 200);
+let spike118 = new Spike(39050, aboveGround - 400, true);
+let spike119 = new Spike(39100, aboveGround - 400, true);
+let spike120 = new Spike(39300, aboveGround - 200);
+let spike121 = new Spike(39500, aboveGround - 400, true);
+
+let spike122 = new Spike(39550, aboveGround - 400, true);
+let spike123 = new Spike(40400, aboveGround - 200);
+let spike124 = new Spike(40450, aboveGround - 200);
+let spike125 = new Spike(40600, aboveGround - 400, true);
+let spike126 = new Spike(40750, aboveGround - 400, true);
+let spike127 = new Spike(40950, aboveGround - 200);
+// let spike99 = new Spike(33580, aboveGround);
+// let spike100 = new Spike(33630, aboveGround);
+// let spike101 = new Spike(33850, aboveGround);
+// let spike102 = new Spike(33900, aboveGround);
+// let spike103 = new Spike(33850, aboveGround - 200, true);
+// let spike104 = new Spike(33900, aboveGround - 200, true);
+// let spike105 = new Spike(35770, aboveGround - 100);
+// let spike106 = new Spike(36140, aboveGround - 100);
+// let spike107 = new Spike(36410 + 150, aboveGround - 150);
 // let spike91 = new Spike(27500, aboveGround);
 
 let spikes = [
@@ -237,7 +267,7 @@ let spikes = [
   spike83,
   spike84,
 
-  spike85,
+  // spike85,
   spike86,
   spike87,
   spike88,
@@ -249,8 +279,8 @@ let spikes = [
   spike94,
   spike95,
   spike96,
-  spike97,
-  spike98,
+  // spike97,
+  // spike98,
   spike99,
   spike100,
   spike101,
@@ -260,6 +290,26 @@ let spikes = [
   spike105,
   spike106,
   spike107,
+  spike108,
+  spike109,
+  spike110,
+  spike111,
+  spike112,
+  spike113,
+  spike114,
+  spike115,
+  spike116,
+  spike117,
+  spike118,
+  spike119,
+  spike120,
+  spike121,
+  spike122,
+  spike123,
+  spike124,
+  spike125,
+  spike126,
+  spike127,
 ];
 
 export default spikes;

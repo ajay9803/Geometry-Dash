@@ -38,6 +38,7 @@ export const resetGame = (milliseconds: number, movingSpeed: number) => {
       theSquare.dx = 0;
       theSquare.dy = 0;
       theSquare.offsetY = 0;
+      theSquare.gravity = 1;
       theSquare.gravityState = GRAVITYSTATE.NORMAL;
 
       // Clear particles

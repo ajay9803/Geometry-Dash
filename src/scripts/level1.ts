@@ -4,22 +4,17 @@ import { GROUND_SPACING } from "../constants/height_constants";
 import Background from "../models/background";
 import Square from "../models/player";
 import spikes from "./spikes";
-import platforms, { aboveGround } from "./platforms";
+import platforms from "./platforms";
 import { portals } from "./portals";
-import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "../models/particle";
-import explodePlayer from "../utilities/collisions";
-import { openMenu, showPauseMenu } from "./pause";
-import { backgroundAudio } from "./menu";
-import { attemptCount, getAttempts, saveAttempts } from "../utilities/attempts";
-import { resetGame } from "./reset";
+import { showPauseMenu } from "./pause";
+import { attemptCount,  } from "../utilities/attempts";
 
 import player from "/assets/sprites/cubes/cube-5.png";
-import { SPEED } from "../constants/speed_constants";
-import Propeller from "../models/propeller";
-import Coin from "../models/coin";
+
 import { coins } from "./coins";
 import { setEventListeners } from "./gameplay_events";
+import { propellers } from "./propeller";
 
 let playerImage = new Image();
 playerImage.src = player;
@@ -98,7 +93,7 @@ let grounds: Ground[] = [];
 export let particles: Particle[] = [];
 
 // Create grounds dynamically up to ground 8
-for (let i = 0; i <= 8 * 40; i++) {
+for (let i = 0; i <= 285; i++) {
   let ground = new Ground(
     i * GROUND_SPACING, // x position
     level1Canvas.height - MENU_GROUND_HEIGHT, // y position
@@ -161,6 +156,7 @@ const animate = () => {
       // theSquare.isDead = true;
       // if (theSquare.isDead) {
       theSquare.removePlayer();
+
       // }
     }
     spike.draw();
@@ -198,6 +194,11 @@ const animate = () => {
     coin.collidesWith(theSquare);
   });
 
+  propellers.forEach((propeller) => {
+    propeller.draw();
+    propeller.checkCollision();
+  });
+
   // Update square's position
   if (!theSquare.isDead) {
     theSquare.update();
@@ -222,11 +223,6 @@ const animate = () => {
   if (pause) {
     showPauseMenu();
   }
-
-  // Example usage:
-  const propeller = new Propeller(600, aboveGround, "gold");
-  propeller.draw();
-  propeller.checkCollision();
 };
 
 animate();

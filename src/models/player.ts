@@ -4,6 +4,7 @@ import {
   level1Canvas,
   level1Ctx,
   movingSpeed,
+  theSquare,
 } from "../scripts/level1";
 import { resetGame } from "../scripts/reset";
 import explodePlayer from "../utilities/collisions";
@@ -99,9 +100,10 @@ class Square {
   }
 
   removePlayer: () => void = () => {
-    // this.isDead = true;
-    // explodePlayer();
-    // resetGame(500, SPEED);
+    this.color = 'red';
+    this.isDead = true;
+    explodePlayer();
+    resetGame(500, SPEED);
   };
 
   updateImage(newImageSrc: string) {

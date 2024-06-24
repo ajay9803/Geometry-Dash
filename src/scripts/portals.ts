@@ -29,5 +29,13 @@ let portal2 = new Portal(
   false
 );
 
+let portal3 = new Portal(
+  startPortalImage,
+  32675,
+  aboveGround - 375,
+  336 / 2,
+  388 / 2,
+  GRAVITYSTATE.FREE
+);
 
-export const portals: Portal[] = [portal1, portal2];
+export const portals: Portal[] = [portal1, portal2, portal3];

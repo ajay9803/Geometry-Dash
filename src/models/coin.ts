@@ -2,9 +2,13 @@ import coin from "../assets/sprites/coins/coin.png";
 import { coins, setCollectedCoinsCount } from "../scripts/coins";
 import { level1Ctx } from "../scripts/level1";
 import Square from "./player";
+import coinAudio from "../assets/audios/collect-coin.mp3";
 
 let coinImage = new Image();
 coinImage.src = coin;
+
+let collectCoinAudio = new Audio();
+collectCoinAudio.src = coinAudio;
 
 class Coin {
   x: number;
@@ -51,6 +55,7 @@ class Coin {
     if (collided) {
       coins.shift();
       setCollectedCoinsCount(1);
+      collectCoinAudio.play();
     }
   };
 }

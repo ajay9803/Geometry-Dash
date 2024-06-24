@@ -132,8 +132,8 @@ let spike88 = new Spike(27300, aboveGround);
 
 let spike89 = new Spike(27350, aboveGround);
 
-let spike90 = new Spike(28900, aboveGround);
-let spike91 = new Spike(28950, aboveGround);
+let spike90 = new Spike(28900 + 50, aboveGround);
+let spike91 = new Spike(28950 + 50, aboveGround);
 let spike92 = new Spike(29400, aboveGround - 100 - 20, true);
 let spike93 = new Spike(29450, aboveGround - 100 - 20, true);
 let spike94 = new Spike(29500, aboveGround - 100 - 20, true);

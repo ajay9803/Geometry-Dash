@@ -117,6 +117,36 @@ document.addEventListener("DOMContentLoaded", () => {
     "leaderboard-button"
   ) as HTMLDivElement;
 
+  const instructionsButton = document.getElementById('instructions-button') as HTMLButtonElement;
+
+  instructionsButton.addEventListener('click', () => {
+    let instructionsBoard = document.createElement("div");
+    instructionsBoard.classList.add("instructions-board");
+    mainBody.appendChild(instructionsBoard);
+
+    let closeButton = document.createElement("img");
+    closeButton.src = "assets/sprites/icons/cross-icon.png";
+    closeButton.alt = "close";
+    closeButton.classList.add("leaderboard-cross-image");
+
+    closeButton.addEventListener('click', () => {
+      instructionsBoard.style.display = 'none';
+    });
+
+    instructionsBoard.appendChild(closeButton);
+
+    // Append the instructions to the board
+    const jumpInstructions = document.createElement("p");
+    jumpInstructions.innerHTML =
+      "Use <strong>Space</strong> or <strong>Arrow Up</strong> key to jump.";
+    instructionsBoard.appendChild(jumpInstructions);
+
+    const continuousJumpInstructions = document.createElement("p");
+    continuousJumpInstructions.innerHTML =
+      "Hold <strong>Space</strong> or <strong>Arrow Up</strong> key for continuous jumps.";
+    instructionsBoard.appendChild(continuousJumpInstructions);
+  });
+
   leaderboardButton.addEventListener("click", () => {
     let leaderboard = document.createElement("div");
     leaderboard.classList.add("leaderboard");
@@ -127,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     leaderboardTitle.classList.add("leaderboard-title");
 
     leaderboard.appendChild(leaderboardTitle);
-    
+
     let coinsCollectedText = document.createElement("h1") as HTMLHeadingElement;
     coinsCollectedText.innerHTML = `Coins Collected: ${collectedCoinsCount}`;
     coinsCollectedText.classList.add("leaderboard-title");
@@ -158,21 +188,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     topProgresses.forEach((progress) => {
       let progressbar = document.createElement("div");
-      progressbar.classList.add('progressbar');
+      progressbar.classList.add("progressbar");
       progressbar.style.width = "10%";
       progressbar.style.height = `${(progress["progress"] / 100) * 200}px`;
       progressbar.style.backgroundColor = "purple";
       progressBarsWrapper.appendChild(progressbar);
     });
 
-    let progressValues = document.createElement('div');
-    progressValues.style.display = 'flex';
-    progressValues.style.justifyContent = 'space-between';
-    progressValues.classList.add('progress-values');
+    let progressValues = document.createElement("div");
+    progressValues.style.display = "flex";
+    progressValues.style.justifyContent = "space-between";
+    progressValues.classList.add("progress-values");
 
     topProgresses.forEach((progress) => {
-      let text = document.createElement('h1');
-      text.innerHTML = Math.floor(progress["progress"]).toString() + '%';
+      let text = document.createElement("h1");
+      text.innerHTML = Math.floor(progress["progress"]).toString() + "%";
       progressValues.appendChild(text);
     });
     mainWrapper.appendChild(progressValues);
@@ -215,7 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
     playButton.style.display = "none";
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
-    leaderboardButton.style.display = 'none';
+    leaderboardButton.style.display = "none";
+    instructionsButton.style.display = 'none';
     setMovingSpeed(SPEED);
   });
 
@@ -224,7 +255,8 @@ document.addEventListener("DOMContentLoaded", () => {
     playButton.style.display = "none";
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
-    leaderboardButton.style.display = 'none';
+    leaderboardButton.style.display = "none";
+    instructionsButton.style.display = 'none';
     menuCanvas.style.display = "none";
     mainBody.style.justifyContent = "start";
     mainBody.style.alignItems = "start";
@@ -344,7 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
       playButton.style.display = "block";
       customizeButton.style.display = "block";
       randomButton.style.display = "block";
-      leaderboardButton.style.display = 'block';
+      leaderboardButton.style.display = "block";
+      instructionsButton.style.display = 'block';
     };
   });
 

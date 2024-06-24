@@ -100,10 +100,10 @@ class Square {
   }
 
   removePlayer: () => void = () => {
-    this.color = 'red';
-    this.isDead = true;
-    explodePlayer();
-    resetGame(500, SPEED);
+    this.color = "red";
+    // this.isDead = true;
+    // explodePlayer();
+    // resetGame(500, SPEED);
   };
 
   updateImage(newImageSrc: string) {
@@ -152,45 +152,61 @@ class Square {
   }
 
   update(): void {
+    let gameProgressPercentage = (canvasCor.x / 42000) * 100;
+    if (gameProgressPercentage >= 100) {
+      gameProgressPercentage = 100;
+    }
+
     if (this.dy > 0) {
       this.shouldJump = false;
     }
 
-    // Update square's position
-    this.y += this.dy;
-    this.x += movingSpeed;
+    // If the game is complete, stop movement
+    if (gameProgressPercentage < 100) {
+      this.y += this.dy;
+      this.x += movingSpeed;
+      canvasCor.x += movingSpeed;
 
-    let translateX = -movingSpeed;
-    let translateY = 0;
+      let translateX = -movingSpeed;
+      let translateY = 0;
 
-    canvasCor.x += movingSpeed;
-
-    if (this.gravityState === GRAVITYSTATE.NORMAL) {
-      if (this.y < level1Canvas.height / 4 + this.offsetY) {
-        translateY = 2.5;
-        canvasCor.y -= 2.5;
-        this.offsetY -= 2.5;
-      } else if (this.y > level1Canvas.height * 0.7 + this.offsetY) {
-        translateY = -5.5;
-        canvasCor.y += 5.5;
-        this.offsetY += 5.5;
+      if (this.gravityState === GRAVITYSTATE.NORMAL) {
+        if (this.y < level1Canvas.height / 4 + this.offsetY) {
+          translateY = 2.5;
+          canvasCor.y -= 2.5;
+          this.offsetY -= 2.5;
+        } else if (this.y > level1Canvas.height * 0.7 + this.offsetY) {
+          translateY = -5.5;
+          canvasCor.y += 5.5;
+          this.offsetY += 5.5;
+        }
       }
-    }
 
-    if (this.gravityState === GRAVITYSTATE.FREE) {
-      // Behavior for free gravity state
-    }
+      if (this.gravityState === GRAVITYSTATE.FREE) {
+        // Behavior for free gravity state
+      }
 
-    level1Ctx.translate(translateX, translateY);
+      level1Ctx.translate(translateX, translateY);
 
-    // Gravity effect
-    if (this.y + this.h + this.dy > this.canvas.height) {
-      this.dy = 0;
-      this.shouldJump = true;
+      // Gravity effect
+      if (this.y + this.h + this.dy > this.canvas.height) {
+        this.dy = 0;
+        this.shouldJump = true;
+      } else {
+        this.dy += this.gravity; // Simulate gravity
+      }
+
+      // Update tail particles and draw the square
+      this.updateTailParticles();
+      this.draw();
     } else {
-      this.dy += this.gravity; // Simulate gravity
+      // Stop the square's movement
+      this.dy = 0;
+      this.shouldJump = false;
     }
+  }
 
+  updateTailParticles(): void {
     // Control the particle creation rate
     this.particleTimer++;
     if (this.particleTimer >= 3) {
@@ -262,9 +278,6 @@ class Square {
     this.tailParticles3 = this.tailParticles3.filter(
       (particle) => particle.opacity > 0.1 && particle.size > 1
     );
-
-    // Draw the square and its tails
-    this.draw();
   }
 }
 

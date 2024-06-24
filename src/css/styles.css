@@ -79,11 +79,25 @@
   width: 80px;
   position: absolute;
   bottom: 10%;
-  right: calc(50% - 40px);
+  right: calc(60% - 40px);
   cursor: pointer;
   transition: transform 0.5s ease-in;
 }
 
 .leaderboard-button:hover {
+  transform: scale(110%);
+}
+
+.instructions-button {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  bottom: 10%;
+  right: calc(40% - 40px);
+  cursor: pointer;
+  transition: transform 0.5s ease-in;
+}
+
+.instructions-button:hover {
   transform: scale(110%);
 }

@@ -168,6 +168,8 @@ export function openMenu() {
     "random-button"
   ) as HTMLDivElement;
   const leaderboardButton = document.getElementById('leaderboard-button') as HTMLDivElement;
+  const instructionsButton = document.getElementById('instructions-button') as HTMLElement;
+
   const mainBody = document.getElementById("main") as HTMLDivElement;
 
   // Display the menu canvas and hide other elements
@@ -178,6 +180,7 @@ export function openMenu() {
   customizeButton.style.display = "block";
   randomButton.style.display = "block";
   leaderboardButton.style.display = 'block';
+  instructionsButton.style.display = 'block';
 
   mainBody.style.justifyContent = "center";
   mainBody.style.alignItems = "center";

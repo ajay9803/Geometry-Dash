@@ -93,7 +93,7 @@ let grounds: Ground[] = [];
 export let particles: Particle[] = [];
 
 // Create grounds dynamically up to ground 8
-for (let i = 0; i <= 285; i++) {
+for (let i = 0; i <= 290; i++) {
   let ground = new Ground(
     i * GROUND_SPACING, // x position
     level1Canvas.height - MENU_GROUND_HEIGHT, // y position

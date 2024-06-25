@@ -1,5 +1,4 @@
 import { MENU_GROUND_HEIGHT } from "../constants/height_constants";
-import { SPEED } from "../constants/speed_constants";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import { saveAttempts } from "../utilities/attempts";
 import {
@@ -10,7 +9,6 @@ import {
   setMovingSpeed,
   theSquare,
 } from "./level1";
-import { backgroundAudio } from "./menu";
 import { isCheckboxChecked } from "./gameplay_events";
 
 let resetGameInterval: any = null;
@@ -46,8 +44,8 @@ export const resetGame = (milliseconds: number, movingSpeed: number) => {
 
       // Restart the background audio if necessary
       if (isCheckboxChecked) {
-        backgroundAudio.currentTime = 0;
-        backgroundAudio.play();
+        // backgroundAudio.currentTime = 0;
+        // backgroundAudio.play();
       }
 
       setMovingSpeed(movingSpeed);

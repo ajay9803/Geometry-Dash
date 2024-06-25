@@ -1,5 +1,4 @@
 import { level1Ctx, theSquare } from "../scripts/level1";
-import Particle from "./particle";
 
 class Propeller {
   x: number;

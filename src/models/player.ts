@@ -4,14 +4,23 @@ import {
   level1Canvas,
   level1Ctx,
   movingSpeed,
+  setMovingSpeed,
+  setPause,
   theSquare,
 } from "../scripts/level1";
 import { resetGame } from "../scripts/reset";
-import explodePlayer from "../utilities/collisions";
+import explodePlayer, { showEndAnimation } from "../utilities/collisions";
 import TailParticle from "./player_tail";
 
 import planeImage from "../assets/sprites/cubes/plane-img.png";
 import { SPEED } from "../constants/speed_constants";
+import { openMenu } from "../scripts/pause";
+import levelCompletionAud from "../assets/audios/level-complete.mp3";
+import { isCheckboxChecked } from "../scripts/gameplay_events";
+import { backgroundAudio } from "../scripts/menu";
+
+let levelCompletionAudio = new Audio();
+levelCompletionAudio.src = levelCompletionAud;
 
 // Utility function to retrieve customization
 export const getCustomization = () => {
@@ -25,7 +34,7 @@ export const getCustomization = () => {
 };
 
 // Retrieve the selected player image and background color
-const { playerImageSrc, playerBackgroundColor } = getCustomization();
+const { playerImageSrc } = getCustomization();
 
 export let playerImage = new Image();
 playerImage.src = playerImageSrc;
@@ -101,9 +110,9 @@ class Square {
 
   removePlayer: () => void = () => {
     this.color = "red";
-    // this.isDead = true;
-    // explodePlayer();
-    // resetGame(500, SPEED);
+    this.isDead = true;
+    explodePlayer();
+    resetGame(500, SPEED);
   };
 
   updateImage(newImageSrc: string) {
@@ -197,13 +206,32 @@ class Square {
       }
 
       // Update tail particles and draw the square
-      this.updateTailParticles();
-      this.draw();
     } else {
+      if (isCheckboxChecked) {
+        backgroundAudio.pause();
+        levelCompletionAudio.play();
+      }
+      showEndAnimation();
+      level1Ctx.save();
+      level1Ctx.fillStyle = "white";
+      level1Ctx.font = "bold 50px Lacquer";
+      level1Ctx.fillText(`Level Completed`, 42300, canvasCor.y + 100);
+      level1Ctx.restore();
       // Stop the square's movement
       this.dy = 0;
       this.shouldJump = false;
+      setTimeout(() => {
+        theSquare.isDead = true;
+        resetGame(1, 0);
+        openMenu();
+        setMovingSpeed(0);
+        levelCompletionAudio.pause();
+        setPause(false);
+      }, 3000);
     }
+
+    this.updateTailParticles();
+    this.draw();
   }
 
   updateTailParticles(): void {

@@ -1,5 +1,6 @@
 import { SPEED } from "../constants/speed_constants";
 import { GRAVITYSTATE } from "../enums/gravity_state";
+import { collectCoinAudio } from "../models/coin";
 import {
   canvasCor,
   level1Canvas,
@@ -38,7 +39,6 @@ export const setEventListeners = () => {
       }
 
       if (theSquare.gravityState === GRAVITYSTATE.FREE) {
-        
         theSquare.shouldJump = true;
         theSquare.dy -= 6;
       }
@@ -137,12 +137,8 @@ export const setEventListeners = () => {
         backgroundAudio.play();
       } else {
         backgroundAudio.pause();
+        collectCoinAudio.pause();
       }
-
-      // (Optional) Perform additional actions when checkbox state changes
-      // console.log(
-      //   `Checkbox state: ${isCheckboxChecked ? "Checked" : "Unchecked"}`
-      // );
     }
   });
 

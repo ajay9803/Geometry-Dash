@@ -1,7 +1,5 @@
 import { level1Ctx } from "../scripts/level1";
 import theImage from "../assets/sprites/grounds/the-test (1).png";
-import explodePlayer from "../utilities/collisions";
-import { resetGame } from "../scripts/reset";
 
 let image = new Image();
 image.src = theImage;
@@ -145,15 +143,14 @@ class ThePlatform {
     const squareRight = theSquare.x + theSquare.w;
     const squareLeft = theSquare.x;
 
-    // if (
-    //   squareBottom < this.y && // Square is above the platform
-    //   squareBottom + theSquare.dy >= this.y - 100 && // Within 5 pixels of the platform
-    //   squareRight > this.x && // Square is horizontally over the platform
-    //   squareLeft < this.x + this.w
-    // ) {
-    //   theSquare.shouldJump = true; // Allow the square to jump
-    //   // return;
-    // }
+    if (
+      squareBottom < this.y && // Square is above the platform
+      squareBottom + theSquare.dy + 10 >= this.y && // Within 5 pixels of the platform
+      squareRight > this.x && // Square is horizontally over the platform
+      squareLeft < this.x + this.w
+    ) {
+      theSquare.shouldJump = true; // Allow the square to jump
+    }
 
     if (
       squareBottom < this.y &&

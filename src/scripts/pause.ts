@@ -1,8 +1,4 @@
-import {
-  canvasCor,
-  level1Canvas,
-  level1Ctx,
-} from "./level1";
+import { canvasCor, level1Canvas, level1Ctx } from "./level1";
 
 import resumeButtonImage from "../assets/sprites/buttons/resume-button.png";
 import starIconImage from "../assets/sprites/icons/the-star.png";
@@ -167,8 +163,12 @@ export function openMenu() {
   const randomButton = document.getElementById(
     "random-button"
   ) as HTMLDivElement;
-  const leaderboardButton = document.getElementById('leaderboard-button') as HTMLDivElement;
-  const instructionsButton = document.getElementById('instructions-button') as HTMLElement;
+  const leaderboardButton = document.getElementById(
+    "leaderboard-button"
+  ) as HTMLDivElement;
+  const instructionsButton = document.getElementById(
+    "instructions-button"
+  ) as HTMLElement;
 
   const mainBody = document.getElementById("main") as HTMLDivElement;
 
@@ -179,8 +179,8 @@ export function openMenu() {
   playButton.style.display = "block";
   customizeButton.style.display = "block";
   randomButton.style.display = "block";
-  leaderboardButton.style.display = 'block';
-  instructionsButton.style.display = 'block';
+  leaderboardButton.style.display = "block";
+  instructionsButton.style.display = "block";
 
   mainBody.style.justifyContent = "center";
   mainBody.style.alignItems = "center";

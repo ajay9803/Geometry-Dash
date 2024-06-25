@@ -1,16 +1,18 @@
 import coin from "../assets/sprites/coins/coin.png";
-import { coins, setCollectedCoinsCount } from "../scripts/coins";
-import { level1Ctx } from "../scripts/level1";
+import { setCollectedCoinsCount } from "../scripts/coins";
+
+import { coins, level1Ctx } from "../scripts/level1";
 import Square from "./player";
 import coinAudio from "../assets/audios/collect-coin.mp3";
+import { isCheckboxChecked } from "../scripts/gameplay_events";
 
 let coinImage = new Image();
 coinImage.src = coin;
 
-let collectCoinAudio = new Audio();
+export let collectCoinAudio = new Audio();
 collectCoinAudio.src = coinAudio;
 
-class Coin {
+export default class Coin {
   x: number;
   y: number;
   h: number;
@@ -55,9 +57,9 @@ class Coin {
     if (collided) {
       coins.shift();
       setCollectedCoinsCount(1);
-      collectCoinAudio.play();
+      if(isCheckboxChecked) {
+        collectCoinAudio.play();
+      }
     }
   };
 }
-
-export default Coin;

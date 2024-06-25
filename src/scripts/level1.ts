@@ -4,17 +4,24 @@ import { GROUND_SPACING } from "../constants/height_constants";
 import Background from "../models/background";
 import Square from "../models/player";
 import spikes from "./spikes";
-import platforms from "./platforms";
+import platforms, { aboveGround } from "./platforms";
 import { portals } from "./portals";
 import Particle from "../models/particle";
 import { showPauseMenu } from "./pause";
-import { attemptCount,  } from "../utilities/attempts";
+import { attemptCount } from "../utilities/attempts";
 
 import player from "/assets/sprites/cubes/cube-5.png";
 
-import { coins } from "./coins";
 import { setEventListeners } from "./gameplay_events";
 import { propellers } from "./propeller";
+import EndWall from "../models/end_wall";
+import Coin from "../models/coin";
+
+let coin1 = new Coin(20370 + 220 * 3, aboveGround - 82 - 120, 82, 82);
+let coin2 = new Coin(31700 + 30, aboveGround - 300, 82, 82);
+let coin3 = new Coin(41500, aboveGround - 300, 82, 82);
+
+export let coins = [coin1, coin2, coin3];
 
 let playerImage = new Image();
 playerImage.src = player;
@@ -91,6 +98,7 @@ for (let i = 0; i < 2 * 20; i++) {
 let grounds: Ground[] = [];
 
 export let particles: Particle[] = [];
+export let endParticles: Particle[] = [];
 
 // Create grounds dynamically up to ground 8
 for (let i = 0; i <= 290; i++) {
@@ -102,6 +110,8 @@ for (let i = 0; i <= 290; i++) {
   );
   grounds.push(ground);
 }
+
+export let endWall = new EndWall(42900, aboveGround - 600, 200, 600);
 
 const animate = () => {
   level1Ctx.clearRect(
@@ -189,11 +199,6 @@ const animate = () => {
   level1Ctx.stroke();
   level1Ctx.restore();
 
-  coins.forEach((coin) => {
-    coin.draw();
-    coin.collidesWith(theSquare);
-  });
-
   propellers.forEach((propeller) => {
     propeller.draw();
     propeller.checkCollision();
@@ -214,11 +219,28 @@ const animate = () => {
     }
   });
 
+  endParticles.forEach((particle, index) => {
+    if (particle.radius <= 0) {
+      particles.splice(index, 1);
+    } else {
+      if (particles.length <= 250) {
+        particle.updatePosition();
+      }
+    }
+  });
+
+  endWall.draw();
+
   level1Ctx.save();
   level1Ctx.fillStyle = "white";
   level1Ctx.font = "bold 50px Lacquer";
   level1Ctx.fillText(`Attempt ${attemptCount}`, 200, canvasCor.y + 100);
   level1Ctx.restore();
+
+  coins.forEach((coin) => {
+    coin.draw();
+    coin.collidesWith(theSquare);
+  });
 
   if (pause) {
     showPauseMenu();

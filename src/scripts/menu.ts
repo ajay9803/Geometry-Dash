@@ -99,6 +99,8 @@ animate();
 
 // Wait for the DOM to fully load
 document.addEventListener("DOMContentLoaded", () => {
+  let isInstructionsBoardOpen = false;
+  let isLeaderboardOpen = false;
   // Main body
   const mainBody = document.getElementById("main") as HTMLDivElement;
 
@@ -117,10 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "leaderboard-button"
   ) as HTMLDivElement;
 
-  const instructionsButton = document.getElementById('instructions-button') as HTMLButtonElement;
+  const instructionsButton = document.getElementById(
+    "instructions-button"
+  ) as HTMLButtonElement;
 
-  instructionsButton.addEventListener('click', () => {
+  instructionsButton.addEventListener("click", () => {
+    if (isInstructionsBoardOpen) {
+      return;
+    }
+    isInstructionsBoardOpen = !isInstructionsBoardOpen;
     let instructionsBoard = document.createElement("div");
+
     instructionsBoard.classList.add("instructions-board");
     mainBody.appendChild(instructionsBoard);
 
@@ -129,8 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
     closeButton.alt = "close";
     closeButton.classList.add("leaderboard-cross-image");
 
-    closeButton.addEventListener('click', () => {
-      instructionsBoard.style.display = 'none';
+    closeButton.addEventListener("click", () => {
+      isInstructionsBoardOpen = !isInstructionsBoardOpen;
+      mainBody.removeChild(instructionsBoard);
     });
 
     instructionsBoard.appendChild(closeButton);
@@ -148,7 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   leaderboardButton.addEventListener("click", () => {
+    if (isLeaderboardOpen) {
+      return;
+    }
+    isLeaderboardOpen = !isLeaderboardOpen;
     let leaderboard = document.createElement("div");
+    // mainBody.removeChild(instructionsBoard);
+
     leaderboard.classList.add("leaderboard");
     mainBody.appendChild(leaderboard);
 
@@ -170,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
     closeButton.classList.add("leaderboard-cross-image");
 
     closeButton.addEventListener("click", () => {
+      isLeaderboardOpen = !isLeaderboardOpen;
       leaderboard.style.display = "none";
     });
 
@@ -246,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
     leaderboardButton.style.display = "none";
-    instructionsButton.style.display = 'none';
+    instructionsButton.style.display = "none";
     setMovingSpeed(SPEED);
   });
 
@@ -256,7 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
     customizeButton.style.display = "none";
     randomButton.style.display = "none";
     leaderboardButton.style.display = "none";
-    instructionsButton.style.display = 'none';
+    instructionsButton.style.display = "none";
+
     menuCanvas.style.display = "none";
     mainBody.style.justifyContent = "start";
     mainBody.style.alignItems = "start";
@@ -377,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
       customizeButton.style.display = "block";
       randomButton.style.display = "block";
       leaderboardButton.style.display = "block";
-      instructionsButton.style.display = 'block';
+      instructionsButton.style.display = "block";
     };
   });
 

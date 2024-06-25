@@ -8,7 +8,7 @@ Welcome to the **Geometry Dash Game**!
 - [Installation](#installation)
 - [How to Play](#how-to-play)
 - [Screenshots](#screenshots)
-- [Development](#development)
+- [Control Instructions](#controls)
 
 ## Introduction
 
@@ -39,3 +39,10 @@ To get started with the Geometry Dash Game, follow these steps:
 ## Screenshots
 
 ![alt text](screenshot-1.png) ![alt text](screenshot-2.png) ![alt text](screenshot-3.png) ![alt text](screenshot-4.png) ![alt text](screenshot-5.png) ![alt text](screenshot-6.png) ![alt text](screenshot-7.png) ![alt text](screenshot-8.png) ![alt text](screenshot-9.png)  ![alt text](screenshot-11.png)![alt text](<Screenshot 2024-06-25 230710.png>) ![alt text](<Screenshot 2024-06-25 230750.png>) ![alt text](screenshot-12.png) ![alt text](screenshot-13.png)
+
+## Controls
+
+- **Use Arrow-Up or Space to jump**
+- **Hold on to Arrow-Up or Space to jump continuous obstacles**
+- **Fast Tap on Arrow-Up or Space to stay up in the air**
+- **For Leapfrog character, Use ShiftRight key to double jump**

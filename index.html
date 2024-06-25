@@ -8,36 +8,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geometry Dash</title>
 
-  <link rel="icon" href="./src/assets/icons/favicon.png" type="./src/assets/sprites/cubes/plane-img.png">
+  <!-- Main Icon  -->
+  <link rel="icon" href="/assets/sprites/cubes/cube-1.png">
 
+  <!-- Custom Stylesheets  -->
   <link rel="stylesheet" href="./src/css/index.css">
   <link rel="stylesheet" href="./src/css/styles.css">
   <link rel="stylesheet" href="./src/css/customize-section.css">
   <link rel="stylesheet" href="./src/css/leaderboard-section.css">
   <link rel="stylesheet" href="./src/css/instructions-section.css">
 
+  <!-- Lacquer font family  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 </head>
 
 <body id="main" class="main">
-
   <img id="title-img" class="title-img" src="/assets/sprites/texts/title.png">
+
   <!-- The menu buttons -->
   <img id="play-button" class="play-button-img" src="/assets/sprites/buttons/play-button.png">
   <img id="customize-button" class="customize-button" src="/assets/sprites/buttons/customize-button.png">
-
-
   <a href="https://nohara-591ab.web.app/home" target="_blank">
     <img id="random-button" class="more-button" src="/assets/sprites/buttons/more-button.png">
   </a>
   <img id="leaderboard-button" class="leaderboard-button" src="/assets/sprites/icons/leaderboard-icon.png">
-  <img id="instructions-button" class="instructions-button" src="/assets/sprites/buttons/instructions-icon.png"> 
+  <img id="instructions-button" class="instructions-button" src="/assets/sprites/buttons/instructions-icon.png">
 
   <!-- Menu Canvas -->
   <canvas id="menu-canvas" class="menu-canvas"></canvas>
+
+  <!-- Game Canvas  -->
   <canvas id="level-one-canvas" class="level-one-canvas"></canvas>
+
+  <!-- Main scripts  -->
   <script type="module" src="./src/scripts/menu.ts"></script>
   <script type="module" src="./src/scripts/level1.ts"></script>
 </body>

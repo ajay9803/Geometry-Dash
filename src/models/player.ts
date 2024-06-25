@@ -109,10 +109,10 @@ class Square {
 
   // Remove player on collision with obstacles
   removePlayer: () => void = () => {
-    explosionAudio.play();
-    this.isDead = true;
-    explodePlayer();
-    resetGame(500, SPEED);
+    // explosionAudio.play();
+    // this.isDead = true;
+    // explodePlayer();
+    // resetGame(500, SPEED);
   };
 
   // Update image on character customization

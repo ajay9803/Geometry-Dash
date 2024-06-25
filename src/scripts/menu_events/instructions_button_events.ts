@@ -4,11 +4,9 @@ export const ListenForInstructionButtonClick = (
   isInstructionsBoardOpen: boolean
 ) => {
   instructionsButton.addEventListener("click", () => {
-    console.log("instruction button clicked", isInstructionsBoardOpen);
     if (isInstructionsBoardOpen) {
       return;
     }
-    console.log("here");
     isInstructionsBoardOpen = !isInstructionsBoardOpen;
     let instructionsBoard = document.createElement("div");
 

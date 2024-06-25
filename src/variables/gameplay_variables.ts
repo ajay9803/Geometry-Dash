@@ -25,3 +25,61 @@ export let setPause = (value: boolean) => {
 };
 
 // Math.abs(squareBottom - this.y - 10) <= theSquare.dy &&
+
+// let portalConfigurations = [
+//   {
+//     image: startPortalImage,
+//     x: 13550,
+//     y: aboveGround - 500,
+//     w: 336 / 2,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.FREE,
+//     isStartPortal: true,
+//   },
+//   {
+//     image: startPortalImage,
+//     x: 13550,
+//     y: aboveGround - 500,
+//     w: 336 / 2,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.FREE,
+//     isStartPortal: false,
+//   },
+//   {
+//     image: startPortalImage,
+//     x: 32675,
+//     y: aboveGround - 375,
+//     w: 336 / 2,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.FREE,
+//     isStartPortal: true,
+//   },
+//   {
+//     image: endPortalImage,
+//     x: 40100,
+//     y: aboveGround - 385,
+//     w: 336 / 2,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.NORMAL,
+//     isStartPortal: false,
+//   },
+//   {
+//     image: gravityPortalImage,
+//     x: 40860,
+//     y: aboveGround - 395,
+//     w: 336 / 3,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.REVERSE,
+//     isStartPortal: true,
+//   },
+//   {
+//     image: gravityPortalImage,
+//     x: 41350,
+//     y: aboveGround - 395,
+//     w: 336 / 3,
+//     h: 388 / 2,
+//     gravityState: GRAVITYSTATE.NORMAL,
+//     isStartPortal: false,
+//   },
+// ];
+

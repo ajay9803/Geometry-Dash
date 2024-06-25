@@ -1,5 +1,3 @@
-// The spikes
-
 import MidSpike from "../models/spikes/mid_spike";
 import Spike from "../models/spikes/spike";
 import { aboveGround } from "./platforms";
@@ -138,9 +136,6 @@ let spike92 = new Spike(29400, aboveGround - 100 - 20, true);
 let spike93 = new Spike(29450, aboveGround - 100 - 20, true);
 let spike94 = new Spike(29500, aboveGround - 100 - 20, true);
 let spike95 = new Spike(29550, aboveGround - 100 - 20, true);
-let spike96 = new Spike(29800, aboveGround);
-// let spike97 = new MidSpike(31700, aboveGround - 200);
-// let spike98 = new Spike(32250 + 150, aboveGround - 150);
 let spike99 = new Spike(36950, aboveGround - 200);
 let spike100 = new Spike(37000, aboveGround - 200);
 let spike101 = new Spike(37300, aboveGround - 400, true);
@@ -166,11 +161,6 @@ let spike120 = new Spike(39300, aboveGround - 200);
 let spike121 = new Spike(39500, aboveGround - 400, true);
 
 let spike122 = new Spike(39550, aboveGround - 400, true);
-// let spike123 = new Spike(40400, aboveGround - 200);
-// let spike124 = new Spike(40450, aboveGround - 200);
-// let spike125 = new Spike(40600, aboveGround - 400, true);
-// let spike126 = new Spike(40750, aboveGround - 400, true);
-// let spike127 = new Spike(40950, aboveGround - 200);
 
 let spikes = [
   spike0,
@@ -268,9 +258,6 @@ let spikes = [
   spike93,
   spike94,
   spike95,
-  spike96,
-  // spike97,
-  // spike98,
   spike99,
   spike100,
   spike101,
@@ -295,11 +282,6 @@ let spikes = [
   spike120,
   spike121,
   spike122,
-  // spike123,
-  // spike124,
-  // spike125,
-  // spike126,
-  // spike127,
 ];
 
 export default spikes;

@@ -14,7 +14,6 @@ export let isMusicCheckboxChecked = true;
 export const setEventListeners = () => {
   // Key down event listener
   addEventListener("keydown", ({ code }) => {
-    console.log(code);
     // Jump
     if (code === "Space" || code === "ArrowUp") {
       if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
@@ -37,11 +36,11 @@ export const setEventListeners = () => {
           }
         }
       }
+    }
 
-      if (theSquare.gravityState === GRAVITYSTATE.FREE) {
-        theSquare.shouldJump = true;
-        theSquare.dy -= 6;
-      }
+    if (theSquare.gravityState === GRAVITYSTATE.FREE) {
+      theSquare.shouldJump = true;
+      theSquare.dy -= 6;
     }
 
     if (code === "ShiftRight") {
@@ -50,11 +49,8 @@ export const setEventListeners = () => {
         theSquare.hasJumpedOnce
       ) {
         // Second Jump Logic
-        if (theSquare.gravityState === GRAVITYSTATE.REVERSE) {
-          theSquare.dy += 15;
-        } else {
-          theSquare.dy -= 15;
-        }
+
+        theSquare.dy -= 15;
 
         // After the second jump, reset the ability to jump until landed
         theSquare.hasJumpedOnce = false; // Reset this flag as the second jump is performed

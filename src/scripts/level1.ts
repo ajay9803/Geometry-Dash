@@ -24,6 +24,7 @@ import {
 } from "../variables/gameplay_variables";
 import { WHITE } from "../constants/color_constants";
 import { littleSpikies } from "./little_spikes";
+import Portal from "../models/portal";
 
 export let movingSpeed = 0;
 
@@ -175,7 +176,7 @@ const animate = () => {
     }
   });
 
-  portals.forEach((portal) => {
+  portals.forEach((portal: Portal) => {
     portal.draw();
     portal.checkCollisionWithSquare(theSquare);
   });

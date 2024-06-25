@@ -12,14 +12,19 @@ import explodePlayer, {
 } from "../utilities/collisions";
 import TailParticle from "./player_tail";
 
-import planeImage from "../assets/sprites/cubes/plane-img.png";
+import planeImage from "/assets/sprites/cubes/plane-img.png";
 import { SPEED } from "../constants/speed_constants";
 import { openMenu } from "../scripts/pause";
-import levelCompletionAud from "../assets/audios/level-complete.mp3";
+import levelCompletionAud from "/assets/audios/level-complete.mp3";
 import { isMusicCheckboxChecked } from "../scripts/gameplay_events";
 import { backgroundAudio } from "../scripts/menu";
 import { getCustomization } from "../utilities/player_utility";
 import { canvasCor, setPause } from "../variables/gameplay_variables";
+
+import explosion from "/assets/audios/explosion.mp3";
+
+let explosionAudio = new Audio();
+explosionAudio.src = explosion;
 
 let levelCompletionAudio = new Audio();
 levelCompletionAudio.src = levelCompletionAud;
@@ -104,6 +109,7 @@ class Square {
 
   // Remove player on collision with obstacles
   removePlayer: () => void = () => {
+    explosionAudio.play();
     this.isDead = true;
     explodePlayer();
     resetGame(500, SPEED);
@@ -124,7 +130,6 @@ class Square {
   }
 
   draw(): void {
-    console.log("the jump count is: ", theSquare.jumpCount);
     this.tailParticles1.forEach((particle) => particle.draw());
     this.tailParticles2.forEach((particle) => particle.draw());
     this.tailParticles3.forEach((particle) => particle.draw());
@@ -202,7 +207,7 @@ class Square {
         backgroundAudio.pause();
         levelCompletionAudio.play();
       }
-
+      setPause(false);
       // Show level completion animation
       showGameCompletionAnimation();
 
@@ -220,7 +225,6 @@ class Square {
         resetGame(1, 0);
         openMenu();
         setMovingSpeed(0);
-        setPause(false);
       }, 3000);
     }
 

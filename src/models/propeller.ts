@@ -1,8 +1,10 @@
+import { WHITE } from "../constants/color_constants";
 import { level1Ctx, theSquare } from "../scripts/level1";
 
+// Propeller class - propels the player higher
 class Propeller {
-  x: number;
-  y: number;
+  x: number; // X-position
+  y: number; // X-position
   color: string;
 
   constructor(x: number, y: number, color: string) {
@@ -22,37 +24,37 @@ class Propeller {
       this.y // Ending point at the left side of the circle
     );
     level1Ctx.lineWidth = 5;
-    level1Ctx.strokeStyle = "white";
+    level1Ctx.strokeStyle = WHITE;
     level1Ctx.stroke();
     level1Ctx.fillStyle = this.color;
     level1Ctx.fill();
     level1Ctx.closePath();
 
-    level1Ctx.strokeStyle = "white";
+    level1Ctx.strokeStyle = WHITE;
     level1Ctx.lineWidth = 1;
     level1Ctx.moveTo(this.x, this.y - 15);
     level1Ctx.lineTo(this.x, this.y - 45);
     level1Ctx.stroke();
 
-    level1Ctx.strokeStyle = "white";
+    level1Ctx.strokeStyle = WHITE;
     level1Ctx.lineWidth = 1;
     level1Ctx.moveTo(this.x + 12.5, this.y - 25);
     level1Ctx.lineTo(this.x + 12.5, this.y - 75);
     level1Ctx.stroke();
 
-    level1Ctx.strokeStyle = "white";
+    level1Ctx.strokeStyle = WHITE;
     level1Ctx.lineWidth = 1;
     level1Ctx.moveTo(this.x + 25, this.y - 35);
     level1Ctx.lineTo(this.x + 25, this.y - 95);
     level1Ctx.stroke();
 
-     level1Ctx.strokeStyle = "white";
-     level1Ctx.lineWidth = 1;
-     level1Ctx.moveTo(this.x + 37.5, this.y - 25);
-     level1Ctx.lineTo(this.x + 37.5, this.y - 75);
-     level1Ctx.stroke();
+    level1Ctx.strokeStyle = WHITE;
+    level1Ctx.lineWidth = 1;
+    level1Ctx.moveTo(this.x + 37.5, this.y - 25);
+    level1Ctx.lineTo(this.x + 37.5, this.y - 75);
+    level1Ctx.stroke();
 
-    level1Ctx.strokeStyle = "white";
+    level1Ctx.strokeStyle = WHITE;
     level1Ctx.lineWidth = 1;
     level1Ctx.moveTo(this.x + 50, this.y - 15);
     level1Ctx.lineTo(this.x + 50, this.y - 45);
@@ -67,6 +69,8 @@ class Propeller {
 
     // Check if the distance is less than the sum of their radii for collision
     if (distance < theSquare.w + Math.max(theSquare.w, theSquare.h) / 2) {
+
+      // Propel the sqare on collision 
       theSquare.dy -= 25;
     }
   }

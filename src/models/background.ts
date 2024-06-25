@@ -2,12 +2,13 @@ import basicGround from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
 
 import { canvasCor, level1Ctx } from "../scripts/level1";
 
+// Gameplay ground - image
 let theGround = new Image();
 theGround.src = basicGround;
 
 class Background {
-  x: number;
-  y: number;
+  x: number; // X-position
+  y: number; // Y-position
   height: number;
   width: number;
 
@@ -19,8 +20,8 @@ class Background {
   }
 
   update: () => void = () => {
+    // Draw static background
     this.draw();
-    // this.x -= BACKGROUND_SPEED;
   };
 
   draw: () => void = () => {

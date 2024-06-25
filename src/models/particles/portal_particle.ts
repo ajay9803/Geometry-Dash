@@ -1,8 +1,9 @@
 import { level1Ctx } from "../../scripts/level1";
 
+// Particle class for portals
 export default class PortalParticle {
-  xpose: number;
-  ypose: number;
+  xposi: number;
+  yposi: number;
   size: number;
   dx: number;
   dy: number;
@@ -10,15 +11,15 @@ export default class PortalParticle {
   opacity: number;
 
   constructor(
-    xpose: number,
-    ypose: number,
+    xposi: number,
+    yposi: number,
     size: number,
     dx: number,
     dy: number,
     color: string
   ) {
-    this.xpose = xpose;
-    this.ypose = ypose;
+    this.xposi = xposi;
+    this.yposi = yposi;
     this.size = size;
     this.dx = dx;
     this.dy = dy;
@@ -30,15 +31,16 @@ export default class PortalParticle {
     level1Ctx.save();
     level1Ctx.globalAlpha = this.opacity;
     level1Ctx.fillStyle = this.color;
-    level1Ctx.fillRect(this.xpose, this.ypose, this.size, this.size);
+    level1Ctx.fillRect(this.xposi, this.yposi, this.size, this.size);
     level1Ctx.restore();
   }
 
+  // Update particle's position with their horizontal / vertical velocities and Update opacity / size values
   updatePosition(): void {
-    this.ypose += this.dy;
-    this.xpose += this.dx;
-    this.opacity -= 0.02; // Adjust fading rate if needed
-    this.size -= 0.2; // Adjust size reduction rate if needed
+    this.yposi += this.dy;
+    this.xposi += this.dx;
+    this.opacity -= 0.02;
+    this.size -= 0.2;
     if (this.size < 0) this.size = 0; // Prevent size from becoming negative
     this.draw();
   }

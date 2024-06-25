@@ -174,11 +174,17 @@ const animate = () => {
 
   // Update platforms
   platforms.forEach((platform) => {
-    // Check collision with square and adjust position
-    platform.checkCollisionWithSquare(theSquare);
+    // Check if the platform is within the visible canvas area before processing
+    if (
+      platform.x + platform.w > canvasCor.x &&
+      platform.x < canvasCor.x + level1Canvas.width
+    ) {
+      // Check collision with square and adjust position
+      platform.checkCollisionWithSquare(theSquare);
 
-    // Draw the platform
-    platform.draw();
+      // Draw the platform
+      platform.draw();
+    }
   });
 
   portals.forEach((portal) => {

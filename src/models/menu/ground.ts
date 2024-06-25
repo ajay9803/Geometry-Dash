@@ -1,12 +1,13 @@
 import { menuCtx } from "../../scripts/menu";
 import basicGround from "/assets/sprites/grounds/groundSquare_01_001-hd.png";
 
+// Ground image
 let theGround = new Image();
 theGround.src = basicGround;
 
 class MenuGround {
-  x: number;
-  y: number;
+  x: number; // X-position
+  y: number; // Y-position
   height: number;
   width: number;
 

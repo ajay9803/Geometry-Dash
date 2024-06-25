@@ -1,14 +1,14 @@
 import { BACKGROUND_SPEED } from "../../constants/speed_constants";
 import { menuCtx } from "../../scripts/menu";
-import basicGround from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
+import basicBackground from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
 
-
-let theGround = new Image();
-theGround.src = basicGround;
+// Background Image
+let theBackground = new Image();
+theBackground.src = basicBackground;
 
 class MenuBackground {
-  x: number;
-  y: number;
+  x: number; // X-position
+  y: number; // Y-position
   height: number;
   width: number;
 
@@ -25,12 +25,7 @@ class MenuBackground {
   };
 
   draw: () => void = () => {
-    menuCtx.drawImage(
-      theGround,
-      this.x, this.y,
-      this.width,
-      this.height
-    );
+    menuCtx.drawImage(theBackground, this.x, this.y, this.width, this.height);
   };
 }
 

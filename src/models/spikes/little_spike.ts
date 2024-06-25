@@ -1,6 +1,7 @@
 import { level1Ctx } from "../../scripts/level1";
 
-class Spike {
+// Minute spikes to showcase throughout the gameplay 
+class LittleSpike {
   x: number;
   y: number;
   currentColor: string;
@@ -18,7 +19,7 @@ class Spike {
       // Draw the spike pointing upwards (reversed)
       level1Ctx.beginPath();
       level1Ctx.moveTo(this.x, this.y); // Bottom point
-      level1Ctx.lineTo(this.x + 25, this.y + 50); // Top-left point
+      level1Ctx.lineTo(this.x + 15, this.y + 50); // Top-left point
       level1Ctx.lineTo(this.x + 50, this.y); // Bottom-right point
       level1Ctx.closePath();
 
@@ -30,7 +31,7 @@ class Spike {
       // Create a linear gradient from bottom to top
       let gradient = level1Ctx.createLinearGradient(
         this.x,
-        this.y + 50, // Start from bottom
+        this.y + 30, // Start from bottom
         this.x,
         this.y // End at top
       );
@@ -44,7 +45,7 @@ class Spike {
       // Draw the spike pointing downwards (normal)
       level1Ctx.beginPath();
       level1Ctx.moveTo(this.x, this.y); // Top point
-      level1Ctx.lineTo(this.x + 25, this.y - 50); // Bottom-left point
+      level1Ctx.lineTo(this.x + 15, this.y - 50); // Bottom-left point
       level1Ctx.lineTo(this.x + 50, this.y); // Bottom-right point
       level1Ctx.closePath();
 
@@ -104,4 +105,4 @@ class Spike {
   }
 }
 
-export default Spike;
+export default LittleSpike;

@@ -1,7 +1,8 @@
+import { GOLD } from "../constants/color_constants";
 import { level1Ctx } from "../scripts/level1";
 export interface IParticle {
-  xpose: number;
-  ypose: number;
+  xposi: number; // X-position
+  yposi: number; // y-position
   radius: number;
   dx: number;
   dy: number;
@@ -11,24 +12,24 @@ export interface IParticle {
   updatePosition: () => void;
 }
 export default class Particle implements IParticle {
-  xpose: number;
-  ypose: number;
+  xposi: number;
+  yposi: number;
   radius: number;
   dx: number;
   dy: number;
   color: string;
   opacity: number;
   constructor(
-    xpose: number,
-    ypose: number,
+    xposi: number,
+    yposi: number,
     dx: number,
     dy: number,
     radius: number,
     color: string
   ) {
     this.radius = radius;
-    this.xpose = xpose;
-    this.ypose = ypose;
+    this.xposi = xposi;
+    this.yposi = yposi;
     this.color = color;
     this.dx = dx;
     this.dy = dy;
@@ -37,16 +38,17 @@ export default class Particle implements IParticle {
   draw(): void {
     level1Ctx.save();
     level1Ctx.globalAlpha = this.opacity;
-    level1Ctx.fillStyle = "gold";
-    level1Ctx.fillRect(this.xpose, this.ypose, this.radius, this.radius);
+    level1Ctx.fillStyle = GOLD;
+    level1Ctx.fillRect(this.xposi, this.yposi, this.radius, this.radius);
     level1Ctx.restore();
   }
+
   updatePosition(
-    opacityChangeRate: number = 0.01,
-    sizeChangeRate: number = 0.05
+    opacityChangeRate: number = 0.01, // Rate for decreasing the opacity
+    sizeChangeRate: number = 0.05 // Rate for decreasing the size of the particle
   ): void {
-    this.ypose += this.dy;
-    this.xpose += this.dx;
+    this.yposi += this.dy;
+    this.xposi += this.dx;
     this.opacity -= opacityChangeRate;
     this.radius -= sizeChangeRate;
     this.draw();

@@ -11,8 +11,8 @@ class ThePlatform {
   h: number;
   color: string;
   showSlabLight: boolean;
-  isSlab: boolean;
-  showLight: boolean;
+  isSlab: boolean; // check if the platform is a slab or not
+  showLight: boolean; 
 
   // Properties for the pulsating circle
   circleRadius: number;

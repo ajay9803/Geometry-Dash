@@ -14,10 +14,11 @@ import {
   setPlayer,
   theSquare,
 } from "./level1";
-import Square, { getCustomization } from "../models/player";
+import Square from "../models/player";
 import { getTodayProgress, getTopThreeProgresses } from "./reset";
 import { SPEED } from "../constants/speed_constants";
 import { collectedCoinsCount } from "./coins";
+import { getCustomization } from "../utilities/player_utility";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);

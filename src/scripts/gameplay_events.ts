@@ -24,18 +24,15 @@ export const setEventListeners = () => {
       if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
         if (theSquare.shouldJump) {
           theSquare.dy -= 15;
-          theSquare.gravity = 1;
-          theSquare.jumpCount--;
-          if (theSquare.jumpCount === 0) {
-            theSquare.shouldJump = false; // Disable jump while in the air
-            theSquare.jumpCount =
-              localStorage.getItem("selectedPlayerImage") === "cube-4" ? 2 : 1;
-          }
+          theSquare.shouldJump = false;
+          // theSquare.gravity = 1;
+          // theSquare.jumpCount--;
+          // if (theSquare.jumpCount === 0) {
+          //   theSquare.shouldJump = false; // Disable jump while in the air
+          //   theSquare.jumpCount =
+          //     localStorage.getItem("selectedPlayerImage") === "cube-4" ? 2 : 1;
+          // }
         }
-
-        // if (theSquare.jumpCount === 0) {
-
-        // }
       }
 
       if (theSquare.gravityState === GRAVITYSTATE.FREE) {

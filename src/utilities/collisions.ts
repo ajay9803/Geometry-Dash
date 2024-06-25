@@ -1,6 +1,7 @@
 import Particle from "../models/particle";
 import { endParticles, endWall, particles, theSquare } from "../scripts/level1";
 
+// Animating particles on explosion ( collision with obstacles )
 const explodePlayer: () => void = () => {
   for (let k = 0; k < 8; k++) {
     const vx = (Math.random() - 0.5) * 8;
@@ -14,7 +15,8 @@ const explodePlayer: () => void = () => {
 
 export default explodePlayer;
 
-export const showEndAnimation: () => void = () => {
+// Animating particles on level completion
+export const showGameCompletionAnimation: () => void = () => {
   for (let k = 0; k < 8; k++) {
     const vx = (Math.random() - 0.5) * 8;
     const vy = (Math.random() - 0.5) * 7;

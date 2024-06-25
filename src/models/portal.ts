@@ -2,7 +2,9 @@ import { level1Ctx } from "../scripts/level1";
 import Square from "../models/player"; // Import Square class
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Particle from "./particle";
+import { GOLD } from "../constants/color_constants";
 
+// Portal class to create multiple gravity state
 class Portal {
   image: HTMLImageElement;
   x: number;
@@ -15,8 +17,8 @@ class Portal {
 
   constructor(
     image: HTMLImageElement,
-    x: number,
-    y: number,
+    x: number, // X-position
+    y: number, // Y-position
     w: number,
     h: number,
     toGravityState: GRAVITYSTATE,
@@ -28,7 +30,7 @@ class Portal {
     this.w = w;
     this.h = h;
     this.toGravityState = toGravityState;
-    this.isStartPortal = isStartPortal;
+    this.isStartPortal = isStartPortal; // check to toggle gravity states
     this.particles = [];
   }
 
@@ -41,18 +43,11 @@ class Portal {
       const r = Math.random() * 10;
       if (this.isStartPortal) {
         this.particles.push(
-          new Particle(this.x, this.y + this.h / 2, vx, vy, r, "#CC0118")
+          new Particle(this.x, this.y + this.h / 2, vx, vy, r, GOLD)
         );
       } else {
         this.particles.push(
-          new Particle(
-            this.x + this.w,
-            this.y + this.h / 2,
-            vx,
-            vy,
-            r,
-            "#CC0118"
-          )
+          new Particle(this.x + this.w, this.y + this.h / 2, vx, vy, r, GOLD)
         );
       }
     }
@@ -76,13 +71,13 @@ class Portal {
       this.y + this.h > square.y; // Check if the portal's bottom edge is below the square's top edge
     if (hasCollided) {
       if (this.isStartPortal) {
-        square.color = "purple";
         square.gravityState = this.toGravityState;
-        // square.dy = 1;
+
+        // Change the gravity when in free gravity state 
         square.gravity = 0.5;
       } else {
-        square.color = "blue";
         square.gravityState = this.toGravityState;
+        // Change the gravity when in normal gravity state
         square.gravity = 1;
       }
     }

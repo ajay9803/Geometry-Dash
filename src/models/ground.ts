@@ -1,12 +1,13 @@
 import basicGround from "/assets/sprites/grounds/groundSquare_01_001-hd.png";
 import { level1Ctx } from "../scripts/level1";
 
+// Basic ground - image
 let theGround = new Image();
 theGround.src = basicGround;
 
 class Ground {
-  x: number;
-  y: number;
+  x: number; // X-position 
+  y: number; // Y-position 
   height: number;
   width: number;
 
@@ -19,7 +20,6 @@ class Ground {
 
   update: () => void = () => {
     this.draw();
-    // this.x -= movingSpeed;
   };
 
   draw: () => void = () => {

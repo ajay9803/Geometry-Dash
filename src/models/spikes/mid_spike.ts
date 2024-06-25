@@ -1,4 +1,3 @@
-// import { level1Ctx } from "../../main";
 import { level1Ctx } from "../../scripts/level1";
 
 class MidSpike {
@@ -34,7 +33,7 @@ class MidSpike {
       this.y
     );
     gradient.addColorStop(0, "black"); // Start color (top)
-    gradient.addColorStop(1, "purple"); // End color (bottom)
+    gradient.addColorStop(1, "blue"); // End color (bottom)
 
     // Use the gradient for filling the shape
     level1Ctx.fillStyle = gradient;

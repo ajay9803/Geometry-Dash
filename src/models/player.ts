@@ -5,33 +5,24 @@ import {
   level1Ctx,
   movingSpeed,
   setMovingSpeed,
-  setPause,
   theSquare,
 } from "../scripts/level1";
 import { resetGame } from "../scripts/reset";
-import explodePlayer, { showEndAnimation } from "../utilities/collisions";
+import explodePlayer, {
+  showGameCompletionAnimation,
+} from "../utilities/collisions";
 import TailParticle from "./player_tail";
 
-import planeImage from "/assets/sprites/cubes/plane-img.png";
+import planeImage from "../assets/sprites/cubes/plane-img.png";
 import { SPEED } from "../constants/speed_constants";
 import { openMenu } from "../scripts/pause";
-import levelCompletionAud from "/assets/audios/level-complete.mp3";
+import levelCompletionAud from "../assets/audios/level-complete.mp3";
 import { isCheckboxChecked } from "../scripts/gameplay_events";
 import { backgroundAudio } from "../scripts/menu";
+import { getCustomization } from "../utilities/player_utility";
 
 let levelCompletionAudio = new Audio();
 levelCompletionAudio.src = levelCompletionAud;
-
-// Utility function to retrieve customization
-export const getCustomization = () => {
-  const playerImageId = localStorage.getItem("selectedPlayerImage") || "cube-1"; // Default to cube-1 if none selected
-  const playerImageSrc = `assets/sprites/cubes/${playerImageId}.png`;
-
-  const playerBackgroundColor =
-    localStorage.getItem("selectedPlayerColor") || "red"; // Default color
-
-  return { playerImageSrc, playerBackgroundColor };
-};
 
 // Retrieve the selected player image and background color
 const { playerImageSrc } = getCustomization();
@@ -83,8 +74,8 @@ class Square {
     this.imgSrc = imgSrc;
     this.isDead = isDead;
 
-    this.jumpCount =
-      localStorage.getItem("selectedPlayerImage") === "cube-4" ? 1 : 1;
+    this.jumpCount = 1;
+    // localStorage.getItem("selectedPlayerImage") === "cube-4" ? 1 : 1;
     this.x = x;
     this.y = y;
     this.w = w;
@@ -108,13 +99,14 @@ class Square {
     this.updateColor(color);
   }
 
+  // Remove player on collision with obstacles
   removePlayer: () => void = () => {
-    this.color = "red";
     this.isDead = true;
     explodePlayer();
     resetGame(500, SPEED);
   };
 
+  // Update image on character customization
   updateImage(newImageSrc: string) {
     this.imgSrc = newImageSrc;
     playerImage.src = newImageSrc;
@@ -123,6 +115,7 @@ class Square {
     };
   }
 
+  // Update character color on color customization
   updateColor(newColor: string) {
     this.color = newColor;
   }
@@ -136,10 +129,6 @@ class Square {
 
     if (this.gravityState === GRAVITYSTATE.FREE) {
       this.ctx.save();
-      // Draw the square with a background color
-      this.ctx.fillStyle = "transparent";
-      this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
       this.ctx.drawImage(
         playerPlaneImage,
         this.x,
@@ -179,6 +168,7 @@ class Square {
       let translateX = -movingSpeed;
       let translateY = 0;
 
+      // translate the canvas vertically based on the player's movement
       if (this.gravityState === GRAVITYSTATE.NORMAL) {
         if (this.y < level1Canvas.height / 4 + this.offsetY) {
           translateY = 2.5;
@@ -208,10 +198,15 @@ class Square {
       // Update tail particles and draw the square
     } else {
       if (isCheckboxChecked) {
+        // Play completion audio on level completion
         backgroundAudio.pause();
         levelCompletionAudio.play();
       }
-      showEndAnimation();
+
+      // Show level completion animation
+      showGameCompletionAnimation();
+
+      // Show level completion message
       level1Ctx.save();
       level1Ctx.fillStyle = "white";
       level1Ctx.font = "bold 50px Lacquer";
@@ -225,8 +220,11 @@ class Square {
         resetGame(1, 0);
         openMenu();
         setMovingSpeed(0);
-        levelCompletionAudio.pause();
-        setPause(false);
+        if (isCheckboxChecked) {
+          levelCompletionAudio.play();
+        }
+
+        // setPause(false);
       }, 3000);
     }
 

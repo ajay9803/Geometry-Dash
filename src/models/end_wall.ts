@@ -1,3 +1,4 @@
+import { WHITE } from "../constants/color_constants";
 import { level1Ctx } from "../scripts/level1";
 
 class EndWall {
@@ -14,10 +15,8 @@ class EndWall {
   }
 
   draw: () => void = () => {
-    level1Ctx.strokeStyle = 'white';
-    level1Ctx.fillStyle = 'red';
+    level1Ctx.fillStyle = WHITE;
     level1Ctx.fillRect(this.x, this.y, this.w, this.h);
-    level1Ctx.stroke();
   };
 }
 

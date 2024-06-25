@@ -23,3 +23,6 @@ export let pause: boolean = false;
 export let setPause = (value: boolean) => {
   pause = value;
 };
+
+
+// Math.abs(squareBottom - this.y - 10) <= theSquare.dy &&

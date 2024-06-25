@@ -4,9 +4,11 @@ export const ListenForInstructionButtonClick = (
   isInstructionsBoardOpen: boolean
 ) => {
   instructionsButton.addEventListener("click", () => {
+    console.log("instruction button clicked", isInstructionsBoardOpen);
     if (isInstructionsBoardOpen) {
       return;
     }
+    console.log("here");
     isInstructionsBoardOpen = !isInstructionsBoardOpen;
     let instructionsBoard = document.createElement("div");
 
@@ -35,5 +37,15 @@ export const ListenForInstructionButtonClick = (
     continuousJumpInstructions.innerHTML =
       "Hold <strong>Space</strong> or <strong>Arrow Up</strong> key for continuous jumps.";
     instructionsBoard.appendChild(continuousJumpInstructions);
+
+    const gravityFreeJumpInstructions = document.createElement("p");
+    gravityFreeJumpInstructions.innerHTML =
+      "Fast Tap <strong>Space</strong> or <strong>Arrow Up</strong> key to stay up in the air.";
+    instructionsBoard.appendChild(gravityFreeJumpInstructions);
+
+    const leapfrogDoubleJumpInstructions = document.createElement("p");
+    leapfrogDoubleJumpInstructions.innerHTML =
+      "On Leapfrog character, Use <strong>Space</strong> or <strong>Arrow Up</strong> key to jump and <strong>ShiftRight</strong> for quick double jump.";
+    instructionsBoard.appendChild(leapfrogDoubleJumpInstructions);
   });
 };

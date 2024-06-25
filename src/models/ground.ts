@@ -6,8 +6,8 @@ let theGround = new Image();
 theGround.src = basicGround;
 
 class Ground {
-  x: number; // X-position 
-  y: number; // Y-position 
+  x: number; // X-position
+  y: number; // Y-position
   height: number;
   width: number;
 
@@ -36,6 +36,9 @@ class Ground {
       theSquare.x + theSquare.w >= this.x && // Right side of the square hits the left side of the platform
       theSquare.x <= this.x + this.width // Left side of the square hits the right side of the platform
     ) {
+      theSquare.jumpCount =
+        localStorage.getItem("selectedPlayerImage") === "cube-9" ? 2 : 1;
+        theSquare.hasJumpedOnce = false;
       theSquare.dy = 0; // Stop the downward movement
       theSquare.shouldJump = true; // Allow the square to jump again
     }

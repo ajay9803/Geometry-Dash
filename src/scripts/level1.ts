@@ -97,7 +97,7 @@ for (let i = 0; i <= 290; i++) {
   grounds.push(ground);
 }
 
-export let endWall = new EndWall(42900, aboveGround - 600, 200, 600);
+export let endWall = new EndWall(43280, aboveGround - 600, 20, 600);
 
 const animate = () => {
   level1Ctx.clearRect(
@@ -157,6 +157,7 @@ const animate = () => {
   // Update little spikes
   littleSpikies.forEach((spiky) => {
     spiky.draw();
+    spiky.checkCollisionWithSquare();
   });
 
   // Update platforms

@@ -1,4 +1,4 @@
-import { level1Ctx } from "../../scripts/level1";
+import { level1Ctx, theSquare } from "../../scripts/level1";
 
 class LittleSpike {
   x: number;
@@ -70,7 +70,7 @@ class LittleSpike {
   };
 
   // Method to check collision with a square
-  checkCollisionWithSquare(sx: number, sy: number, sSize: number): boolean {
+  checkCollisionWithSquare(): void {
     let spikeLeft, spikeRight, spikeTop, spikeBottom;
 
     if (this.isReverse) {
@@ -88,10 +88,10 @@ class LittleSpike {
     }
 
     // Define the bounding box for the square
-    const squareLeft = sx;
-    const squareRight = sx + sSize;
-    const squareTop = sy;
-    const squareBottom = sy + sSize;
+    const squareLeft = theSquare.x;
+    const squareRight = theSquare.x + theSquare.w;
+    const squareTop = theSquare.y;
+    const squareBottom = theSquare.y + theSquare.h;
 
     // Check if the bounding boxes overlap
     const isColliding = !(
@@ -100,7 +100,9 @@ class LittleSpike {
       spikeBottom < squareTop ||
       spikeTop > squareBottom
     );
-    return isColliding;
+    if (isColliding) {
+      theSquare.removePlayer();
+    }
   }
 }
 

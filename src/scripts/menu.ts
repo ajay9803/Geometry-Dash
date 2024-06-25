@@ -7,12 +7,7 @@ import MenuGround from "../models/menu/ground";
 import MenuBackground from "../models/menu/background";
 
 import backgroundMusic from "/assets/audios/zilly.mp3";
-import {
-  level1Canvas,
-  level1Ctx,
-  setMovingSpeed,
-  setPlayer,
-} from "./level1";
+import { level1Canvas, level1Ctx, setMovingSpeed, setPlayer } from "./level1";
 import Square from "../models/player";
 import { SPEED } from "../constants/speed_constants";
 import { getCustomization } from "../utilities/player_utility";

@@ -35,5 +35,5 @@ export const getTopSevenProgresses = (progresses: any[]) => {
   progresses.sort((a, b) => b.progress - a.progress);
 
   // Return the top 7 progresses
-  return progresses.slice(0, 7);
+  return progresses.slice(0, 5);
 };

@@ -12,7 +12,7 @@ class ThePlatform {
   color: string;
   showSlabLight: boolean;
   isSlab: boolean; // check if the platform is a slab or not
-  showLight: boolean; 
+  showLight: boolean;
 
   // Properties for the pulsating circle
   circleRadius: number;
@@ -67,7 +67,6 @@ class ThePlatform {
   draw = (): void => {
     level1Ctx.save();
 
-    // if (this.isSlab) {
     // Draw slab platform with gradient fill
     let gradient = level1Ctx.createLinearGradient(
       this.x,
@@ -83,23 +82,6 @@ class ThePlatform {
     level1Ctx.strokeStyle = "white";
     level1Ctx.lineWidth = 3;
     level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
-    // } else {
-    //   // Draw non-slab platform with image pattern fill
-    //   let pattern = level1Ctx.createPattern(image, "repeat");
-    //   if (pattern) {
-    //     level1Ctx.fillStyle = pattern;
-    //     level1Ctx.fillRect(this.x, this.y, this.w, this.h);
-    //   }
-
-    //   level1Ctx.strokeStyle = "white";
-    //   level1Ctx.lineWidth = 3;
-    //   level1Ctx.strokeRect(this.x, this.y, this.w, this.h);
-
-    //   level1Ctx.globalAlpha = 0.5;
-    //   level1Ctx.fillStyle = "rgba(0, 0, 255, 1)";
-    //   level1Ctx.fillRect(this.x, this.y, this.w, this.h);
-    //   level1Ctx.globalAlpha = 1.0;
-    // }
 
     if (this.showLight && this.showSlabLight) {
       const lineStartX = this.x + this.w / 2;
@@ -144,20 +126,14 @@ class ThePlatform {
     const squareLeft = theSquare.x;
 
     if (
-      squareBottom < this.y && // Square is above the platform
-      squareBottom + theSquare.dy + 10 >= this.y && // Within 5 pixels of the platform
-      squareRight > this.x && // Square is horizontally over the platform
-      squareLeft < this.x + this.w
-    ) {
-      theSquare.shouldJump = true; // Allow the square to jump
-    }
-
-    if (
       squareBottom < this.y &&
-      squareBottom + theSquare.dy >= this.y &&
+      Math.abs(squareBottom - this.y) <= theSquare.dy &&
       squareRight > this.x &&
       squareLeft < this.x + this.w
     ) {
+      theSquare.jumpCount =
+        localStorage.getItem("selectedPlayerImage") === "cube-9" ? 2 : 1;
+        theSquare.hasJumpedOnce = false;
       theSquare.dy = 0;
       theSquare.shouldJump = true;
       return;

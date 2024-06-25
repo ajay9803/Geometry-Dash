@@ -15,7 +15,6 @@ export const ListenForLeaderboardButtonClick = (
     }
     isLeaderboardOpen = !isLeaderboardOpen;
     let leaderboard = document.createElement("div");
-    // mainBody.removeChild(instructionsBoard);
 
     leaderboard.classList.add("leaderboard");
     mainBody.appendChild(leaderboard);
@@ -55,6 +54,13 @@ export const ListenForLeaderboardButtonClick = (
     let progresses = getTodayProgress();
     let topProgresses = getTopSevenProgresses(progresses);
 
+    if (topProgresses.length === 0) {
+      let progressText = document.createElement("h1");
+      progressText.innerHTML = 'You have no progress for today';
+
+      leaderboard.appendChild(progressText);
+    }
+
     topProgresses.forEach((progress) => {
       let progressbar = document.createElement("div");
       progressbar.classList.add("progressbar");
@@ -65,12 +71,10 @@ export const ListenForLeaderboardButtonClick = (
     });
 
     let progressValues = document.createElement("div");
-    progressValues.style.display = "flex";
-    progressValues.style.justifyContent = "space-between";
     progressValues.classList.add("progress-values");
 
     topProgresses.forEach((progress) => {
-      let text = document.createElement("h1");
+      let text = document.createElement("h3");
       text.innerHTML = Math.floor(progress["progress"]).toString() + "%";
       progressValues.appendChild(text);
     });

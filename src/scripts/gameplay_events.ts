@@ -14,19 +14,27 @@ export let isMusicCheckboxChecked = true;
 export const setEventListeners = () => {
   // Key down event listener
   addEventListener("keydown", ({ code }) => {
+    console.log(code);
     // Jump
     if (code === "Space" || code === "ArrowUp") {
       if (theSquare.gravityState === GRAVITYSTATE.NORMAL) {
-        if (theSquare.shouldJump) {
+        // First Jump Logic
+        if (
+          theSquare.shouldJump &&
+          theSquare.jumpCount > 0 &&
+          !theSquare.hasJumpedOnce
+        ) {
           theSquare.dy -= 15;
-          theSquare.shouldJump = false;
-          // theSquare.gravity = 1;
-          // theSquare.jumpCount--;
-          // if (theSquare.jumpCount === 0) {
-          //   theSquare.shouldJump = false; // Disable jump while in the air
-          //   theSquare.jumpCount =
-          //     localStorage.getItem("selectedPlayerImage") === "cube-4" ? 2 : 1;
-          // }
+
+          // Mark that the player has jumped once
+          theSquare.hasJumpedOnce = true;
+
+          // Decrease jump count only for the first jump
+          theSquare.jumpCount--;
+
+          if (theSquare.jumpCount === 0) {
+            theSquare.shouldJump = false; // Disable jump while in the air
+          }
         }
       }
 
@@ -35,6 +43,24 @@ export const setEventListeners = () => {
         theSquare.dy -= 6;
       }
     }
+
+    if (code === "ShiftRight") {
+      if (
+        localStorage.getItem("selectedPlayerImage") === "cube-9" &&
+        theSquare.hasJumpedOnce
+      ) {
+        // Second Jump Logic
+        theSquare.dy -= 15;
+
+        // After the second jump, reset the ability to jump until landed
+        theSquare.hasJumpedOnce = false; // Reset this flag as the second jump is performed
+        theSquare.jumpCount--; // Decrement jump count for the second jump
+
+        theSquare.shouldJump = false; // Disable further jumps in the air
+      }
+    }
+
+    // A method or event listener should handle the landing logic to reset the jump state
 
     // Pause the game
     if (code === "Enter") {

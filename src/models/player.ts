@@ -54,6 +54,7 @@ class Square {
   tailParticles2: TailParticle[]; // Array to hold the second tail particles
   tailParticles3: TailParticle[]; // Array to hold the third tail particles
   particleTimer: number; // Timer to control particle creation
+  hasJumpedOnce: boolean;
 
   constructor(
     imgSrc: string,
@@ -69,13 +70,14 @@ class Square {
     ctx: CanvasRenderingContext2D,
     gravity: number,
     offsetY: number = 0,
-    gravityState: GRAVITYSTATE = GRAVITYSTATE.NORMAL
+    gravityState: GRAVITYSTATE = GRAVITYSTATE.NORMAL,
+    hasJumpedOnce: boolean = false
   ) {
     this.imgSrc = imgSrc;
     this.isDead = isDead;
 
-    this.jumpCount = 1;
-    // localStorage.getItem("selectedPlayerImage") === "cube-4" ? 1 : 1;
+    this.jumpCount =
+      localStorage.getItem("selectedPlayerImage") === "cube-9" ? 2 : 1;
     this.x = x;
     this.y = y;
     this.w = w;
@@ -93,6 +95,7 @@ class Square {
     this.tailParticles2 = []; // Initialize the second tail particles array
     this.tailParticles3 = []; // Initialize the third tail particles array
     this.particleTimer = 0; // Initialize the timer for particle creation
+    this.hasJumpedOnce = hasJumpedOnce;
 
     // Set the initial image
     this.updateImage(imgSrc);
@@ -121,6 +124,7 @@ class Square {
   }
 
   draw(): void {
+    console.log("the jump count is: ", theSquare.jumpCount);
     this.tailParticles1.forEach((particle) => particle.draw());
     this.tailParticles2.forEach((particle) => particle.draw());
     this.tailParticles3.forEach((particle) => particle.draw());

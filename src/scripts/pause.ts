@@ -1,8 +1,8 @@
 import { canvasCor, level1Canvas, level1Ctx } from "./level1";
 
-import resumeButtonImage from "../assets/sprites/buttons/resume-button.png";
-import starIconImage from "../assets/sprites/icons/the-star.png";
-import menuIconImage from "../assets/sprites/icons/menu-icon.png";
+import resumeButtonImage from "/assets/sprites/buttons/resume-button.png";
+import starIconImage from "/assets/sprites/icons/the-star.png";
+import menuIconImage from "/assets/sprites/icons/menu-icon.png";
 import { isCheckboxChecked } from "./gameplay_events";
 
 let resumeButton = new Image();

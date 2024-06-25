@@ -1,6 +1,6 @@
 import { BACKGROUND_SPEED } from "../../constants/speed_constants";
 import { menuCtx } from "../../scripts/menu";
-import basicGround from "../../assets/sprites/backgrounds/game_bg_01_001-hd.png";
+import basicGround from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
 
 
 let theGround = new Image();

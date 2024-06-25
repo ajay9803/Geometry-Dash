@@ -1,4 +1,4 @@
-import basicGround from "../assets/sprites/grounds/groundSquare_01_001-hd.png";
+import basicGround from "/assets/sprites/grounds/groundSquare_01_001-hd.png";
 import { level1Ctx } from "../scripts/level1";
 
 let theGround = new Image();

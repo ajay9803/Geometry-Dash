@@ -12,10 +12,10 @@ import { resetGame } from "../scripts/reset";
 import explodePlayer, { showEndAnimation } from "../utilities/collisions";
 import TailParticle from "./player_tail";
 
-import planeImage from "../assets/sprites/cubes/plane-img.png";
+import planeImage from "/assets/sprites/cubes/plane-img.png";
 import { SPEED } from "../constants/speed_constants";
 import { openMenu } from "../scripts/pause";
-import levelCompletionAud from "../assets/audios/level-complete.mp3";
+import levelCompletionAud from "/assets/audios/level-complete.mp3";
 import { isCheckboxChecked } from "../scripts/gameplay_events";
 import { backgroundAudio } from "../scripts/menu";
 

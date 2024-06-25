@@ -1,8 +1,8 @@
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import Portal from "../models/portal";
 import { aboveGround } from "./platforms";
-import startPortal from "../assets/sprites/portals/portal-2.png";
-import endPortal from "../assets/sprites/portals/portal-1.png";
+import startPortal from "/assets/sprites/portals/portal-2.png";
+import endPortal from "/assets/sprites/portals/portal-1.png";
 
 let endPortalImage = new Image();
 endPortalImage.src = endPortal;

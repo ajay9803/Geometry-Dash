@@ -1,5 +1,5 @@
 import { menuCtx } from "../../scripts/menu";
-import basicGround from "../../assets/sprites/grounds/groundSquare_01_001-hd.png";
+import basicGround from "/assets/sprites/grounds/groundSquare_01_001-hd.png";
 
 let theGround = new Image();
 theGround.src = basicGround;

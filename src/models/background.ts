@@ -1,4 +1,4 @@
-import basicGround from "../assets/sprites/backgrounds/game_bg_01_001-hd.png";
+import basicGround from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
 
 import { canvasCor, level1Ctx } from "../scripts/level1";
 

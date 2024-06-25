@@ -1,9 +1,9 @@
-import coin from "../assets/sprites/coins/coin.png";
+import coin from "/assets/sprites/coins/coin.png";
 import { setCollectedCoinsCount } from "../scripts/coins";
 
 import { coins, level1Ctx } from "../scripts/level1";
 import Square from "./player";
-import coinAudio from "../assets/audios/collect-coin.mp3";
+import coinAudio from "/assets/audios/collect-coin.mp3";
 import { isCheckboxChecked } from "../scripts/gameplay_events";
 
 let coinImage = new Image();

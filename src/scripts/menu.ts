@@ -2,11 +2,11 @@ import { MENU_GROUND_HEIGHT } from "../constants/height_constants";
 import { GROUND_SPACING } from "../constants/height_constants";
 import { WHITE } from "../constants/color_constants";
 
-import playButtonImage from "../assets/sprites/buttons/play-button.png";
+import playButtonImage from "/assets/sprites/buttons/play-button.png";
 import MenuGround from "../models/menu/ground";
 import MenuBackground from "../models/menu/background";
 
-import backgroundMusic from "../assets/audios/zilly.mp3";
+import backgroundMusic from "/assets/audios/zilly.mp3";
 import {
   level1Canvas,
   level1Ctx,

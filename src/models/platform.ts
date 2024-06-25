@@ -1,5 +1,5 @@
 import { level1Ctx } from "../scripts/level1";
-import theImage from "../assets/sprites/grounds/the-test (1).png";
+import theImage from "/assets/sprites/grounds/the-test (1).png";
 
 let image = new Image();
 image.src = theImage;

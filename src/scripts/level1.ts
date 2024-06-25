@@ -23,6 +23,7 @@ import {
   themeColor,
 } from "../variables/gameplay_variables";
 import { WHITE } from "../constants/color_constants";
+import { littleSpikies } from "./little_spikes";
 
 export let movingSpeed = 0;
 
@@ -148,12 +149,14 @@ const animate = () => {
       50
     );
     if (isColliding) {
-      // theSquare.isDead = true;
-      // if (theSquare.isDead) {
-        theSquare.removePlayer();
-      // }
+      theSquare.removePlayer();
     }
     spike.draw();
+  });
+
+  // Update little spikes
+  littleSpikies.forEach((spiky) => {
+    spiky.draw();
   });
 
   // Update platforms
@@ -239,9 +242,9 @@ const animate = () => {
 
 animate();
 
-// Set event listeners for 
+// Set event listeners for
 // Pause
 // Resume Button
 // Menu Button
-// Music Checkbox 
+// Music Checkbox
 setEventListeners();

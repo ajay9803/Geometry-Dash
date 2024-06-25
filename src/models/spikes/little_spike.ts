@@ -1,6 +1,5 @@
 import { level1Ctx } from "../../scripts/level1";
 
-// Minute spikes to showcase throughout the gameplay 
 class LittleSpike {
   x: number;
   y: number;
@@ -19,8 +18,8 @@ class LittleSpike {
       // Draw the spike pointing upwards (reversed)
       level1Ctx.beginPath();
       level1Ctx.moveTo(this.x, this.y); // Bottom point
-      level1Ctx.lineTo(this.x + 15, this.y + 50); // Top-left point
-      level1Ctx.lineTo(this.x + 50, this.y); // Bottom-right point
+      level1Ctx.lineTo(this.x + 12.5, this.y + 25); // Top-left point
+      level1Ctx.lineTo(this.x + 25, this.y); // Bottom-right point
       level1Ctx.closePath();
 
       // Set line properties
@@ -31,7 +30,7 @@ class LittleSpike {
       // Create a linear gradient from bottom to top
       let gradient = level1Ctx.createLinearGradient(
         this.x,
-        this.y + 30, // Start from bottom
+        this.y + 25, // Start from bottom
         this.x,
         this.y // End at top
       );
@@ -45,8 +44,8 @@ class LittleSpike {
       // Draw the spike pointing downwards (normal)
       level1Ctx.beginPath();
       level1Ctx.moveTo(this.x, this.y); // Top point
-      level1Ctx.lineTo(this.x + 15, this.y - 50); // Bottom-left point
-      level1Ctx.lineTo(this.x + 50, this.y); // Bottom-right point
+      level1Ctx.lineTo(this.x + 12.5, this.y - 25); // Bottom-left point
+      level1Ctx.lineTo(this.x + 25, this.y); // Bottom-right point
       level1Ctx.closePath();
 
       // Set line properties
@@ -57,7 +56,7 @@ class LittleSpike {
       // Create a linear gradient from top to bottom
       let gradient = level1Ctx.createLinearGradient(
         this.x,
-        this.y - 50, // Start from top
+        this.y - 25, // Start from top
         this.x,
         this.y // End at bottom
       );
@@ -77,14 +76,14 @@ class LittleSpike {
     if (this.isReverse) {
       // Bounding box for the reversed spike (pointing upwards)
       spikeLeft = this.x;
-      spikeRight = this.x + 50;
+      spikeRight = this.x + 25;
       spikeTop = this.y;
-      spikeBottom = this.y + 50; // Extend 50 units downwards
+      spikeBottom = this.y + 25; // Extend 25 units downwards
     } else {
       // Bounding box for the normal spike (pointing downwards)
       spikeLeft = this.x;
-      spikeRight = this.x + 50;
-      spikeTop = this.y - 50; // Extend 50 units upwards
+      spikeRight = this.x + 25;
+      spikeTop = this.y - 25; // Extend 25 units upwards
       spikeBottom = this.y;
     }
 

@@ -2,8 +2,6 @@ import LittleSpike from "../models/spikes/little_spike";
 import { aboveGround } from "./platforms";
 
 let littleSpikesConfiguration = [
-  { x: 500, y: aboveGround, isReverse: false },
-  { x: 530, y: aboveGround, isReverse: false },
   { x: 2115, y: aboveGround, isReverse: false },
   { x: 2160, y: aboveGround, isReverse: false },
   { x: 2205, y: aboveGround, isReverse: false },
@@ -314,10 +312,6 @@ let littleSpikesConfiguration = [
   { x: 36600, y: aboveGround - 550, isReverse: true },
   { x: 36650, y: aboveGround - 550, isReverse: true },
   { x: 36700, y: aboveGround - 550, isReverse: true },
-  // { x: 36750, y: aboveGround - 550, isReverse: true },
-
-  // { x: 28700, y: aboveGround, isReverse: false },
-  // { x: 26270, y: aboveGround, isReverse: false },
 ];
 
 export let littleSpikies = littleSpikesConfiguration.map((spiky) => {

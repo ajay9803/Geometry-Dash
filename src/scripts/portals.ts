@@ -3,12 +3,16 @@ import Portal from "../models/portal";
 import { aboveGround } from "./platforms";
 import startPortal from "/assets/sprites/portals/portal-2.png";
 import endPortal from "/assets/sprites/portals/portal-1.png";
+import gravityPortal from "/assets/sprites/portals/reverse-gravity-portal.png";
 
 let endPortalImage = new Image();
 endPortalImage.src = endPortal;
 
 let startPortalImage = new Image();
 startPortalImage.src = startPortal;
+
+let gravityPortalImage = new Image();
+gravityPortalImage.src = gravityPortal;
 
 let portal1 = new Portal(
   startPortalImage,
@@ -48,20 +52,20 @@ let portal4 = new Portal(
   false
 );
 let portal5 = new Portal(
-  endPortalImage,
+  gravityPortalImage,
   40860,
-  aboveGround - 390,
-  336 / 2,
+  aboveGround - 395,
+  336 / 3,
   388 / 2,
   GRAVITYSTATE.REVERSE,
   true
 );
 
 let portal6 = new Portal(
-  endPortalImage,
-  41400,
-  aboveGround - 390,
-  336 / 2,
+  gravityPortalImage,
+  41350,
+  aboveGround - 395,
+  336 / 3,
   388 / 2,
   GRAVITYSTATE.NORMAL,
   false

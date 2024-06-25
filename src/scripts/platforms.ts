@@ -2,10 +2,6 @@ import ThePlatform from "../models/platform";
 
 export let aboveGround = window.innerHeight - 6 - 150;
 
-// The platforms
-
-// let platform0 = new ThePlatform(500, aboveGround - 50, 500, 50, "black");
-
 let platform1 = new ThePlatform(
   2050,
   window.innerHeight - 6 - 150 - 50,
@@ -172,7 +168,6 @@ let platform38 = new ThePlatform(
   20,
   "blue"
 );
-// let platform39 = new ThePlatform(10500 + 100, aboveGround - 100, 50, 20, "blue");
 
 let platform40 = new ThePlatform(
   10740 + 100,
@@ -629,7 +624,6 @@ let platform128 = new ThePlatform(
   false
 );
 let platform129 = new ThePlatform(31700, aboveGround - 50, 50, 50, "pink");
-// let platform130 = new ThePlatform(32100, aboveGround - 100, 50, 20, "pink");
 let platform131 = new ThePlatform(
   32150 + 150,
   aboveGround - 150,
@@ -748,10 +742,7 @@ let platform166 = new ThePlatform(
   "red",
   false
 );
-// let platform167 = new ThePlatform(35950, aboveGround - 550, 50, 50, "red");
-// let platform167 = new ThePlatform(36500, aboveGround - 100, 50, 20, "red");
-// let platform168 = new ThePlatform(36550, aboveGround - 100, 50, 20, "red");
-// let platform169 = new ThePlatform(36600, aboveGround - 100, 50, 20, "red");
+
 let platform167 = new ThePlatform(36740, aboveGround - 200, 5000, 200, "red");
 let platform168 = new ThePlatform(36740, aboveGround - 550, 5000, 150, "red");
 let platform169 = new ThePlatform(37200, aboveGround - 400, 100, 50, "red");
@@ -768,7 +759,6 @@ let platform172 = new ThePlatform(39350, aboveGround - 250, 750, 50, "red");
 let platform173 = new ThePlatform(39800, aboveGround - 300, 200, 50, "red");
 let platform174 = new ThePlatform(40650, aboveGround - 220, 200, 20, "yellow");
 let platform175 = new ThePlatform(40950, aboveGround - 400, 400, 20, "yellow");
-// let platform153 = new ThePlatform(34980, aboveGround - 100, 50, 20, "pink");
 
 let platforms = [
   platform1,

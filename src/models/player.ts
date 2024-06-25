@@ -19,7 +19,7 @@ import levelCompletionAud from "../assets/audios/level-complete.mp3";
 import { isMusicCheckboxChecked } from "../scripts/gameplay_events";
 import { backgroundAudio } from "../scripts/menu";
 import { getCustomization } from "../utilities/player_utility";
-import { canvasCor } from "../variables/gameplay_variables";
+import { canvasCor, setPause } from "../variables/gameplay_variables";
 
 let levelCompletionAudio = new Audio();
 levelCompletionAudio.src = levelCompletionAud;
@@ -185,10 +185,6 @@ class Square {
         }
       }
 
-      if (this.gravityState === GRAVITYSTATE.FREE) {
-        // Behavior for free gravity state
-      }
-
       level1Ctx.translate(translateX, translateY);
 
       // Gravity effect
@@ -224,11 +220,7 @@ class Square {
         resetGame(1, 0);
         openMenu();
         setMovingSpeed(0);
-        if (isMusicCheckboxChecked) {
-          levelCompletionAudio.play();
-        }
-
-        // setPause(false);
+        setPause(false);
       }, 3000);
     }
 

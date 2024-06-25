@@ -97,7 +97,7 @@ for (let i = 0; i <= 290; i++) {
   grounds.push(ground);
 }
 
-export let endWall = new EndWall(43280, aboveGround - 600, 20, 600);
+export let endWall = new EndWall(43270, aboveGround - 600, 20, 600);
 
 const animate = () => {
   level1Ctx.clearRect(

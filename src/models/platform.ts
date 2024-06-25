@@ -1,3 +1,4 @@
+import { GRAVITYSTATE } from "../enums/gravity_state";
 import { level1Ctx } from "../scripts/level1";
 import theImage from "/assets/sprites/grounds/the-test (1).png";
 
@@ -125,6 +126,27 @@ class ThePlatform {
     const squareRight = theSquare.x + theSquare.w;
     const squareLeft = theSquare.x;
 
+    if (theSquare.gravityState === GRAVITYSTATE.REVERSE) {
+      // Calculate the square's top position
+      let squareTop = theSquare.y;
+
+      // Check for collision with the bottom of the platform
+      if (
+        squareTop > this.y + this.h &&
+        Math.abs(squareTop - (this.y + this.h)) <= Math.abs(theSquare.dy) &&
+        squareRight > this.x &&
+        squareLeft < this.x + this.w
+      ) {
+        // Reset jump conditions for reverse gravity
+        theSquare.jumpCount =
+          localStorage.getItem("selectedPlayerImage") === "cube-9" ? 2 : 1;
+        theSquare.hasJumpedOnce = false;
+        theSquare.dy = 0;
+        theSquare.shouldJump = true;
+        return;
+      }
+    }
+
     if (
       squareBottom < this.y &&
       Math.abs(squareBottom - this.y) <= theSquare.dy &&
@@ -133,7 +155,7 @@ class ThePlatform {
     ) {
       theSquare.jumpCount =
         localStorage.getItem("selectedPlayerImage") === "cube-9" ? 2 : 1;
-        theSquare.hasJumpedOnce = false;
+      theSquare.hasJumpedOnce = false;
       theSquare.dy = 0;
       theSquare.shouldJump = true;
       return;

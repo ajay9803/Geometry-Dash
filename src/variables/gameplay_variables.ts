@@ -3,7 +3,7 @@ import { aboveGround } from "../scripts/platforms";
 
 let coin1 = new Coin(20370 + 220 * 3, aboveGround - 82 - 120, 82, 82);
 let coin2 = new Coin(31700 + 30, aboveGround - 300, 82, 82);
-let coin3 = new Coin(41500, aboveGround - 300, 82, 82);
+let coin3 = new Coin(41650, aboveGround - 300, 82, 82);
 
 // Coins to be collected
 export let coins = [coin1, coin2, coin3];
@@ -23,6 +23,5 @@ export let pause: boolean = false;
 export let setPause = (value: boolean) => {
   pause = value;
 };
-
 
 // Math.abs(squareBottom - this.y - 10) <= theSquare.dy &&

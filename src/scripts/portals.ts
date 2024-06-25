@@ -38,4 +38,40 @@ let portal3 = new Portal(
   GRAVITYSTATE.FREE
 );
 
-export const portals: Portal[] = [portal1, portal2, portal3];
+let portal4 = new Portal(
+  endPortalImage,
+  40100,
+  aboveGround - 385,
+  336 / 2,
+  388 / 2,
+  GRAVITYSTATE.NORMAL,
+  false
+);
+let portal5 = new Portal(
+  endPortalImage,
+  40860,
+  aboveGround - 390,
+  336 / 2,
+  388 / 2,
+  GRAVITYSTATE.REVERSE,
+  true
+);
+
+let portal6 = new Portal(
+  endPortalImage,
+  41400,
+  aboveGround - 390,
+  336 / 2,
+  388 / 2,
+  GRAVITYSTATE.NORMAL,
+  false
+);
+
+export const portals: Portal[] = [
+  portal1,
+  portal2,
+  portal3,
+  portal4,
+  portal5,
+  portal6,
+];

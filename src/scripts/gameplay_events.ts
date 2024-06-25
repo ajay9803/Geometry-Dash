@@ -50,7 +50,11 @@ export const setEventListeners = () => {
         theSquare.hasJumpedOnce
       ) {
         // Second Jump Logic
-        theSquare.dy -= 15;
+        if (theSquare.gravityState === GRAVITYSTATE.REVERSE) {
+          theSquare.dy += 15;
+        } else {
+          theSquare.dy -= 15;
+        }
 
         // After the second jump, reset the ability to jump until landed
         theSquare.hasJumpedOnce = false; // Reset this flag as the second jump is performed

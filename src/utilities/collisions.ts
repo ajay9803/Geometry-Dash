@@ -22,7 +22,7 @@ export const showGameCompletionAnimation: () => void = () => {
     const vy = (Math.random() - 0.5) * 7;
     const r = Math.random() * 10;
     endParticles.push(
-      new Particle(endWall.x - 15, endWall.y + 370, vx, vy, r, theSquare.color)
+      new Particle(endWall.x - 50, endWall.y + 370, vx, vy, r, theSquare.color)
     );
   }
 };

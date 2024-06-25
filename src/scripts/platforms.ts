@@ -764,10 +764,10 @@ let platform171 = new ThePlatform(
   "red",
   false
 );
-let platform172 = new ThePlatform(39350, aboveGround - 250, 1050, 50, "red");
-let platform173 = new ThePlatform(39800, aboveGround - 300, 600, 50, "red");
-let platform174 = new ThePlatform(40650, aboveGround - 400, 100, 100, "red");
-let platform175 = new ThePlatform(41000, aboveGround - 300, 100, 100, "red");
+let platform172 = new ThePlatform(39350, aboveGround - 250, 750, 50, "red");
+let platform173 = new ThePlatform(39800, aboveGround - 300, 200, 50, "red");
+let platform174 = new ThePlatform(40650, aboveGround - 220, 200, 20, "yellow");
+let platform175 = new ThePlatform(40950, aboveGround - 400, 400, 20, "yellow");
 // let platform153 = new ThePlatform(34980, aboveGround - 100, 50, 20, "pink");
 
 let platforms = [

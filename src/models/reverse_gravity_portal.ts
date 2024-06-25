@@ -5,7 +5,7 @@ import Particle from "./particle";
 import { GOLD } from "../constants/color_constants";
 
 // Portal class to create multiple gravity state
-class Portal {
+class ReverseGravityPortal {
   image: HTMLImageElement;
   x: number;
   y: number;
@@ -70,16 +70,13 @@ class Portal {
       this.y < square.y + square.h && // Check if the portal's top edge is above the square's bottom edge
       this.y + this.h > square.y; // Check if the portal's bottom edge is below the square's top edge
     if (hasCollided) {
-      square.gravityState = this.toGravityState;
-      if (this.isStartPortal && square.gravityState === GRAVITYSTATE.FREE) {
+      if (this.isStartPortal) {
+        square.gravityState = this.toGravityState;
+
         // Change the gravity when in free gravity state
         square.gravity = 0.5;
-      } else if (
-        this.isStartPortal &&
-        square.gravityState === GRAVITYSTATE.REVERSE
-      ) {
-        square.gravity = -1;
       } else {
+        square.gravityState = this.toGravityState;
         // Change the gravity when in normal gravity state
         square.gravity = 1;
       }
@@ -87,4 +84,4 @@ class Portal {
   };
 }
 
-export default Portal;
+export default ReverseGravityPortal;

@@ -15,6 +15,7 @@ import { getCustomization } from "../utilities/player_utility";
 import { ListenForInstructionButtonClick } from "./menu_events/instructions_button_events";
 import { ListenForLeaderboardButtonClick } from "./menu_events/leaderboard_button_events";
 import { ListenForCustomizeButtonClick } from "./menu_events/customize_button_events";
+import { setPause } from "../variables/gameplay_variables";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);
@@ -161,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       1
     );
     setPlayer(player);
+    setPause(false);
 
     backgroundAudio.play();
     menuCanvas.style.display = "none";

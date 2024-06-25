@@ -1,9 +1,10 @@
-import { canvasCor, level1Canvas, level1Ctx } from "./level1";
+import { level1Canvas, level1Ctx } from "./level1";
 
 import resumeButtonImage from "/assets/sprites/buttons/resume-button.png";
 import starIconImage from "/assets/sprites/icons/the-star.png";
 import menuIconImage from "/assets/sprites/icons/menu-icon.png";
-import { isCheckboxChecked } from "./gameplay_events";
+import { isMusicCheckboxChecked } from "./gameplay_events";
+import { canvasCor } from "../variables/gameplay_variables";
 
 let resumeButton = new Image();
 resumeButton.src = resumeButtonImage;
@@ -61,7 +62,7 @@ export const showPauseMenu = () => {
   level1Ctx.restore();
 
   let gameProgressPercentage =
-    (canvasCor.x / 37000) * 100 >= 100 ? 100 : (canvasCor.x / 42000) * 100;
+    (canvasCor.x / 42000) * 100 >= 100 ? 100 : (canvasCor.x / 42000) * 100;
 
   if ((gameProgressPercentage / 100) * 450 > 450) {
   }
@@ -126,7 +127,7 @@ export const showPauseMenu = () => {
     50
   );
 
-  if (isCheckboxChecked) {
+  if (isMusicCheckboxChecked) {
     level1Ctx.drawImage(
       starIcon,
       canvasCor.x + level1Canvas.width * 0.2 + 100 + 5,

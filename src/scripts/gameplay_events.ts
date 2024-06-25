@@ -1,21 +1,16 @@
 import { SPEED } from "../constants/speed_constants";
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import { collectCoinAudio } from "../models/coin";
-import {
-  canvasCor,
-  level1Canvas,
-  pause,
-  setMovingSpeed,
-  setPause,
-  theSquare,
-} from "./level1";
+import { canvasCor, pause, setPause } from "../variables/gameplay_variables";
+import { level1Canvas, setMovingSpeed, theSquare } from "./level1";
 import { backgroundAudio } from "./menu";
 import { openMenu } from "./pause";
 import { resetGame } from "./reset";
 
 // Track the state of the checkbox (checked or unchecked)
-export let isCheckboxChecked = true;
+export let isMusicCheckboxChecked = true;
 
+// Event listeners for space and arrow up
 export const setEventListeners = () => {
   // Key down event listener
   addEventListener("keydown", ({ code }) => {
@@ -51,6 +46,7 @@ export const setEventListeners = () => {
       }
     }
 
+    // For debugging
     if (code === "ArrowLeft") {
       theSquare.color = "blue";
       setMovingSpeed(-9);
@@ -82,13 +78,11 @@ export const setEventListeners = () => {
       mouseX <= buttonX + buttonWidth &&
       mouseY >= buttonY &&
       mouseY <= buttonY + buttonHeight;
-
-    if (isHoveringOverResume) {
-      console.log("hovering over resume");
-    }
-
     // Optionally, change cursor style when hovering over the button
-    level1Canvas.style.cursor = isHoveringOverResume ? "pointer" : "default";
+    level1Canvas.style.cursor =
+      isHoveringOverResume || isHoveringOverCheckbox || isHoveringOverMenuIcon
+        ? "pointer"
+        : "default";
   });
 
   // Add event listener for mouse clicks on the resume button
@@ -120,17 +114,15 @@ export const setEventListeners = () => {
       mouseX <= checkboxX + checkboxSize &&
       mouseY >= checkboxY &&
       mouseY <= checkboxY + checkboxSize;
-
-    level1Canvas.style.cursor = isHoveringOverCheckbox ? "pointer" : "default";
   });
 
   // Add event listener for mouse clicks on the checkbox
   level1Canvas.addEventListener("click", () => {
     if (isHoveringOverCheckbox && pause) {
       // Toggle the checkbox state
-      isCheckboxChecked = !isCheckboxChecked;
+      isMusicCheckboxChecked = !isMusicCheckboxChecked;
 
-      if (isCheckboxChecked) {
+      if (isMusicCheckboxChecked) {
         backgroundAudio.play();
       } else {
         backgroundAudio.pause();
@@ -160,21 +152,12 @@ export const setEventListeners = () => {
       mouseX <= menuIconX + menuIconWidth &&
       mouseY >= menuIconY &&
       mouseY <= menuIconY + menuIconHeight;
-
-    if (isHoveringOverMenuIcon) {
-    }
-
-    // Optionally, you can provide visual feedback for hovering (like changing cursor)
-    level1Canvas.style.cursor = isHoveringOverMenuIcon ? "pointer" : "default";
   });
 
-  // Add event listener for mouse clicks
+  // Add event listener menu icon click
   level1Canvas.addEventListener("click", () => {
     if (isHoveringOverMenuIcon) {
-      // Action to be taken when the menu icon is clicked
-      // For example, open the game menu or pause the game
-      console.log("Menu icon clicked");
-      // Implement the desired functionality here
+      // Open Menu and Reset the game
       theSquare.isDead = true;
       resetGame(1, 0);
       openMenu();

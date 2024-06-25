@@ -1,6 +1,7 @@
 import basicGround from "/assets/sprites/backgrounds/game_bg_01_001-hd.png";
 
-import { canvasCor, level1Ctx } from "../scripts/level1";
+import { level1Ctx } from "../scripts/level1";
+import { canvasCor } from "../variables/gameplay_variables";
 
 // Gameplay ground - image
 let theGround = new Image();

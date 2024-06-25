@@ -1,6 +1,5 @@
 import { GRAVITYSTATE } from "../enums/gravity_state";
 import {
-  canvasCor,
   level1Canvas,
   level1Ctx,
   movingSpeed,
@@ -17,9 +16,10 @@ import planeImage from "../assets/sprites/cubes/plane-img.png";
 import { SPEED } from "../constants/speed_constants";
 import { openMenu } from "../scripts/pause";
 import levelCompletionAud from "../assets/audios/level-complete.mp3";
-import { isCheckboxChecked } from "../scripts/gameplay_events";
+import { isMusicCheckboxChecked } from "../scripts/gameplay_events";
 import { backgroundAudio } from "../scripts/menu";
 import { getCustomization } from "../utilities/player_utility";
+import { canvasCor } from "../variables/gameplay_variables";
 
 let levelCompletionAudio = new Audio();
 levelCompletionAudio.src = levelCompletionAud;
@@ -101,9 +101,9 @@ class Square {
 
   // Remove player on collision with obstacles
   removePlayer: () => void = () => {
-    this.isDead = true;
-    explodePlayer();
-    resetGame(500, SPEED);
+    // this.isDead = true;
+    // explodePlayer();
+    // resetGame(500, SPEED);
   };
 
   // Update image on character customization
@@ -197,7 +197,7 @@ class Square {
 
       // Update tail particles and draw the square
     } else {
-      if (isCheckboxChecked) {
+      if (isMusicCheckboxChecked) {
         // Play completion audio on level completion
         backgroundAudio.pause();
         levelCompletionAudio.play();
@@ -220,7 +220,7 @@ class Square {
         resetGame(1, 0);
         openMenu();
         setMovingSpeed(0);
-        if (isCheckboxChecked) {
+        if (isMusicCheckboxChecked) {
           levelCompletionAudio.play();
         }
 

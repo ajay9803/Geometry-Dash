@@ -15,33 +15,15 @@ import player from "/assets/sprites/cubes/cube-5.png";
 import { setEventListeners } from "./gameplay_events";
 import { propellers } from "./propeller";
 import EndWall from "../models/end_wall";
-import Coin from "../models/coin";
+import {
+  canvasCor,
+  coins,
+  opacityValue,
+  pause,
+  themeColor,
+} from "../variables/gameplay_variables";
+import { WHITE } from "../constants/color_constants";
 
-let coin1 = new Coin(20370 + 220 * 3, aboveGround - 82 - 120, 82, 82);
-let coin2 = new Coin(31700 + 30, aboveGround - 300, 82, 82);
-let coin3 = new Coin(41500, aboveGround - 300, 82, 82);
-
-export let coins = [coin1, coin2, coin3];
-
-let playerImage = new Image();
-playerImage.src = player;
-
-let themeValue = 255;
-let themeColor = `rgba(0, 0, ${themeValue})`;
-let opacityValue = 0.5;
-
-export let canvasCor = {
-  x: 0,
-  y: 0,
-};
-
-// Variables to pause and resume the game
-export let pause: boolean = false;
-
-export let setPause = (value: boolean) => {
-  pause = value;
-};
-// export let movingSpeed = 50;
 export let movingSpeed = 0;
 
 export const setMovingSpeed = (speed: number) => {
@@ -97,10 +79,13 @@ for (let i = 0; i < 2 * 20; i++) {
 
 let grounds: Ground[] = [];
 
+// Initialize particles
 export let particles: Particle[] = [];
+
+// Initialize end particles
 export let endParticles: Particle[] = [];
 
-// Create grounds dynamically up to ground 8
+// Create grounds up to 290
 for (let i = 0; i <= 290; i++) {
   let ground = new Ground(
     i * GROUND_SPACING, // x position
@@ -165,8 +150,7 @@ const animate = () => {
     if (isColliding) {
       // theSquare.isDead = true;
       // if (theSquare.isDead) {
-      theSquare.removePlayer();
-
+        theSquare.removePlayer();
       // }
     }
     spike.draw();
@@ -194,7 +178,7 @@ const animate = () => {
 
   // Separator between ground and the game-env
   level1Ctx.save();
-  level1Ctx.strokeStyle = "white";
+  level1Ctx.strokeStyle = WHITE;
   level1Ctx.lineWidth = 2;
   level1Ctx.beginPath();
   level1Ctx.moveTo(canvasCor.x, level1Canvas.height - MENU_GROUND_HEIGHT); // Adjust the x position based on canvasCor.x
@@ -255,4 +239,9 @@ const animate = () => {
 
 animate();
 
+// Set event listeners for 
+// Pause
+// Resume Button
+// Menu Button
+// Music Checkbox 
 setEventListeners();

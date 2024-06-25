@@ -1,11 +1,12 @@
 import coin from "/assets/sprites/coins/coin.png";
 import { setCollectedCoinsCount } from "../scripts/coins";
 
-import { coins, level1Ctx } from "../scripts/level1";
+import { level1Ctx } from "../scripts/level1";
 import Square from "./player";
 import coinAudio from "/assets/audios/collect-coin.mp3";
-import { isCheckboxChecked } from "../scripts/gameplay_events";
+import { isMusicCheckboxChecked } from "../scripts/gameplay_events";
 import { COIN_WIDTH } from "../constants/size_constants";
+import { coins } from "../variables/gameplay_variables";
 
 // Coin Sprite Image
 let coinImage = new Image();
@@ -77,7 +78,7 @@ export default class Coin {
       setCollectedCoinsCount(1);
 
       // Play audio only if the audio-play is on
-      if (isCheckboxChecked) {
+      if (isMusicCheckboxChecked) {
         collectCoinAudio.play();
       }
     }

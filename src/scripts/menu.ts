@@ -12,13 +12,14 @@ import {
   level1Ctx,
   setMovingSpeed,
   setPlayer,
-  theSquare,
 } from "./level1";
 import Square from "../models/player";
-import { getTodayProgress, getTopThreeProgresses } from "./reset";
 import { SPEED } from "../constants/speed_constants";
-import { collectedCoinsCount } from "./coins";
 import { getCustomization } from "../utilities/player_utility";
+
+import { ListenForInstructionButtonClick } from "./menu_events/instructions_button_events";
+import { ListenForLeaderboardButtonClick } from "./menu_events/leaderboard_button_events";
+import { ListenForCustomizeButtonClick } from "./menu_events/customize_button_events";
 
 // Background Music
 export let backgroundAudio = new Audio(backgroundMusic);
@@ -124,107 +125,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "instructions-button"
   ) as HTMLButtonElement;
 
-  instructionsButton.addEventListener("click", () => {
-    if (isInstructionsBoardOpen) {
-      return;
-    }
-    isInstructionsBoardOpen = !isInstructionsBoardOpen;
-    let instructionsBoard = document.createElement("div");
+  ListenForInstructionButtonClick(
+    mainBody,
+    instructionsButton,
+    isInstructionsBoardOpen
+  );
 
-    instructionsBoard.classList.add("instructions-board");
-    mainBody.appendChild(instructionsBoard);
-
-    let closeButton = document.createElement("img");
-    closeButton.src = "assets/sprites/icons/cross-icon.png";
-    closeButton.alt = "close";
-    closeButton.classList.add("leaderboard-cross-image");
-
-    closeButton.addEventListener("click", () => {
-      isInstructionsBoardOpen = !isInstructionsBoardOpen;
-      mainBody.removeChild(instructionsBoard);
-    });
-
-    instructionsBoard.appendChild(closeButton);
-
-    // Append the instructions to the board
-    const jumpInstructions = document.createElement("p");
-    jumpInstructions.innerHTML =
-      "Use <strong>Space</strong> or <strong>Arrow Up</strong> key to jump.";
-    instructionsBoard.appendChild(jumpInstructions);
-
-    const continuousJumpInstructions = document.createElement("p");
-    continuousJumpInstructions.innerHTML =
-      "Hold <strong>Space</strong> or <strong>Arrow Up</strong> key for continuous jumps.";
-    instructionsBoard.appendChild(continuousJumpInstructions);
-  });
-
-  leaderboardButton.addEventListener("click", () => {
-    if (isLeaderboardOpen) {
-      return;
-    }
-    isLeaderboardOpen = !isLeaderboardOpen;
-    let leaderboard = document.createElement("div");
-    // mainBody.removeChild(instructionsBoard);
-
-    leaderboard.classList.add("leaderboard");
-    mainBody.appendChild(leaderboard);
-
-    let leaderboardTitle = document.createElement("h1") as HTMLHeadingElement;
-    leaderboardTitle.innerHTML = "Today's Leaderboard";
-    leaderboardTitle.classList.add("leaderboard-title");
-
-    leaderboard.appendChild(leaderboardTitle);
-
-    let coinsCollectedText = document.createElement("h1") as HTMLHeadingElement;
-    coinsCollectedText.innerHTML = `Coins Collected: ${collectedCoinsCount}`;
-    coinsCollectedText.classList.add("leaderboard-title");
-
-    leaderboard.appendChild(coinsCollectedText);
-
-    const closeButton = document.createElement("img");
-    closeButton.src = "assets/sprites/icons/cross-icon.png"; // Replace with the path to your image
-    closeButton.alt = "Close"; // Replace with a description for accessibility
-    closeButton.classList.add("leaderboard-cross-image");
-
-    closeButton.addEventListener("click", () => {
-      isLeaderboardOpen = !isLeaderboardOpen;
-      leaderboard.style.display = "none";
-    });
-
-    leaderboard.appendChild(closeButton);
-
-    let mainWrapper = document.createElement("div");
-    mainWrapper.classList.add("main-wrapper");
-    leaderboard.appendChild(mainWrapper);
-
-    let progressBarsWrapper = document.createElement("div");
-    progressBarsWrapper.classList.add("progress-bars-wrapper");
-    mainWrapper.appendChild(progressBarsWrapper);
-
-    let progresses = getTodayProgress();
-    let topProgresses = getTopThreeProgresses(progresses);
-
-    topProgresses.forEach((progress) => {
-      let progressbar = document.createElement("div");
-      progressbar.classList.add("progressbar");
-      progressbar.style.width = "10%";
-      progressbar.style.height = `${(progress["progress"] / 100) * 200}px`;
-      progressbar.style.backgroundColor = "purple";
-      progressBarsWrapper.appendChild(progressbar);
-    });
-
-    let progressValues = document.createElement("div");
-    progressValues.style.display = "flex";
-    progressValues.style.justifyContent = "space-between";
-    progressValues.classList.add("progress-values");
-
-    topProgresses.forEach((progress) => {
-      let text = document.createElement("h1");
-      text.innerHTML = Math.floor(progress["progress"]).toString() + "%";
-      progressValues.appendChild(text);
-    });
-    mainWrapper.appendChild(progressValues);
-  });
+  ListenForLeaderboardButtonClick(
+    mainBody,
+    leaderboardButton,
+    isLeaderboardOpen
+  );
 
   const menuCanvas = document.getElementById(
     "menu-canvas"
@@ -268,137 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setMovingSpeed(SPEED);
   });
 
-  customizeButton.addEventListener("click", () => {
-    title.style.display = "none";
-    playButton.style.display = "none";
-    customizeButton.style.display = "none";
-    randomButton.style.display = "none";
-    leaderboardButton.style.display = "none";
-    instructionsButton.style.display = "none";
-
-    menuCanvas.style.display = "none";
-    mainBody.style.justifyContent = "start";
-    mainBody.style.alignItems = "start";
-    mainBody.style.background =
-      "linear-gradient(to right, transparent, #787878)";
-
-    const customizeWrapper = document.createElement("div");
-    customizeWrapper.classList.add("customize-wrapper");
-
-    mainBody.appendChild(customizeWrapper);
-
-    const closeButton = document.createElement("img");
-    closeButton.src = "assets/sprites/icons/cross-icon.png"; // Replace with the path to your image
-    closeButton.alt = "Close"; // Replace with a description for accessibility
-    closeButton.classList.add("cross-image");
-
-    customizeWrapper.appendChild(closeButton);
-
-    const selectedPlayerImage = document.createElement("img");
-    selectedPlayerImage.id = "selected-player"; // Set an ID for easy access later
-    selectedPlayerImage.classList.add("selected-player-image");
-    customizeWrapper.appendChild(selectedPlayerImage);
-
-    const line = document.createElement("div");
-    line.classList.add("separator-line");
-    customizeWrapper.appendChild(line);
-
-    // Create a color picker input
-    const colorPicker = document.createElement("input");
-    colorPicker.type = "color";
-    colorPicker.id = "color-picker";
-    colorPicker.value = "#ff0000"; // Default value (red)
-    customizeWrapper.appendChild(colorPicker);
-
-    // Update background color of selected player image when color is picked
-    colorPicker.addEventListener("input", () => {
-      const selectedColor = colorPicker.value;
-      theSquare.color = selectedColor;
-      (selectedPlayerImage as HTMLImageElement).style.backgroundColor =
-        selectedColor;
-
-      // Save the selected color to local storage
-      localStorage.setItem("selectedPlayerColor", selectedColor);
-    });
-
-    // Create a flexbox container for the images
-    const flexContainer = document.createElement("div");
-    flexContainer.classList.add("flex-container");
-
-    // Create and append 8 player images to the flexbox container
-    for (let i = 0; i < 9; i++) {
-      const playerImg = document.createElement("img");
-      playerImg.id = `cube-${i + 1}`;
-      playerImg.src = `assets/sprites/cubes/cube-${i + 1}.png`; // Use modulo to loop through available images
-      playerImg.alt = `Player ${i + 1}`;
-      playerImg.classList.add("player-image");
-      flexContainer.appendChild(playerImg);
-
-      playerImg.onclick = () => {
-        // Reset border for all player images
-        const allPlayerImages = document.querySelectorAll(".player-image");
-        allPlayerImages.forEach((img) => {
-          (img as HTMLImageElement).style.border = "none";
-        });
-
-        // Set border for the selected image
-        (playerImg as HTMLImageElement).style.border = "2px dotted blue";
-
-        // Update the selected player image
-        (selectedPlayerImage as HTMLImageElement).src = playerImg.src;
-        selectedPlayerImage.id = playerImg.id;
-
-        // Save selected player image to local storage
-        localStorage.setItem("selectedPlayerImage", playerImg.id);
-      };
-    }
-
-    // Append the flexbox container to the main body
-    customizeWrapper.appendChild(flexContainer);
-
-    // Retrieve the saved player image and color from local storage (if any)
-    const savedPlayerId = localStorage.getItem("selectedPlayerImage");
-    const savedPlayerColor = localStorage.getItem("selectedPlayerColor");
-
-    if (savedPlayerId) {
-      const savedPlayerImage = document.getElementById(
-        savedPlayerId
-      ) as HTMLImageElement;
-      if (savedPlayerImage) {
-        (selectedPlayerImage as HTMLImageElement).src = savedPlayerImage.src;
-        selectedPlayerImage.id = savedPlayerImage.id;
-        savedPlayerImage.style.border = "2px dotted blue";
-      }
-    } else {
-      // Default selection if nothing is saved
-      (selectedPlayerImage as HTMLImageElement).src =
-        "assets/sprites/cubes/cube-1.png";
-      selectedPlayerImage.id = "cube-1";
-    }
-
-    if (savedPlayerColor) {
-      (selectedPlayerImage as HTMLImageElement).style.backgroundColor =
-        savedPlayerColor;
-      colorPicker.value = savedPlayerColor; // Set the color picker to the saved color
-    } else {
-      // Default color if nothing is saved
-      (selectedPlayerImage as HTMLImageElement).style.backgroundColor =
-        "#ff0000"; // Red
-      colorPicker.value = "#ff0000"; // Red
-    }
-
-    closeButton.onclick = () => {
-      mainBody.removeChild(customizeWrapper);
-
-      menuCanvas.style.display = "block";
-      title.style.display = "block";
-      playButton.style.display = "block";
-      customizeButton.style.display = "block";
-      randomButton.style.display = "block";
-      leaderboardButton.style.display = "block";
-      instructionsButton.style.display = "block";
-    };
-  });
+  ListenForCustomizeButtonClick(mainBody);
 
   // Retrieve and apply the saved player image and color when the page loads
   const applySavedPlayerImage = () => {

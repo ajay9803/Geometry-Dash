@@ -38,4 +38,4 @@ To get started with the Geometry Dash Game, follow these steps:
 
 ## Screenshots
 
-![alt text](screenshot-1.png) ![alt text](screenshot-2.png) ![alt text](screenshot-3.png) ![alt text](screenshot-4.png) ![alt text](screenshot-5.png) ![alt text](screenshot-6.png) ![alt text](screenshot-7.png) ![alt text](screenshot-8.png) ![alt text](screenshot-9.png) ![alt text](screenshot-10.png) ![alt text](screenshot-11.png)![alt text](<Screenshot 2024-06-25 230710.png>) ![alt text](<Screenshot 2024-06-25 230750.png>) ![alt text](screenshot-12.png) ![alt text](screenshot-13.png) ![alt text](<Screenshot (61).png>)
+![alt text](screenshot-1.png) ![alt text](screenshot-2.png) ![alt text](screenshot-3.png) ![alt text](screenshot-4.png) ![alt text](screenshot-5.png) ![alt text](screenshot-6.png) ![alt text](screenshot-7.png) ![alt text](screenshot-8.png) ![alt text](screenshot-9.png)  ![alt text](screenshot-11.png)![alt text](<Screenshot 2024-06-25 230710.png>) ![alt text](<Screenshot 2024-06-25 230750.png>) ![alt text](screenshot-12.png) ![alt text](screenshot-13.png)
